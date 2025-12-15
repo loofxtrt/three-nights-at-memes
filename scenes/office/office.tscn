@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
 
 [node name="Office" type="Node2D" groups=["office"]]
-position = Vector2(25, 0)
 script = ExtResource("1_ul364")
 
 [node name="Sprite" type="Sprite2D" parent="."]

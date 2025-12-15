@@ -21,16 +21,12 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	can_interact = false
+	set_light(false)
 
-func _process(delta: float) -> void:
-	# FIXME: se já estiver segurando ctrl, quando passar o mouse
-	# a luz já acende automaticamente, sem precisar clicar no ctrl de novo
-	
-	# FIXME: não dá pra lanternar as duas portas, uma quebra a outra
-	if can_interact && Input.is_action_pressed("light"):
-		print("lanterna ativa")
+func _input(event: InputEvent) -> void:
+	if can_interact && event.is_action_pressed("light"):
 		set_light(true)
-	else:
+	elif event.is_action_released("light"):
 		set_light(false)
 
 func reset_office_lights(office_sprite: Sprite2D):
@@ -43,6 +39,7 @@ func set_light(state: bool):
 	#	is_lit = state
 	
 	is_lit = state
+	print("estado da lanterna: " + str(is_lit))
 	
 	var office_sprite = office.get_node("Sprite")
 	if !office_sprite:
