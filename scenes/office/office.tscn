@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://diw1qplhntkkf"]
+
+[ext_resource type="Texture2D" uid="uid://soeplbijsxai" path="res://placeholders/office.png" id="1_ql6sr"]
+[ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
+[ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
+[ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
+
+[node name="Office" type="Node2D" groups=["office"]]
+position = Vector2(25, 0)
+script = ExtResource("1_ul364")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.725, 0.911111)
+texture = ExtResource("1_ql6sr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="DoorR" parent="." instance=ExtResource("4_nanex")]
+position = Vector2(456, 0)
+
+[node name="DoorL" parent="." instance=ExtResource("4_nanex")]
+position = Vector2(-476, 0)
+scale = Vector2(-1, 1)
+
+[node name="LightableR" parent="." instance=ExtResource("4_66du1")]
+position = Vector2(389, 0)
+direction = "right"
+
+[node name="LightableL" parent="." instance=ExtResource("4_66du1")]
+position = Vector2(-407, 0)
+direction = "left"

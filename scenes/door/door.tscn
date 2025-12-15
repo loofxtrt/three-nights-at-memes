@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu1ymi7f087r"]
+
+[ext_resource type="Script" uid="uid://c7pl787lh8bs1" path="res://scenes/door/door.gd" id="1_e7noh"]
+[ext_resource type="Texture2D" uid="uid://cglk2b76pj5wy" path="res://placeholders/door.png" id="2_3slxr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3slxr"]
+size = Vector2(182, 648)
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_e7noh")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_3slxr")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3slxr")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

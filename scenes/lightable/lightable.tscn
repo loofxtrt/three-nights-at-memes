@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwl2mlr8acbnr"]
+
+[ext_resource type="Script" uid="uid://blb44vqqapfgw" path="res://scenes/lightable/lightable.gd" id="1_qk068"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xlv"]
+size = Vector2(332, 644)
+
+[node name="Lightable" type="Area2D"]
+script = ExtResource("1_qk068")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o6xlv")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
