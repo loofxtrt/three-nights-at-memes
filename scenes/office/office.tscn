@@ -1,15 +1,50 @@
-[gd_scene load_steps=10 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=15 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://soeplbijsxai" path="res://placeholders/office.png" id="1_ql6sr"]
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
 [ext_resource type="Texture2D" uid="uid://coq7s7rrfkbgp" path="res://placeholders/tablet-trigger.png" id="5_66du1"]
+[ext_resource type="Texture2D" uid="uid://udu3k5exwrrw" path="res://placeholders/amostradinho-cove-0.png" id="5_e1yc2"]
+[ext_resource type="Texture2D" uid="uid://dljpu2qp36x26" path="res://placeholders/hall-left.png" id="5_sf0ao"]
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="6_8d8gp"]
 [ext_resource type="Texture2D" uid="uid://cebnq7y8tgils" path="res://placeholders/stage-blv.png" id="6_art4y"]
+[ext_resource type="Texture2D" uid="uid://ocpx6s0ahifn" path="res://placeholders/hall-right.png" id="6_b6q11"]
+[ext_resource type="Texture2D" uid="uid://cpxgnx0t416qc" path="res://placeholders/amostradinho-cove-1.png" id="6_y3s53"]
+[ext_resource type="Texture2D" uid="uid://sno5q2eyro75" path="res://placeholders/amostradinho-cove-2.png" id="7_p8n5g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8d8gp"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_e1yc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y3s53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p8n5g")
+}],
+"loop": false,
+"name": &"amostradinho_cove",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_sf0ao")
+}],
+"loop": false,
+"name": &"hall_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_b6q11")
+}],
+"loop": false,
+"name": &"hall_right",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("6_art4y")
@@ -52,7 +87,7 @@ visible = false
 [node name="Sprite" type="AnimatedSprite2D" parent="Cameras"]
 scale = Vector2(0.73875, 0.94166666)
 sprite_frames = SubResource("SpriteFrames_8d8gp")
-animation = &"stage"
+animation = &"amostradinho_cove"
 
 [node name="ChannelButtons" type="VBoxContainer" parent="Cameras"]
 anchors_preset = 15

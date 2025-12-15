@@ -22,6 +22,10 @@ func _on_mouse_exited() -> void:
 	can_interact = false
 
 func _process(delta: float) -> void:
+	# só poder interagir quando estiver com as câmeras abaixadas
+	if Manager.is_cameras_open:
+		return
+	
 	if !can_interact:
 		return
 	

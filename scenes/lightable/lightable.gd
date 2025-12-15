@@ -24,18 +24,19 @@ func _on_mouse_exited() -> void:
 	set_light(false) # deve apagar a luz sempre que o mouse sair, não só quando soltar o botão
 
 func _input(event: InputEvent) -> void:
+	# só poder interagir quando estiver com as câmeras abaixadas
+	if Manager.is_cameras_open:
+		return
+	
 	if can_interact && event.is_action_pressed("light"):
 		set_light(true)
 	elif event.is_action_released("light"):
 		set_light(false)
 
 func _process(delta: float) -> void:
-	if !office:
-		return
-	
 	# subtrair energia enquanto uma das luzes estiver ligada
 	if is_lit:
-		office.modify_power(-0.1)
+		Manager.modify_power(-0.1)
 
 func reset_office_lights(office_sprite: Sprite2D):
 	office_sprite.texture = OFFICE
