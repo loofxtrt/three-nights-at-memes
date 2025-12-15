@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=10 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://soeplbijsxai" path="res://placeholders/office.png" id="1_ql6sr"]
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
+[ext_resource type="Texture2D" uid="uid://coq7s7rrfkbgp" path="res://placeholders/tablet-trigger.png" id="5_66du1"]
+[ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="6_8d8gp"]
+[ext_resource type="Texture2D" uid="uid://cebnq7y8tgils" path="res://placeholders/stage-blv.png" id="6_art4y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8d8gp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_art4y")
+}],
+"loop": false,
+"name": &"stage",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66du1"]
+size = Vector2(608, 82)
 
 [node name="Office" type="Node2D" groups=["office"]]
 script = ExtResource("1_ul364")
@@ -28,3 +45,44 @@ direction = "right"
 [node name="LightableL" parent="." instance=ExtResource("4_66du1")]
 position = Vector2(-407, 0)
 direction = "left"
+
+[node name="Cameras" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Cameras"]
+scale = Vector2(0.73875, 0.94166666)
+sprite_frames = SubResource("SpriteFrames_8d8gp")
+animation = &"stage"
+
+[node name="ChannelButtons" type="VBoxContainer" parent="Cameras"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 55.0
+offset_right = 583.0
+offset_bottom = 332.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="TabletTrigger" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="TabletTrigger"]
+position = Vector2(0, 287)
+texture = ExtResource("5_66du1")
+
+[node name="Collision" type="CollisionShape2D" parent="TabletTrigger"]
+position = Vector2(0, 302)
+shape = SubResource("RectangleShape2D_66du1")
+
+[node name="ButtonTest" type="Button" parent="."]
+visible = false
+offset_left = 300.0
+offset_top = 55.0
+offset_right = 583.0
+offset_bottom = 89.0
+theme = ExtResource("6_8d8gp")
+text = "CHANNEL 1"
+
+[connection signal="mouse_entered" from="TabletTrigger" to="." method="_on_tablet_trigger_mouse_entered"]
