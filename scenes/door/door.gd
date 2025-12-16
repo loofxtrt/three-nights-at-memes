@@ -7,7 +7,6 @@ extends Area2D
 
 var can_interact: bool = false
 var is_mouse_over: bool = false
-var is_lit: bool = false
 var is_closed: bool = false
 
 func _ready() -> void:
@@ -23,24 +22,28 @@ func _on_mouse_exited() -> void:
 
 func _process(delta: float) -> void:
 	# só poder interagir quando estiver com as câmeras abaixadas
-	if Manager.is_cameras_open:
-		return
-	
-	if !can_interact:
+	if Manager.is_cameras_open || !can_interact:
 		return
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		toggle_door()
 
 func toggle_door():
+	# cooldown até poder fechar/abrir de novo
 	can_interact = false
 	cooldown.start()
 	
+	# fechar/abrir a porta
 	sprite.visible = !sprite.visible
 	is_closed = sprite.visible
+	
+	if direction == "right":
+		Manager.is_right_door_closed = is_closed
+	elif direction == "left":
+		Manager.is_left_door_closed = is_closed
 
 func _on_cooldown_timeout() -> void:
-	# se não tiver a deteção do mouse over
+	# se não tivevesse a deteção do mouse over
 	# ainda daria pra fechar a porta mesmo estando com o mouse longe
 	if is_mouse_over:
 		can_interact = true

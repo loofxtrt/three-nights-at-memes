@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvslmmrypv5kl"]
+
+[ext_resource type="Script" uid="uid://der2pjshai01g" path="res://scenes/audio_controller/audio_controller.gd" id="1_0wpo5"]
+[ext_resource type="AudioStream" uid="uid://bglro7dolcq4x" path="res://assets/audio/amostradinho.wav" id="2_32fwx"]
+[ext_resource type="AudioStream" uid="uid://deaxwb5q1r8i8" path="res://assets/audio/running_footsteps_QnJ26_ZlEbo.wav" id="3_d81ow"]
+[ext_resource type="AudioStream" uid="uid://dreq1878o8rd6" path="res://assets/audio/jumpscare.wav" id="4_l217a"]
+
+[node name="AudioController" type="Node"]
+script = ExtResource("1_0wpo5")
+
+[node name="AmostradinhoWarning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_32fwx")
+
+[node name="AmostradinhoRunning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_d81ow")
+
+[node name="Jumpscare" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_l217a")

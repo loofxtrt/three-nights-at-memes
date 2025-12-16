@@ -42,6 +42,7 @@ func reset_office_lights(office_sprite: Sprite2D):
 	office_sprite.texture = OFFICE
 
 func set_light(state: bool):
+	# define o estado da luz, seja apagado ou aceso
 	is_lit = state
 	print("estado da lanterna: " + str(is_lit))
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=24 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://soeplbijsxai" path="res://placeholders/office.png" id="1_ql6sr"]
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
@@ -7,11 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://coq7s7rrfkbgp" path="res://placeholders/tablet-trigger.png" id="5_66du1"]
 [ext_resource type="Texture2D" uid="uid://udu3k5exwrrw" path="res://placeholders/amostradinho-cove-0.png" id="5_e1yc2"]
 [ext_resource type="Texture2D" uid="uid://dljpu2qp36x26" path="res://placeholders/hall-left.png" id="5_sf0ao"]
+[ext_resource type="Script" uid="uid://dxajnyjvrcjjg" path="res://scenes/office/cameras.gd" id="5_yexkw"]
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="6_8d8gp"]
 [ext_resource type="Texture2D" uid="uid://cebnq7y8tgils" path="res://placeholders/stage-blv.png" id="6_art4y"]
 [ext_resource type="Texture2D" uid="uid://ocpx6s0ahifn" path="res://placeholders/hall-right.png" id="6_b6q11"]
 [ext_resource type="Texture2D" uid="uid://cpxgnx0t416qc" path="res://placeholders/amostradinho-cove-1.png" id="6_y3s53"]
 [ext_resource type="Texture2D" uid="uid://sno5q2eyro75" path="res://placeholders/amostradinho-cove-2.png" id="7_p8n5g"]
+[ext_resource type="Texture2D" uid="uid://clcqgga51i8yc" path="res://placeholders/hall-left-luva.png" id="9_p8n5g"]
+[ext_resource type="Texture2D" uid="uid://c681ffya7pgh8" path="res://placeholders/hall-right-virginia.png" id="11_yexkw"]
+[ext_resource type="Texture2D" uid="uid://gfop30xrsjxw" path="res://placeholders/amostradinho-screamer.jpg" id="16_qei30"]
+[ext_resource type="PackedScene" uid="uid://cvslmmrypv5kl" path="res://scenes/audio_controller/audio_controller.tscn" id="17_vyb6o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8d8gp"]
 animations = [{
@@ -39,10 +44,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("9_p8n5g")
+}],
+"loop": false,
+"name": &"hall_left_luva",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_b6q11")
 }],
 "loop": false,
 "name": &"hall_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_yexkw")
+}],
+"loop": false,
+"name": &"hall_right_virginia",
 "speed": 5.0
 }, {
 "frames": [{
@@ -57,6 +78,54 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66du1"]
 size = Vector2(608, 82)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_vyb6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_qei30")
+}],
+"loop": false,
+"name": &"amostradinho_warning",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_dml3y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_11cpu"]
+resource_name = "flashing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0vp7"]
+_data = {
+&"RESET": SubResource("Animation_dml3y"),
+&"flashing": SubResource("Animation_11cpu")
+}
+
 [node name="Office" type="Node2D" groups=["office"]]
 script = ExtResource("1_ul364")
 
@@ -68,10 +137,12 @@ texture = ExtResource("1_ql6sr")
 
 [node name="DoorR" parent="." instance=ExtResource("4_nanex")]
 position = Vector2(456, 0)
+direction = "right"
 
 [node name="DoorL" parent="." instance=ExtResource("4_nanex")]
 position = Vector2(-476, 0)
 scale = Vector2(-1, 1)
+direction = "left"
 
 [node name="LightableR" parent="." instance=ExtResource("4_66du1")]
 position = Vector2(389, 0)
@@ -81,15 +152,16 @@ direction = "right"
 position = Vector2(-407, 0)
 direction = "left"
 
-[node name="Cameras" type="Node2D" parent="."]
+[node name="CamerasContainer" type="Node2D" parent="." groups=["cameras_container"]]
 visible = false
+script = ExtResource("5_yexkw")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Cameras"]
+[node name="Sprite" type="AnimatedSprite2D" parent="CamerasContainer"]
 scale = Vector2(0.73875, 0.94166666)
 sprite_frames = SubResource("SpriteFrames_8d8gp")
-animation = &"amostradinho_cove"
+animation = &"hall_left_luva"
 
-[node name="ChannelButtons" type="VBoxContainer" parent="Cameras"]
+[node name="ChannelButtons" type="VBoxContainer" parent="CamerasContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -111,7 +183,22 @@ texture = ExtResource("5_66du1")
 position = Vector2(0, 302)
 shape = SubResource("RectangleShape2D_66du1")
 
-[node name="ButtonTest" type="Button" parent="."]
+[node name="AudioController" parent="." instance=ExtResource("17_vyb6o")]
+
+[node name="Ignore" type="Node" parent="."]
+
+[node name="Hallucinations" type="AnimatedSprite2D" parent="Ignore"]
+visible = false
+scale = Vector2(0.60729164, 0.62592596)
+sprite_frames = SubResource("SpriteFrames_vyb6o")
+animation = &"amostradinho_warning"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ignore/Hallucinations"]
+libraries = {
+&"": SubResource("AnimationLibrary_r0vp7")
+}
+
+[node name="ButtonTest" type="Button" parent="Ignore"]
 visible = false
 offset_left = 300.0
 offset_top = 55.0
@@ -120,4 +207,4 @@ offset_bottom = 89.0
 theme = ExtResource("6_8d8gp")
 text = "CHANNEL 1"
 
-[connection signal="mouse_entered" from="TabletTrigger" to="." method="_on_tablet_trigger_mouse_entered"]
+[connection signal="mouse_entered" from="TabletTrigger" to="CamerasContainer" method="_on_tablet_trigger_mouse_entered"]
