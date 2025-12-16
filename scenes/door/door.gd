@@ -3,6 +3,7 @@ extends Area2D
 @onready var sprite: Sprite2D = $Sprite
 @onready var cooldown: Timer = $Cooldown
 
+@export var manager: Node
 @export_enum("left", "right") var direction: String
 
 var can_interact: bool = false
@@ -22,7 +23,7 @@ func _on_mouse_exited() -> void:
 
 func _process(delta: float) -> void:
 	# só poder interagir quando estiver com as câmeras abaixadas
-	if Manager.is_cameras_open || !can_interact:
+	if manager.is_cameras_open || !can_interact:
 		return
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -38,9 +39,9 @@ func toggle_door():
 	is_closed = sprite.visible
 	
 	if direction == "right":
-		Manager.is_right_door_closed = is_closed
+		manager.is_right_door_closed = is_closed
 	elif direction == "left":
-		Manager.is_left_door_closed = is_closed
+		manager.is_left_door_closed = is_closed
 
 func _on_cooldown_timeout() -> void:
 	# se não tivevesse a deteção do mouse over

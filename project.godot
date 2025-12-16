@@ -15,11 +15,6 @@ run/main_scene="uid://diw1qplhntkkf"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Manager="*res://manager.gd"
-AudioController="*res://scenes/audio_controller/audio_controller.tscn"
-
 [global_group]
 
 office=""

@@ -1,5 +1,6 @@
 extends Area2D
 
+@export var manager: Node
 @export_enum("left", "right") var direction: String
 
 var is_lit: bool = false
@@ -25,7 +26,7 @@ func _on_mouse_exited() -> void:
 
 func _input(event: InputEvent) -> void:
 	# só poder interagir quando estiver com as câmeras abaixadas
-	if Manager.is_cameras_open:
+	if manager.is_cameras_open:
 		return
 	
 	if can_interact && event.is_action_pressed("light"):
@@ -36,7 +37,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	# subtrair energia enquanto uma das luzes estiver ligada
 	if is_lit:
-		Manager.modify_power(-0.1)
+		manager.modify_power(-0.1)
 
 func reset_office_lights(office_sprite: Sprite2D):
 	office_sprite.texture = OFFICE

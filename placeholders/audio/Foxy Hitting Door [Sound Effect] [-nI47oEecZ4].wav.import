@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcms5tdud8hdk"
+path="res://.godot/imported/Foxy Hitting Door [Sound Effect] [-nI47oEecZ4].wav-ff69789730a2e54e23a4a9ebf2bae529.sample"
+
+[deps]
+
+source_file="res://placeholders/audio/Foxy Hitting Door [Sound Effect] [-nI47oEecZ4].wav"
+dest_files=["res://.godot/imported/Foxy Hitting Door [Sound Effect] [-nI47oEecZ4].wav-ff69789730a2e54e23a4a9ebf2bae529.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

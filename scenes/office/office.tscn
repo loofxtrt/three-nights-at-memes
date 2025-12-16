@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=39 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://soeplbijsxai" path="res://placeholders/office.png" id="1_ql6sr"]
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
@@ -15,8 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://sno5q2eyro75" path="res://placeholders/amostradinho-cove-2.png" id="7_p8n5g"]
 [ext_resource type="Texture2D" uid="uid://clcqgga51i8yc" path="res://placeholders/hall-left-luva.png" id="9_p8n5g"]
 [ext_resource type="Texture2D" uid="uid://c681ffya7pgh8" path="res://placeholders/hall-right-virginia.png" id="11_yexkw"]
-[ext_resource type="Texture2D" uid="uid://gfop30xrsjxw" path="res://placeholders/amostradinho-screamer.jpg" id="16_qei30"]
-[ext_resource type="PackedScene" uid="uid://cvslmmrypv5kl" path="res://scenes/audio_controller/audio_controller.tscn" id="17_vyb6o"]
+[ext_resource type="Script" uid="uid://cupwn3d4bdju" path="res://scenes/office/manager.gd" id="15_r0vp7"]
+[ext_resource type="Script" uid="uid://b6akukxqqanvq" path="res://scenes/office/audio_controller.gd" id="16_h6w4s"]
+[ext_resource type="Texture2D" uid="uid://ucpfbej5usud" path="res://placeholders/PC _ Computer - Five Nights at Freddy's 2 - Animatronics - Withered Freddy.png" id="16_qei30"]
+[ext_resource type="AudioStream" uid="uid://c47me4i48d873" path="res://assets/audio/amostradinho-warning-shorter.wav" id="17_5sbiv"]
+[ext_resource type="AudioStream" uid="uid://gb55kxkrkjmt" path="res://assets/audio/amostradinho-knocking.wav" id="18_4fjga"]
+[ext_resource type="AudioStream" uid="uid://dreq1878o8rd6" path="res://assets/audio/jumpscare.wav" id="18_5sbiv"]
+[ext_resource type="AudioStream" uid="uid://bubvel3wo6k4v" path="res://assets/audio/amostradinho-running.wav" id="19_5sbiv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8d8gp"]
 animations = [{
@@ -78,53 +83,104 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66du1"]
 size = Vector2(608, 82)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vyb6o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0vp7"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 1, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6w4s"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 770, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sbiv"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 1539, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fjga"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 2308, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0sld"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 3077, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdy2d"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 3846, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgefm"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1, 4615, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01qce"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1026, 1, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35w6l"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1026, 770, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trify"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1026, 1539, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4y4s"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1026, 2308, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in01k"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1026, 3077, 1024, 768)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgmud"]
+atlas = ExtResource("16_qei30")
+region = Rect2(1026, 3846, 1024, 768)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4y4s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("16_qei30")
+"texture": SubResource("AtlasTexture_r0vp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6w4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sbiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fjga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0sld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdy2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgefm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01qce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35w6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trify")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4y4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in01k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgmud")
 }],
 "loop": false,
-"name": &"amostradinho_warning",
-"speed": 5.0
+"name": &"bill",
+"speed": 30.0
 }]
-
-[sub_resource type="Animation" id="Animation_dml3y"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_11cpu"]
-resource_name = "flashing"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.26666668, 0.36666667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0vp7"]
-_data = {
-&"RESET": SubResource("Animation_dml3y"),
-&"flashing": SubResource("Animation_11cpu")
-}
 
 [node name="Office" type="Node2D" groups=["office"]]
 script = ExtResource("1_ul364")
@@ -135,33 +191,37 @@ texture = ExtResource("1_ql6sr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="DoorR" parent="." instance=ExtResource("4_nanex")]
+[node name="DoorR" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_nanex")]
 position = Vector2(456, 0)
+manager = NodePath("../Manager")
 direction = "right"
 
-[node name="DoorL" parent="." instance=ExtResource("4_nanex")]
+[node name="DoorL" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_nanex")]
 position = Vector2(-476, 0)
 scale = Vector2(-1, 1)
+manager = NodePath("../Manager")
 direction = "left"
 
-[node name="LightableR" parent="." instance=ExtResource("4_66du1")]
+[node name="LightableR" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_66du1")]
 position = Vector2(389, 0)
+manager = NodePath("../Manager")
 direction = "right"
 
-[node name="LightableL" parent="." instance=ExtResource("4_66du1")]
+[node name="LightableL" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_66du1")]
 position = Vector2(-407, 0)
+manager = NodePath("../Manager")
 direction = "left"
 
-[node name="CamerasContainer" type="Node2D" parent="." groups=["cameras_container"]]
+[node name="Cameras" type="Node2D" parent="." groups=["cameras_container"]]
 visible = false
 script = ExtResource("5_yexkw")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="CamerasContainer"]
+[node name="CameraSprite" type="AnimatedSprite2D" parent="Cameras"]
 scale = Vector2(0.73875, 0.94166666)
 sprite_frames = SubResource("SpriteFrames_8d8gp")
 animation = &"hall_left_luva"
 
-[node name="ChannelButtons" type="VBoxContainer" parent="CamerasContainer"]
+[node name="ChannelButtons" type="VBoxContainer" parent="Cameras"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -183,28 +243,42 @@ texture = ExtResource("5_66du1")
 position = Vector2(0, 302)
 shape = SubResource("RectangleShape2D_66du1")
 
-[node name="AudioController" parent="." instance=ExtResource("17_vyb6o")]
+[node name="Manager" type="Node" parent="."]
+script = ExtResource("15_r0vp7")
 
-[node name="Ignore" type="Node" parent="."]
+[node name="AudioController" type="Node" parent="."]
+script = ExtResource("16_h6w4s")
 
-[node name="Hallucinations" type="AnimatedSprite2D" parent="Ignore"]
+[node name="AmostradinhoWarning" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("17_5sbiv")
+
+[node name="AmostradinhoKnocking" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("18_4fjga")
+
+[node name="AmostradinhoRunning" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("19_5sbiv")
+
+[node name="Jumpscare" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("18_5sbiv")
+
+[node name="JumpscareSprite" type="AnimatedSprite2D" parent="."]
 visible = false
-scale = Vector2(0.60729164, 0.62592596)
-sprite_frames = SubResource("SpriteFrames_vyb6o")
-animation = &"amostradinho_warning"
+sprite_frames = SubResource("SpriteFrames_o4y4s")
+animation = &"bill"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Ignore/Hallucinations"]
-libraries = {
-&"": SubResource("AnimationLibrary_r0vp7")
-}
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="ButtonTest" type="Button" parent="Ignore"]
-visible = false
-offset_left = 300.0
-offset_top = 55.0
-offset_right = 583.0
-offset_bottom = 89.0
+[node name="PowerLeft" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_right = 21.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme = ExtResource("6_8d8gp")
-text = "CHANNEL 1"
+text = "100"
 
-[connection signal="mouse_entered" from="TabletTrigger" to="CamerasContainer" method="_on_tablet_trigger_mouse_entered"]
+[connection signal="mouse_entered" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_entered"]
