@@ -33,7 +33,7 @@ func _ready() -> void:
 	tip_visible(false)
 
 func _process(delta: float) -> void:
-	power_left.text = "baterilla: " + str(round(power))
+	power_left.text = "billteria: " + str(round(power))
 	
 	if is_right_door_closed or is_left_door_closed:
 		modify_power(-0.2)

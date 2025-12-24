@@ -2,36 +2,60 @@ extends Node2D
 
 @onready var manager: Node = $"../Manager"
 @onready var camera_sprite: AnimatedSprite2D = $CameraSprite
+@onready var blip_flash: AnimatedSprite2D = $BlipFlash
 @onready var trigger_sprite: Sprite2D = $"../TabletTrigger/Sprite"
+@onready var audio_controller: Node = $"../AudioController"
+@onready var camera_switch: AudioStreamPlayer = $"../AudioController/CameraSwitch"
 
 const CHANNEL_BUTTON_THEME = preload("uid://3idyt7myk8tf")
 const MONITOR_OFF_SPRITE = preload("uid://d25pm6tqx28e3")
 const MONITOR_ON_SPRITE = preload("uid://dj2qmmn1x50lv")
 
 var active_camera: String = "stage"
-var active_channel: int = 0
-
-#var channel_buttons = ButtonGroup.new()
 
 func _ready() -> void:
-	# garantir que as câmeras comecem desligadas
+	# garantir que as câmeras/efeitos comecem desligados
 	# e que a inicial seja sempre a do palco
 	visible = false
-	set_active_camera("stage")
+	blip_flash.visible = false
 	
 	# atualizar as câmeras quando um animatronic se mover
 	manager.animatronic_moved.connect(refresh_current_camera)
 
 func set_active_camera(camera_id: String):
+	play_blip_flash()
+	
 	var animation_name: String
 	var frame_index: int = 0
-
+	
 	if camera_id == "stage":
+		var sprite_map = [
+			{
+				"animatronics": ["luva", "bill", "virginia"],
+				"sprite": "stage_luva_bill_virginia"
+			},
+			{
+				"animatronics": ["luva", "bill"],
+				"sprite": "stage_luva_bill"
+			},
+			{
+				"animatronics": ["bill", "virginia"],
+				"sprite": "stage_bill_virginia"
+			},
+			{
+				"animatronics": [],
+				"sprite": "stage"
+			}
+		]
 		animation_name = "stage"
 		camera_id = animation_name
 		
 		if manager.luva_pos == "stage" && manager.virginia_pos == "stage":
 			animation_name = "stage_luva_bill_virginia"
+		elif manager.luva_pos == "stage" && manager.virginia_pos != "stage":
+			animation_name = "stage_luva_bill"
+		elif manager.luva_pos != "stage" && manager.virginia_pos == "stage":
+			animation_name = "stage_bill_virginia"
 	elif camera_id == "hall_left":
 		animation_name = "hall_left"
 		camera_id = animation_name
@@ -66,6 +90,13 @@ func set_active_camera(camera_id: String):
 	camera_sprite.animation = animation_name
 	camera_sprite.frame = frame_index
 
+func play_blip_flash(silent: bool = false):
+	if !silent:
+		camera_switch.play()
+	
+	blip_flash.visible = true
+	blip_flash.play()
+
 func refresh_current_camera():
 	# pra usar quando um animatronic se move enquanto
 	# o player já está olhando a câmera que ele entrou/saiu
@@ -73,12 +104,16 @@ func refresh_current_camera():
 	set_active_camera(active_camera)
 
 func camera_tips_visible(state):
+	# mostrar as dicas de hotkeys da câmera
 	manager.set_tip([["e", "câmeras"]])
 	manager.tip_visible(state)
 
 func toggle_cameras():
 	visible = !visible
 	manager.is_cameras_open = visible
+	
+	if visible:
+		set_active_camera(active_camera) # pro sprite sempre começar atualizado
 	
 	camera_tips_visible(visible)
 
@@ -103,3 +138,6 @@ func _on_tablet_trigger_mouse_exited() -> void:
 	
 	if !manager.is_cameras_open:
 		camera_tips_visible(false)
+
+func _on_blip_flash_animation_finished() -> void:
+	blip_flash.visible = false

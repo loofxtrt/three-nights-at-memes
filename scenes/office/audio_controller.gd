@@ -6,6 +6,8 @@ extends Node
 @onready var jumpscare: AudioStreamPlayer = $Jumpscare
 @onready var door_slam: AudioStreamPlayer = $DoorSlam
 @onready var light_flicker: AudioStreamPlayer = $LightFlicker
+@onready var ambience: AudioStreamPlayer = $Ambience
+#@onready var camera_switch: AudioStreamPlayer = $CameraSwitch
 
 # uso:
 # NomeDoAutoload.nome_da_variavel.play()
@@ -15,3 +17,5 @@ func _ready() -> void:
 	for c in get_children():
 		if c is AudioStreamPlayer:
 			c.volume_db = -10
+	
+	ambience.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=80 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
@@ -23,16 +23,27 @@
 [ext_resource type="AudioStream" uid="uid://dreq1878o8rd6" path="res://assets/audio/jumpscare.wav" id="18_5sbiv"]
 [ext_resource type="Texture2D" uid="uid://cq6qtubd8iaat" path="res://assets/sprites/cameras/stage_luva-bill-virginia.png" id="18_35w6l"]
 [ext_resource type="AudioStream" uid="uid://bubvel3wo6k4v" path="res://assets/audio/amostradinho-running.wav" id="19_5sbiv"]
+[ext_resource type="Texture2D" uid="uid://c387887l2blrw" path="res://assets/sprites/cameras/stage_virginia-bill.png" id="19_akl8q"]
+[ext_resource type="Texture2D" uid="uid://caeb2ig8kdeuw" path="res://placeholders/static.png" id="19_in01k"]
+[ext_resource type="Shader" uid="uid://dlfdljy8u8rjh" path="res://scenes/office/camera_saturation.gdshader" id="19_pgmud"]
+[ext_resource type="Texture2D" uid="uid://nsrlgdxyjb6o" path="res://assets/sprites/cameras/stage_luva-bill.png" id="20_d0vrj"]
 [ext_resource type="Texture2D" uid="uid://c6t8rye4mv6tm" path="res://assets/sprites/cameras_ui/map.png" id="20_o4y4s"]
 [ext_resource type="AudioStream" uid="uid://chbmybcstool4" path="res://assets/audio/door-slam.wav" id="21_01qce"]
 [ext_resource type="PackedScene" uid="uid://dboffipd38jsp" path="res://scenes/office/channel_button.tscn" id="21_o4y4s"]
 [ext_resource type="AudioStream" uid="uid://3k3vw4vfpxio" path="res://assets/audio/fluorescent-light.wav" id="22_35w6l"]
 [ext_resource type="Texture2D" uid="uid://b6cp4v0twevq1" path="res://assets/sprites/labubu.png" id="23_mdy2d"]
+[ext_resource type="Texture2D" uid="uid://dmcmbrfygeq6c" path="res://placeholders/blip_flash.png" id="24_30jyb"]
 [ext_resource type="Script" uid="uid://drit1526rwnuk" path="res://scenes/office/nose_honk.gd" id="24_g0sld"]
 [ext_resource type="AudioStream" uid="uid://dym0idan4k3mq" path="res://assets/audio/honk.mp3" id="25_mdy2d"]
+[ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://placeholders/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
+[ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://placeholders/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0sld"]
 radius = 12.0415945
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgmud"]
+shader = ExtResource("19_pgmud")
+shader_parameter/saturation = 0.400000019
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8d8gp"]
 animations = [{
@@ -92,6 +103,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("19_akl8q")
+}],
+"loop": true,
+"name": &"stage_bill_virginia",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_d0vrj")
+}],
+"loop": true,
+"name": &"stage_luva_bill",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("18_35w6l")
 }],
 "loop": true,
@@ -99,17 +126,152 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_o4y4s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_30jyb"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 4, 1280, 720)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_in01k"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvg5m"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 726, 1280, 720)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_pgmud"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_akl8q"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 1448, 1280, 720)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_30jyb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0vrj"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 2170, 1280, 720)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_dvg5m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_45seo"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 2892, 1280, 720)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_akl8q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_irf2c"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 3614, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnluk"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 4336, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkt0b"]
+atlas = ExtResource("19_in01k")
+region = Rect2(0, 5058, 1280, 720)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dubn4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30jyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvg5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akl8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0vrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45seo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irf2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnluk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkt0b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_tl8i5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2im7n"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_j1jds"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_gkxou"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_juxeb"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_tk24r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 4, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl8i5"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 726, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2im7n"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 1448, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtlpu"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 5058, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh2bw"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 6502, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnr2b"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 7224, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qa8um"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 7946, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0oiu"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 8668, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m40x1"]
+atlas = ExtResource("24_30jyb")
+region = Rect2(0, 9390, 1280, 720)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m055d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dubn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl8i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2im7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtlpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh2bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnr2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qa8um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0oiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m40x1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0vp7"]
 atlas = ExtResource("16_qei30")
@@ -271,12 +433,20 @@ shape = SubResource("CircleShape2D_g0sld")
 stream = ExtResource("25_mdy2d")
 
 [node name="Cameras" type="Node2D" parent="." groups=["cameras_container"]]
+visible = false
 script = ExtResource("5_yexkw")
 
 [node name="CameraSprite" type="AnimatedSprite2D" parent="Cameras"]
+material = SubResource("ShaderMaterial_pgmud")
 scale = Vector2(0.61111104, 0.6111111)
 sprite_frames = SubResource("SpriteFrames_8d8gp")
-animation = &"stage_luva_bill_virginia"
+animation = &"stage"
+
+[node name="Static" type="AnimatedSprite2D" parent="Cameras"]
+modulate = Color(1, 1, 1, 0.09019608)
+sprite_frames = SubResource("SpriteFrames_dubn4")
+autoplay = "default"
+frame_progress = 0.14509098
 
 [node name="HotkeyLabel" type="Label" parent="Cameras"]
 visible = false
@@ -300,62 +470,68 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_o4y4s")
+button_group = SubResource("ButtonGroup_tl8i5")
 camera_id = "stage"
 initial_state = true
-_button_group = SubResource("ButtonGroup_o4y4s")
 
 [node name="ChannelButton3" parent="Cameras" instance=ExtResource("21_o4y4s")]
 offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_in01k")
+button_group = SubResource("ButtonGroup_2im7n")
 camera_id = "kitchen"
 initial_state = true
-_button_group = SubResource("ButtonGroup_in01k")
 
 [node name="ChannelButton4" parent="Cameras" instance=ExtResource("21_o4y4s")]
 offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_pgmud")
+button_group = SubResource("ButtonGroup_j1jds")
 camera_id = "kitchen"
-_button_group = SubResource("ButtonGroup_pgmud")
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
 offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_30jyb")
+button_group = SubResource("ButtonGroup_gkxou")
 camera_id = "hall_right"
-_button_group = SubResource("ButtonGroup_30jyb")
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
 offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_dvg5m")
+button_group = SubResource("ButtonGroup_juxeb")
 camera_id = "hall_left"
-_button_group = SubResource("ButtonGroup_dvg5m")
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
 offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_akl8q")
+button_group = SubResource("ButtonGroup_tk24r")
 camera_id = "amostradinho_cove"
-_button_group = SubResource("ButtonGroup_akl8q")
+
+[node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_m055d")
+frame = 8
+frame_progress = 1.0
 
 [node name="Manager" type="Node" parent="."]
 script = ExtResource("15_r0vp7")
 
 [node name="AudioController" type="Node" parent="."]
 script = ExtResource("16_h6w4s")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("29_d0vrj")
+
+[node name="CameraSwitch" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("30_45seo")
 
 [node name="DoorSlam" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("21_01qce")
@@ -396,7 +572,7 @@ size_flags_vertical = 0
 [node name="PowerLeft" type="Label" parent="HUD/TopVBox"]
 layout_mode = 2
 theme = ExtResource("6_8d8gp")
-text = "100"
+text = "POWER LEFT"
 horizontal_alignment = 1
 
 [node name="HotkeyTip" type="Label" parent="HUD/TopVBox"]
@@ -413,3 +589,4 @@ horizontal_alignment = 1
 [connection signal="mouse_entered" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_entered"]
 [connection signal="mouse_exited" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_exited"]
 [connection signal="input_event" from="Labubu/Area2D" to="Labubu/Area2D" method="_on_input_event"]
+[connection signal="animation_finished" from="Cameras/BlipFlash" to="Cameras" method="_on_blip_flash_animation_finished"]
