@@ -3,7 +3,8 @@ extends Node
 @onready var audio_controller: Node = $"../AudioController"
 @onready var jumpscare_sprite: AnimatedSprite2D = $"../JumpscareSprite"
 @onready var cameras: Node2D = $"../Cameras"
-@onready var power_left: Label = $"../HUD/PowerLeft"
+@onready var power_left: Label = $"../HUD/TopVBox/PowerLeft"
+@onready var hotkey_tip: Label = $"../HUD/TopVBox/HotkeyTip"
 
 var is_cameras_open: bool = false
 var power: float = 100.0
@@ -21,18 +22,38 @@ var next_move: Timer
 signal animatronic_moved
 
 func _ready() -> void:
+	# acionar o timer de movimentação dos animatronics pela primeira vez
 	next_move = Timer.new()
 	next_move.one_shot = true
 	add_child(next_move)
 	
 	next_move.timeout.connect(move_animatronic)
 	start_movement_timer()
+	
+	tip_visible(false)
 
 func _process(delta: float) -> void:
-	power_left.text = str(round(power))
+	power_left.text = "baterilla: " + str(round(power))
 	
 	if is_right_door_closed or is_left_door_closed:
 		modify_power(-0.2)
+
+func set_tip(tips: Array):
+	# recebe um array de dicas. cada item é uma linha
+	# ex: [["e", "interagir"]]
+	var text = ""
+	
+	for t in tips:
+		var key = t[0] as String
+		var action = t[1] as String
+		
+		key = "[" + key.to_upper() + "]"
+		text += key + " " + action + "\n"
+	
+	hotkey_tip.text = text
+
+func tip_visible(state: bool):
+	hotkey_tip.visible = state
 
 func jumpscare():
 	# abaixar as câmeras antes de dar o jumpscare
@@ -57,15 +78,28 @@ func move_animatronic(animatronic: String = ""):
 	
 	if animatronic == "":
 		animatronic = ["luva", "virginia"].pick_random()
+	if animatronic == "virginia":
+		return
 	
 	if animatronic == "luva":
-		if luva_pos == "stage":
-			possible_next = ["hall_left"]
-		elif luva_pos == "hall_left":
-			possible_next = ["office"]
+		var moving_map = {
+			"stage": ["hall_left", "kitchen"],
+			"kitchen": ["hall_left", "stage"],
+			"hall_left": ["stage", "office"]
+		}
+		var moves = moving_map.get(luva_pos)
 
-		new_pos = possible_next.pick_random()
-		luva_pos = new_pos
+		if luva_pos != "office":
+			new_pos = moves.pick_random()
+			luva_pos = new_pos
+		else:
+			await get_tree().create_timer(4).timeout
+			
+			if !is_left_door_closed:
+				jumpscare()
+			else:
+				luva_pos = "stage"
+				print("luva foi embora")
 	elif animatronic == "virginia":
 		if virginia_pos == "stage":
 			possible_next = ["hall_right"]
@@ -78,9 +112,11 @@ func move_animatronic(animatronic: String = ""):
 	animatronic_moved.emit() # útil pra atualizar as câmeras
 	print("posição de " + animatronic + " atualizada")
 	
-	if new_pos == "office":
-		jumpscare()
-		print(animatronic + " atacou, jumpscare")
+	#if new_pos == "office":
+	#	await get_tree().create_timer(4).timeout
+	#
+	#	jumpscare()
+	#	print(animatronic + " atacou, jumpscare")
 
 func trigger_amostradinho():
 	# FIXME: warning toca duas vezes
@@ -102,9 +138,8 @@ func trigger_amostradinho():
 		print("amostradinho foi embora")
 	else:
 		jumpscare()
-		print("amostradinho entrou na office")
 
 func modify_power(amount: float):
 	amount = amount / 50
 	power += amount
-	print("energia atual: " + str(power))
+	#print("energia atual: " + str(power))

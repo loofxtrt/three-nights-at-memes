@@ -4,6 +4,7 @@ extends Area2D
 @onready var cooldown: Timer = $Cooldown
 
 @export var manager: Node
+@export var audio_controller: Node
 @export_enum("left", "right") var direction: String
 
 var can_interact: bool = false
@@ -16,10 +17,17 @@ func _ready() -> void:
 func _on_mouse_entered() -> void:
 	is_mouse_over = true
 	can_interact = true
+	
+	if !manager.is_cameras_open:
+		manager.set_tip([["lmb", "porta"], ["ctrl", "luz"]])
+		manager.tip_visible(true)
 
 func _on_mouse_exited() -> void:
 	is_mouse_over = false
 	can_interact = false
+	
+	if !manager.is_cameras_open:
+		manager.tip_visible(false)
 
 func _process(delta: float) -> void:
 	# só poder interagir quando estiver com as câmeras abaixadas
@@ -42,6 +50,8 @@ func toggle_door():
 		manager.is_right_door_closed = is_closed
 	elif direction == "left":
 		manager.is_left_door_closed = is_closed
+	
+	audio_controller.door_slam.play()
 
 func _on_cooldown_timeout() -> void:
 	# se não tivevesse a deteção do mouse over

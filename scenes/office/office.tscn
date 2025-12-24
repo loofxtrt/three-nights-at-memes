@@ -1,27 +1,38 @@
-[gd_scene load_steps=39 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=53 format=3 uid="uid://diw1qplhntkkf"]
 
-[ext_resource type="Texture2D" uid="uid://soeplbijsxai" path="res://placeholders/office.png" id="1_ql6sr"]
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
+[ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
-[ext_resource type="Texture2D" uid="uid://coq7s7rrfkbgp" path="res://placeholders/tablet-trigger.png" id="5_66du1"]
 [ext_resource type="Texture2D" uid="uid://udu3k5exwrrw" path="res://placeholders/amostradinho-cove-0.png" id="5_e1yc2"]
-[ext_resource type="Texture2D" uid="uid://dljpu2qp36x26" path="res://placeholders/hall-left.png" id="5_sf0ao"]
 [ext_resource type="Script" uid="uid://dxajnyjvrcjjg" path="res://scenes/office/cameras.gd" id="5_yexkw"]
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="6_8d8gp"]
-[ext_resource type="Texture2D" uid="uid://cebnq7y8tgils" path="res://placeholders/stage-blv.png" id="6_art4y"]
-[ext_resource type="Texture2D" uid="uid://ocpx6s0ahifn" path="res://placeholders/hall-right.png" id="6_b6q11"]
 [ext_resource type="Texture2D" uid="uid://cpxgnx0t416qc" path="res://placeholders/amostradinho-cove-1.png" id="6_y3s53"]
 [ext_resource type="Texture2D" uid="uid://sno5q2eyro75" path="res://placeholders/amostradinho-cove-2.png" id="7_p8n5g"]
-[ext_resource type="Texture2D" uid="uid://clcqgga51i8yc" path="res://placeholders/hall-left-luva.png" id="9_p8n5g"]
-[ext_resource type="Texture2D" uid="uid://c681ffya7pgh8" path="res://placeholders/hall-right-virginia.png" id="11_yexkw"]
+[ext_resource type="Texture2D" uid="uid://cx8kwat3cw7ex" path="res://assets/sprites/cameras/hall_left.png" id="13_01qce"]
+[ext_resource type="Texture2D" uid="uid://cno234u6842wd" path="res://assets/sprites/cameras/hall_left_luva.png" id="14_35w6l"]
 [ext_resource type="Script" uid="uid://cupwn3d4bdju" path="res://scenes/office/manager.gd" id="15_r0vp7"]
+[ext_resource type="Texture2D" uid="uid://k62uvyw5ks7d" path="res://assets/sprites/cameras/hall_right.png" id="15_trify"]
 [ext_resource type="Script" uid="uid://b6akukxqqanvq" path="res://scenes/office/audio_controller.gd" id="16_h6w4s"]
+[ext_resource type="Texture2D" uid="uid://c2kck82ljtk2g" path="res://assets/sprites/cameras/hall_right_virginia.png" id="16_o4y4s"]
 [ext_resource type="Texture2D" uid="uid://ucpfbej5usud" path="res://placeholders/PC _ Computer - Five Nights at Freddy's 2 - Animatronics - Withered Freddy.png" id="16_qei30"]
 [ext_resource type="AudioStream" uid="uid://c47me4i48d873" path="res://assets/audio/amostradinho-warning-shorter.wav" id="17_5sbiv"]
+[ext_resource type="Texture2D" uid="uid://bkur32nhkarbt" path="res://assets/sprites/cameras/stage.png" id="17_in01k"]
+[ext_resource type="Texture2D" uid="uid://d25pm6tqx28e3" path="res://assets/sprites/monitor_off.png" id="17_mdy2d"]
 [ext_resource type="AudioStream" uid="uid://gb55kxkrkjmt" path="res://assets/audio/amostradinho-knocking.wav" id="18_4fjga"]
 [ext_resource type="AudioStream" uid="uid://dreq1878o8rd6" path="res://assets/audio/jumpscare.wav" id="18_5sbiv"]
+[ext_resource type="Texture2D" uid="uid://cq6qtubd8iaat" path="res://assets/sprites/cameras/stage_luva-bill-virginia.png" id="18_35w6l"]
 [ext_resource type="AudioStream" uid="uid://bubvel3wo6k4v" path="res://assets/audio/amostradinho-running.wav" id="19_5sbiv"]
+[ext_resource type="Texture2D" uid="uid://c6t8rye4mv6tm" path="res://assets/sprites/cameras_ui/map.png" id="20_o4y4s"]
+[ext_resource type="AudioStream" uid="uid://chbmybcstool4" path="res://assets/audio/door-slam.wav" id="21_01qce"]
+[ext_resource type="PackedScene" uid="uid://dboffipd38jsp" path="res://scenes/office/channel_button.tscn" id="21_o4y4s"]
+[ext_resource type="AudioStream" uid="uid://3k3vw4vfpxio" path="res://assets/audio/fluorescent-light.wav" id="22_35w6l"]
+[ext_resource type="Texture2D" uid="uid://b6cp4v0twevq1" path="res://assets/sprites/labubu.png" id="23_mdy2d"]
+[ext_resource type="Script" uid="uid://drit1526rwnuk" path="res://scenes/office/nose_honk.gd" id="24_g0sld"]
+[ext_resource type="AudioStream" uid="uid://dym0idan4k3mq" path="res://assets/audio/honk.mp3" id="25_mdy2d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0sld"]
+radius = 12.0415945
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8d8gp"]
 animations = [{
@@ -41,7 +52,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_sf0ao")
+"texture": ExtResource("13_01qce")
 }],
 "loop": false,
 "name": &"hall_left",
@@ -49,7 +60,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_p8n5g")
+"texture": ExtResource("14_35w6l")
 }],
 "loop": false,
 "name": &"hall_left_luva",
@@ -57,7 +68,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_b6q11")
+"texture": ExtResource("15_trify")
 }],
 "loop": false,
 "name": &"hall_right",
@@ -65,7 +76,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_yexkw")
+"texture": ExtResource("16_o4y4s")
 }],
 "loop": false,
 "name": &"hall_right_virginia",
@@ -73,15 +84,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_art4y")
+"texture": ExtResource("17_in01k")
 }],
 "loop": false,
 "name": &"stage",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_35w6l")
+}],
+"loop": true,
+"name": &"stage_luva_bill_virginia",
+"speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_66du1"]
-size = Vector2(608, 82)
+[sub_resource type="ButtonGroup" id="ButtonGroup_o4y4s"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_in01k"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_pgmud"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_30jyb"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_dvg5m"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_akl8q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0vp7"]
 atlas = ExtResource("16_qei30")
@@ -186,68 +214,154 @@ animations = [{
 script = ExtResource("1_ul364")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.725, 0.911111)
-texture = ExtResource("1_ql6sr")
+texture = ExtResource("2_mdy2d")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="DoorR" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_nanex")]
-position = Vector2(456, 0)
+[node name="DoorR" parent="." node_paths=PackedStringArray("manager", "audio_controller") instance=ExtResource("4_nanex")]
+position = Vector2(490, 19)
 manager = NodePath("../Manager")
+audio_controller = NodePath("../AudioController")
 direction = "right"
 
-[node name="DoorL" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_nanex")]
-position = Vector2(-476, 0)
+[node name="DoorL" parent="." node_paths=PackedStringArray("manager", "audio_controller") instance=ExtResource("4_nanex")]
+position = Vector2(-489, 19)
 scale = Vector2(-1, 1)
 manager = NodePath("../Manager")
+audio_controller = NodePath("../AudioController")
 direction = "left"
 
-[node name="LightableR" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_66du1")]
+[node name="LightableR" parent="." node_paths=PackedStringArray("manager", "audio_controller") instance=ExtResource("4_66du1")]
 position = Vector2(389, 0)
 manager = NodePath("../Manager")
+audio_controller = NodePath("../AudioController")
 direction = "right"
 
-[node name="LightableL" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("4_66du1")]
+[node name="LightableL" parent="." node_paths=PackedStringArray("manager", "audio_controller") instance=ExtResource("4_66du1")]
 position = Vector2(-407, 0)
 manager = NodePath("../Manager")
+audio_controller = NodePath("../AudioController")
 direction = "left"
 
-[node name="Cameras" type="Node2D" parent="." groups=["cameras_container"]]
-visible = false
-script = ExtResource("5_yexkw")
-
-[node name="CameraSprite" type="AnimatedSprite2D" parent="Cameras"]
-scale = Vector2(0.73875, 0.94166666)
-sprite_frames = SubResource("SpriteFrames_8d8gp")
-animation = &"hall_left_luva"
-
-[node name="ChannelButtons" type="VBoxContainer" parent="Cameras"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 300.0
-offset_top = 55.0
-offset_right = 583.0
-offset_bottom = 332.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-
 [node name="TabletTrigger" type="Area2D" parent="."]
+position = Vector2(129, -246)
 
 [node name="Sprite" type="Sprite2D" parent="TabletTrigger"]
 position = Vector2(0, 287)
-texture = ExtResource("5_66du1")
+texture = ExtResource("17_mdy2d")
 
-[node name="Collision" type="CollisionShape2D" parent="TabletTrigger"]
-position = Vector2(0, 302)
-shape = SubResource("RectangleShape2D_66du1")
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="TabletTrigger"]
+position = Vector2(-13, 0)
+polygon = PackedVector2Array(-73, 210, -75, 318, 40, 342, 42, 227)
+
+[node name="Labubu" type="Node2D" parent="."]
+position = Vector2(-164, 61)
+
+[node name="Sprite2D" type="Sprite2D" parent="Labubu"]
+position = Vector2(4.928331, -9.140333)
+scale = Vector2(0.36129856, 0.36129853)
+texture = ExtResource("23_mdy2d")
+
+[node name="Area2D" type="Area2D" parent="Labubu"]
+script = ExtResource("24_g0sld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Labubu/Area2D"]
+position = Vector2(5, -14)
+shape = SubResource("CircleShape2D_g0sld")
+
+[node name="HonkAudio" type="AudioStreamPlayer" parent="Labubu"]
+stream = ExtResource("25_mdy2d")
+
+[node name="Cameras" type="Node2D" parent="." groups=["cameras_container"]]
+script = ExtResource("5_yexkw")
+
+[node name="CameraSprite" type="AnimatedSprite2D" parent="Cameras"]
+scale = Vector2(0.61111104, 0.6111111)
+sprite_frames = SubResource("SpriteFrames_8d8gp")
+animation = &"stage_luva_bill_virginia"
+
+[node name="HotkeyLabel" type="Label" parent="Cameras"]
+visible = false
+offset_left = -561.0
+offset_top = -307.0
+offset_right = -363.0
+offset_bottom = -256.0
+theme = ExtResource("6_8d8gp")
+text = "[e] para sair"
+
+[node name="Map" type="TextureRect" parent="Cameras"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 28.0
+offset_right = 553.8689
+offset_bottom = 297.0
+texture = ExtResource("20_o4y4s")
+
+[node name="ChannelButton" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 426.0
+offset_top = 33.0
+offset_right = 461.3846
+offset_bottom = 56.0
+button_group = SubResource("ButtonGroup_o4y4s")
+camera_id = "stage"
+initial_state = true
+_button_group = SubResource("ButtonGroup_o4y4s")
+
+[node name="ChannelButton3" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 524.0
+offset_top = 155.0
+offset_right = 559.38464
+offset_bottom = 178.0
+button_group = SubResource("ButtonGroup_in01k")
+camera_id = "kitchen"
+initial_state = true
+_button_group = SubResource("ButtonGroup_in01k")
+
+[node name="ChannelButton4" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 524.0
+offset_top = 155.0
+offset_right = 559.38464
+offset_bottom = 178.0
+button_group = SubResource("ButtonGroup_pgmud")
+camera_id = "kitchen"
+_button_group = SubResource("ButtonGroup_pgmud")
+
+[node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 470.0
+offset_top = 208.0
+offset_right = 505.38464
+offset_bottom = 231.0
+button_group = SubResource("ButtonGroup_30jyb")
+camera_id = "hall_right"
+_button_group = SubResource("ButtonGroup_30jyb")
+
+[node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 293.0
+offset_top = 186.0
+offset_right = 328.38464
+offset_bottom = 209.0
+button_group = SubResource("ButtonGroup_dvg5m")
+camera_id = "hall_left"
+_button_group = SubResource("ButtonGroup_dvg5m")
+
+[node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 352.0
+offset_top = 92.0
+offset_right = 387.3846
+offset_bottom = 115.0
+button_group = SubResource("ButtonGroup_akl8q")
+camera_id = "amostradinho_cove"
+_button_group = SubResource("ButtonGroup_akl8q")
 
 [node name="Manager" type="Node" parent="."]
 script = ExtResource("15_r0vp7")
 
 [node name="AudioController" type="Node" parent="."]
 script = ExtResource("16_h6w4s")
+
+[node name="DoorSlam" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("21_01qce")
+
+[node name="LightFlicker" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("22_35w6l")
 
 [node name="AmostradinhoWarning" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("17_5sbiv")
@@ -268,17 +382,34 @@ animation = &"bill"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="PowerLeft" type="Label" parent="HUD"]
+[node name="TopVBox" type="VBoxContainer" parent="HUD"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -21.0
-offset_right = 21.0
-offset_bottom = 23.0
+offset_left = -58.5
+offset_right = 58.5
+offset_bottom = 43.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 0
+
+[node name="PowerLeft" type="Label" parent="HUD/TopVBox"]
+layout_mode = 2
 theme = ExtResource("6_8d8gp")
 text = "100"
+horizontal_alignment = 1
 
+[node name="HotkeyTip" type="Label" parent="HUD/TopVBox"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_8d8gp")
+theme_override_font_sizes/font_size = 18
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="input_event" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_input_event"]
 [connection signal="mouse_entered" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_entered"]
+[connection signal="mouse_exited" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_exited"]
+[connection signal="input_event" from="Labubu/Area2D" to="Labubu/Area2D" method="_on_input_event"]

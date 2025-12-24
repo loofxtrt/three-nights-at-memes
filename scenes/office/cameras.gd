@@ -2,66 +2,49 @@ extends Node2D
 
 @onready var manager: Node = $"../Manager"
 @onready var camera_sprite: AnimatedSprite2D = $CameraSprite
-@onready var channel_buttons: VBoxContainer = $ChannelButtons
+@onready var trigger_sprite: Sprite2D = $"../TabletTrigger/Sprite"
 
 const CHANNEL_BUTTON_THEME = preload("uid://3idyt7myk8tf")
+const MONITOR_OFF_SPRITE = preload("uid://d25pm6tqx28e3")
+const MONITOR_ON_SPRITE = preload("uid://dj2qmmn1x50lv")
 
 var active_camera: String = "stage"
 var active_channel: int = 0
+
+#var channel_buttons = ButtonGroup.new()
 
 func _ready() -> void:
 	# garantir que as câmeras comecem desligadas
 	# e que a inicial seja sempre a do palco
 	visible = false
-	make_channel_buttons()
-	
-	set_active_camera(0)
+	set_active_camera("stage")
 	
 	# atualizar as câmeras quando um animatronic se mover
 	manager.animatronic_moved.connect(refresh_current_camera)
 
-func make_channel_buttons():
-	# limpar todos os botões antes de desenhar eles de novo
-	for c in channel_buttons.get_children():
-		c.queue_free()
-	
-	# cria um botão pra cada câmera
-	# baseado no número de câmeras definido pelo amount
-	var amount = 4
-	for i in range(amount):
-		var button = Button.new()
-		
-		# aplicar o tema e texto, adicionando o botão à vbox
-		button.theme = CHANNEL_BUTTON_THEME
-		button.text = "CHANNEL " + str(i)
-		
-		channel_buttons.add_child(button)
-		
-		# conecta o botão a um índice de câmera
-		# o i é o número que a câmera recebe
-		button.pressed.connect(set_active_camera.bind(i))
-
-func set_active_camera(channel_number: int):
+func set_active_camera(camera_id: String):
 	var animation_name: String
-	var camera_id: String
 	var frame_index: int = 0
 
-	if channel_number == 0:
+	if camera_id == "stage":
 		animation_name = "stage"
 		camera_id = animation_name
-	elif channel_number == 1:
+		
+		if manager.luva_pos == "stage" && manager.virginia_pos == "stage":
+			animation_name = "stage_luva_bill_virginia"
+	elif camera_id == "hall_left":
 		animation_name = "hall_left"
 		camera_id = animation_name
 		
 		if manager.luva_pos == "hall_left":
 			animation_name = "hall_left_luva"
-	elif channel_number == 2:
+	elif camera_id == "hall_right":
 		animation_name = "hall_right"
 		camera_id = animation_name
 		
 		if manager.virginia_pos == "hall_right":
 			animation_name = "hall_right_virginia"
-	elif channel_number == 3:
+	elif camera_id == "amostradinho_cove":
 		animation_name = "amostradinho_cove"
 		camera_id = animation_name
 		
@@ -79,7 +62,6 @@ func set_active_camera(channel_number: int):
 	# define as variáveis e atualiza o sprite
 	# o frame index serve principalmente pra mostrar o estágio do amostradinho
 	active_camera = camera_id
-	active_channel = channel_number
 	
 	camera_sprite.animation = animation_name
 	camera_sprite.frame = frame_index
@@ -88,11 +70,36 @@ func refresh_current_camera():
 	# pra usar quando um animatronic se move enquanto
 	# o player já está olhando a câmera que ele entrou/saiu
 	print("recarregando a câmera")
-	set_active_camera(active_channel)
+	set_active_camera(active_camera)
+
+func camera_tips_visible(state):
+	manager.set_tip([["e", "câmeras"]])
+	manager.tip_visible(state)
 
 func toggle_cameras():
 	visible = !visible
 	manager.is_cameras_open = visible
+	
+	camera_tips_visible(visible)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("cameras"):
+		toggle_cameras()
+
+func _on_tablet_trigger_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if manager.is_cameras_open:
+		return
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			toggle_cameras()
 
 func _on_tablet_trigger_mouse_entered() -> void:
-	toggle_cameras()
+	trigger_sprite.texture = MONITOR_ON_SPRITE
+	camera_tips_visible(true)
+
+func _on_tablet_trigger_mouse_exited() -> void:
+	trigger_sprite.texture = MONITOR_OFF_SPRITE
+	
+	if !manager.is_cameras_open:
+		camera_tips_visible(false)

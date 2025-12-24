@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dboffipd38jsp"]
+
+[ext_resource type="Texture2D" uid="uid://c68k8sm1qmrbq" path="res://assets/sprites/cameras_ui/inactive.png" id="1_cs3j5"]
+[ext_resource type="Texture2D" uid="uid://bc5vxinc1g0vo" path="res://assets/sprites/cameras_ui/selected.png" id="2_datue"]
+[ext_resource type="Script" uid="uid://g81127dhu38a" path="res://scenes/office/channel_button.gd" id="3_qihrp"]
+
+[node name="ChannelButton" type="TextureButton"]
+texture_filter = 1
+offset_right = 10.0
+offset_bottom = 7.0
+toggle_mode = true
+texture_normal = ExtResource("1_cs3j5")
+texture_pressed = ExtResource("2_datue")
+stretch_mode = 0
+script = ExtResource("3_qihrp")

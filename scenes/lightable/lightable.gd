@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var manager: Node
+@export var audio_controller: Node
 @export_enum("left", "right") var direction: String
 
 var is_lit: bool = false
@@ -8,11 +9,11 @@ var can_interact: bool = false
 
 var office: Node2D = null
 
-const OFFICE_LIGHT_LEFT = preload("uid://cjllu4k2hgryc")
-const OFFICE_LIGHT_RIGHT = preload("uid://de5y2e2h1y3wq")
-const OFFICE_LUVA_LEFT = preload("uid://jelo5cpmorhr")
-const OFFICE_VIRGINIA_RIGHT = preload("uid://bui7w38p6m5sw")
-const OFFICE = preload("uid://soeplbijsxai")
+const OFFICE = preload("uid://dejvws08oqqy0")
+const OFFICE_LIGHT_LEFT = preload("uid://do8qvsoucsoe5")
+const OFFICE_LIGHT_RIGHT = preload("uid://dt7mp53vcaggq")
+const OFFICE_LUVA_LEFT = preload("uid://yk4nsp7rj4uo")
+const OFFICE_VIRGINIA_RIGHT = preload("uid://c1ndoc7edjjnv")
 
 func _ready() -> void:
 	office = get_tree().get_first_node_in_group("office")
@@ -45,7 +46,12 @@ func reset_office_lights(office_sprite: Sprite2D):
 func set_light(state: bool):
 	# define o estado da luz, seja apagado ou aceso
 	is_lit = state
-	print("estado da lanterna: " + str(is_lit))
+	#print("estado da lanterna: " + str(is_lit))
+	
+	if is_lit:
+		audio_controller.light_flicker.play()
+	else:
+		audio_controller.light_flicker.stop()
 	
 	var office_sprite = office.get_node("Sprite")
 	if !office_sprite:
@@ -55,15 +61,28 @@ func set_light(state: bool):
 	# não precisa de lógica pra só um botão poder ser apertado por vez
 	# porque o mouse já precisa estar sobre um de qualquer modo,
 	# então já é teoricamente impossível usar as duas luzes de uma vez
-	if direction == "left":
-		if is_lit:
-			office_sprite.texture = OFFICE_LIGHT_LEFT
+	var directional_methods = {
+		"left": {
+			"lit": OFFICE_LIGHT_LEFT,        # sprite da porta quando não tem nada
+			"animatronic": OFFICE_LUVA_LEFT, # sprite de quando tem o animatronic na portta
+			"pos": manager.luva_pos          # posição que deve ser levada em consideração pra mostrar o sprite
+		},
+		"right": {
+			"lit": OFFICE_LIGHT_RIGHT,
+			"animatronic": OFFICE_VIRGINIA_RIGHT,
+			"pos": manager.virginia_pos
+		}
+	}
+	
+	var methods = directional_methods.get(direction)
+	var lit_sprite = methods.get("lit")
+	var animatronic_sprite = methods.get("animatronic")
+	var pos = methods.get("pos")
+	
+	if is_lit:
+		if pos == "office":
+			office_sprite.texture = animatronic_sprite
 		else:
-			reset_office_lights(office_sprite)
-	elif direction == "right":
-		if is_lit:
-			office_sprite.texture = OFFICE_LIGHT_RIGHT
-		else:
-			reset_office_lights(office_sprite)
+			office_sprite.texture = lit_sprite
 	else:
-		return
+		reset_office_lights(office_sprite)
