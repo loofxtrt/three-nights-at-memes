@@ -8,19 +8,10 @@ extends Node
 
 var is_cameras_open: bool = false
 var power: float = 100.0
-
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 
-#var luva_pos = "stage"
-#var virginia_pos = "stage"
-#var bill_pos = "stage"
-var amostradinho_stage: int = 2
-
-var luva_ai: int = 10
-var virginia_ai: int = 10
-
-var next_move: Timer
+var amostradinho_stage: int = 3
 
 signal animatronic_moved
 
@@ -29,12 +20,30 @@ class Animatronic:
 	var ai: int
 	var pos: String
 	var moving_map: Dictionary
+	var manager: Node
 	
-	func _init(_nick, _ai, _pos, _moving_map) -> void:
+	func _init(_nick, _ai, _pos, _moving_map, _manager) -> void:
 		nick = _nick
 		ai = _ai
 		pos = _pos
 		moving_map = _moving_map
+		manager = _manager # precisa pra poder adicionar o timer e conectar funções
+	
+	func start_movement_timer():
+		# o tempo entre cada tentativa de movimento
+		# isso é individual. vários podem tentar se mover ao mesmo tempo
+		var next_move = Timer.new()
+		manager.add_child(next_move)
+		
+		next_move.wait_time = randf_range(4, 6)
+		next_move.one_shot = true
+		
+		# conectar o timeout com a função pra gerar um loop
+		next_move.timeout.connect(
+			Callable(manager, "move_animatronic").bind(self)
+		)
+		
+		next_move.start()
 
 var luva = Animatronic.new(
 	"luva",
@@ -44,17 +53,26 @@ var luva = Animatronic.new(
 		"stage": ["hall_left", "kitchen"],
 		"kitchen": ["hall_left", "stage"],
 		"hall_left": ["stage", "office"]
-	}
+	},
+	self
 )
+var virginia = Animatronic.new(
+	"virginia",
+	10,
+	"stage",
+	{
+		"stage": ["hall_right", "kitchen"],
+		"kitchen": ["hall_right", "stage"],
+		"hall_right": ["stage", "office"]
+	},
+	self
+)
+var animatronic_list = [luva, virginia]
 
 func _ready() -> void:
-	# acionar o timer de movimentação dos animatronics pela primeira vez
-	next_move = Timer.new()
-	next_move.one_shot = true
-	add_child(next_move)
-	
-	next_move.timeout.connect(move_animatronic)
-	start_movement_timer()
+	# setar os timers de movimentação pela primeira vez
+	for a in animatronic_list:
+		a.start_movement_timer()
 	
 	tip_visible(false)
 
@@ -92,15 +110,9 @@ func jumpscare():
 	jumpscare_sprite.play()
 	audio_controller.jumpscare.play()
 
-func start_movement_timer():
-	# o tempo entre cada tentativa de movimento dos animatronics
-	next_move.wait_time = randf_range(4, 6)
-	next_move.start()
-
-func move_animatronic():
-	start_movement_timer()
+func move_animatronic(animatronic: Animatronic):
+	animatronic.start_movement_timer()
 	
-	var animatronic: Animatronic = [luva].pick_random()
 	var nick = animatronic.nick
 	var ai = animatronic.ai
 	var moving_map = animatronic.moving_map
@@ -137,10 +149,13 @@ func trigger_amostradinho():
 	# FIXME: warning toca duas vezes
 	# FIXME: nada acontece se abrir a porta antes do audio de batidas terminar
 	
-	# estágio em que ele tá correndo pro escritório ou batendo na porta
-	amostradinho_stage = 3
-	audio_controller.amostradinho_warning.play()
-	audio_controller.amostradinho_running.play()
+	var sfx_warning = audio_controller.amostradinho_warning
+	var sfx_running = audio_controller.amostradinho_running
+	
+	if !sfx_warning.playing:
+		audio_controller.amostradinho_warning.play()
+	if !sfx_running.playing:
+		audio_controller.amostradinho_running.play()
 	
 	# depois que ele termina de correr (esse timer)
 	# porta aberta -> jumpscare

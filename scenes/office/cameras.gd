@@ -30,8 +30,7 @@ func set_active_camera(camera_id: String, trigger_blip_flash: bool = true):
 	var frame_index: int = 0
 	
 	var luva_pos = manager.luva.pos
-	var virginia_pos = "stage"
-	#var virginia_pos = manager.virginia.pos
+	var virginia_pos = manager.virginia.pos
 	
 	if camera_id == "stage":
 		var sprite_map = [
@@ -53,7 +52,6 @@ func set_active_camera(camera_id: String, trigger_blip_flash: bool = true):
 			}
 		]
 		animation_name = "stage"
-		camera_id = animation_name
 		
 		if luva_pos == "stage" && virginia_pos == "stage":
 			animation_name = "stage_luva_bill_virginia"
@@ -63,29 +61,39 @@ func set_active_camera(camera_id: String, trigger_blip_flash: bool = true):
 			animation_name = "stage_bill_virginia"
 	elif camera_id == "hall_left":
 		animation_name = "hall_left"
-		camera_id = animation_name
 		
 		if luva_pos == "hall_left":
 			animation_name = "hall_left_luva"
 	elif camera_id == "hall_right":
 		animation_name = "hall_right"
-		camera_id = animation_name
 		
 		if virginia_pos == "hall_right":
 			animation_name = "hall_right_virginia"
+	elif camera_id == "backstage":
+		animation_name = "backstage"
+		
+		if virginia_pos == "backstage":
+			animation_name = "backstage_virginia"
+		elif luva_pos == "backstage":
+			animation_name = "backstage_luva"
+		elif virginia_pos && luva_pos == "backstage":
+			animation_name = "backstage_luva_virginia"
+	elif camera_id == "kitchen":
+		animation_name = "kitchen"
+		
+		if virginia_pos == "kitchen":
+			animation_name = "kitchen_virginia"
+		elif luva_pos == "kitchen":
+			animation_name = "kitchen_luva"
+		elif luva_pos && virginia_pos == "kitchen":
+			animation_name = "kitchen_luva_virginia"
 	elif camera_id == "amostradinho_cove":
 		animation_name = "amostradinho_cove"
-		camera_id = animation_name
+		frame_index = manager.amostradinho_stage
 		
 		# se for 3, significa que ele tá correndo/batendo na porta do escritório
-		# o sprite da pirate cove continua o mesmo do estágio anterior nas câmeras
-		if manager.amostradinho_stage > 3:
-			frame_index = manager.amostradinho_stage
-		else:
-			frame_index = 2
-		
-		# começar a perseguição do amostradinho. automaticamente faz o estágio virar 3
-		if manager.amostradinho_stage == 2:
+		# ele começa a correr quando a câmera muda pra amostradinho cove
+		if manager.amostradinho_stage == 3:
 			manager.trigger_amostradinho()
 	
 	# define as variáveis e atualiza o sprite

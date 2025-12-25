@@ -70,7 +70,7 @@ func set_light(state: bool):
 		"right": {
 			"lit": OFFICE_LIGHT_RIGHT,
 			"animatronic": OFFICE_VIRGINIA_RIGHT,
-			#"pos": manager.virginia.pos
+			"pos": manager.virginia.pos
 		}
 	}
 	

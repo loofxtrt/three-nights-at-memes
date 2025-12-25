@@ -1,24 +1,29 @@
-[gd_scene load_steps=80 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=89 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
-[ext_resource type="Texture2D" uid="uid://udu3k5exwrrw" path="res://placeholders/amostradinho-cove-0.png" id="5_e1yc2"]
 [ext_resource type="Script" uid="uid://dxajnyjvrcjjg" path="res://scenes/office/cameras.gd" id="5_yexkw"]
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="6_8d8gp"]
-[ext_resource type="Texture2D" uid="uid://cpxgnx0t416qc" path="res://placeholders/amostradinho-cove-1.png" id="6_y3s53"]
-[ext_resource type="Texture2D" uid="uid://sno5q2eyro75" path="res://placeholders/amostradinho-cove-2.png" id="7_p8n5g"]
+[ext_resource type="Texture2D" uid="uid://dumck5loe1o8w" path="res://assets/sprites/cameras/amostradinho_cove_0.png" id="11_juxeb"]
+[ext_resource type="Texture2D" uid="uid://qbdwyvdkkgeb" path="res://assets/sprites/cameras/amostradinho_cove_1.png" id="12_tk24r"]
 [ext_resource type="Texture2D" uid="uid://cx8kwat3cw7ex" path="res://assets/sprites/cameras/hall_left.png" id="13_01qce"]
+[ext_resource type="Texture2D" uid="uid://mab7qbspjbsj" path="res://assets/sprites/cameras/amostradinho_cove_2.png" id="13_wtlpu"]
 [ext_resource type="Texture2D" uid="uid://cno234u6842wd" path="res://assets/sprites/cameras/hall_left_luva.png" id="14_35w6l"]
+[ext_resource type="Texture2D" uid="uid://beefp8dopc6mc" path="res://assets/sprites/cameras/backstage.png" id="14_gkxou"]
+[ext_resource type="Texture2D" uid="uid://ci20x7q7g1ymt" path="res://assets/sprites/cameras/amostradinho_cove_3.png" id="14_vnclx"]
+[ext_resource type="Texture2D" uid="uid://in0aagoui7lp" path="res://assets/sprites/cameras/backstage_luva.png" id="15_juxeb"]
 [ext_resource type="Script" uid="uid://cupwn3d4bdju" path="res://scenes/office/manager.gd" id="15_r0vp7"]
 [ext_resource type="Texture2D" uid="uid://k62uvyw5ks7d" path="res://assets/sprites/cameras/hall_right.png" id="15_trify"]
 [ext_resource type="Script" uid="uid://b6akukxqqanvq" path="res://scenes/office/audio_controller.gd" id="16_h6w4s"]
 [ext_resource type="Texture2D" uid="uid://c2kck82ljtk2g" path="res://assets/sprites/cameras/hall_right_virginia.png" id="16_o4y4s"]
 [ext_resource type="Texture2D" uid="uid://ucpfbej5usud" path="res://placeholders/PC _ Computer - Five Nights at Freddy's 2 - Animatronics - Withered Freddy.png" id="16_qei30"]
+[ext_resource type="Texture2D" uid="uid://dpw2pgym5dpts" path="res://assets/sprites/cameras/backstage_virginia-luva.png" id="16_tk24r"]
 [ext_resource type="AudioStream" uid="uid://c47me4i48d873" path="res://assets/audio/amostradinho-warning-shorter.wav" id="17_5sbiv"]
 [ext_resource type="Texture2D" uid="uid://bkur32nhkarbt" path="res://assets/sprites/cameras/stage.png" id="17_in01k"]
 [ext_resource type="Texture2D" uid="uid://d25pm6tqx28e3" path="res://assets/sprites/monitor_off.png" id="17_mdy2d"]
+[ext_resource type="Texture2D" uid="uid://bfwwiavuvig4a" path="res://assets/sprites/cameras/backstage_virginia.png" id="17_wtlpu"]
 [ext_resource type="AudioStream" uid="uid://gb55kxkrkjmt" path="res://assets/audio/amostradinho-knocking.wav" id="18_4fjga"]
 [ext_resource type="AudioStream" uid="uid://dreq1878o8rd6" path="res://assets/audio/jumpscare.wav" id="18_5sbiv"]
 [ext_resource type="Texture2D" uid="uid://cq6qtubd8iaat" path="res://assets/sprites/cameras/stage_luva-bill-virginia.png" id="18_35w6l"]
@@ -31,10 +36,14 @@
 [ext_resource type="AudioStream" uid="uid://chbmybcstool4" path="res://assets/audio/door-slam.wav" id="21_01qce"]
 [ext_resource type="PackedScene" uid="uid://dboffipd38jsp" path="res://scenes/office/channel_button.tscn" id="21_o4y4s"]
 [ext_resource type="AudioStream" uid="uid://3k3vw4vfpxio" path="res://assets/audio/fluorescent-light.wav" id="22_35w6l"]
+[ext_resource type="Texture2D" uid="uid://dxnnka2cx3ejn" path="res://assets/sprites/cameras/kitchen.png" id="22_vnclx"]
 [ext_resource type="Texture2D" uid="uid://b6cp4v0twevq1" path="res://assets/sprites/labubu.png" id="23_mdy2d"]
+[ext_resource type="Texture2D" uid="uid://dfupo7ec6np13" path="res://assets/sprites/cameras/kitchen_luva.png" id="23_vh2bw"]
 [ext_resource type="Texture2D" uid="uid://dmcmbrfygeq6c" path="res://placeholders/blip_flash.png" id="24_30jyb"]
 [ext_resource type="Script" uid="uid://drit1526rwnuk" path="res://scenes/office/nose_honk.gd" id="24_g0sld"]
+[ext_resource type="Texture2D" uid="uid://bo7qjnudqx555" path="res://assets/sprites/cameras/kitchen_luva-virginia.png" id="24_xnr2b"]
 [ext_resource type="AudioStream" uid="uid://dym0idan4k3mq" path="res://assets/audio/honk.mp3" id="25_mdy2d"]
+[ext_resource type="Texture2D" uid="uid://cnnqgltwb6vpr" path="res://assets/sprites/cameras/kitchen_virginia.png" id="25_qa8um"]
 [ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://placeholders/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
 [ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://placeholders/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
 
@@ -49,16 +58,51 @@ shader_parameter/saturation = 0.400000019
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_e1yc2")
+"texture": ExtResource("11_juxeb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_y3s53")
+"texture": ExtResource("12_tk24r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_p8n5g")
+"texture": ExtResource("13_wtlpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vnclx")
 }],
 "loop": false,
 "name": &"amostradinho_cove",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_gkxou")
+}],
+"loop": true,
+"name": &"backstage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_juxeb")
+}],
+"loop": true,
+"name": &"backstage_luva",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_tk24r")
+}],
+"loop": true,
+"name": &"backstage_luva_virginia",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_wtlpu")
+}],
+"loop": true,
+"name": &"backstage_virginia",
 "speed": 5.0
 }, {
 "frames": [{
@@ -91,6 +135,38 @@ animations = [{
 }],
 "loop": false,
 "name": &"hall_right_virginia",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_vnclx")
+}],
+"loop": true,
+"name": &"kitchen",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_vh2bw")
+}],
+"loop": true,
+"name": &"kitchen_luva",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_xnr2b")
+}],
+"loop": true,
+"name": &"kitchen_luva_virginia",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_qa8um")
+}],
+"loop": true,
+"name": &"kitchen_virginia",
 "speed": 5.0
 }, {
 "frames": [{
@@ -440,7 +516,7 @@ script = ExtResource("5_yexkw")
 material = SubResource("ShaderMaterial_pgmud")
 scale = Vector2(0.61111104, 0.6111111)
 sprite_frames = SubResource("SpriteFrames_8d8gp")
-animation = &"stage"
+animation = &"amostradinho_cove"
 
 [node name="Static" type="AnimatedSprite2D" parent="Cameras"]
 modulate = Color(1, 1, 1, 0.09019608)
