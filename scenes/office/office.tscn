@@ -190,17 +190,17 @@ animations = [{
 "speed": 18.0
 }]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_45seo"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_irf2c"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_gnluk"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_gkt0b"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_dubn4"]
+
 [sub_resource type="ButtonGroup" id="ButtonGroup_tl8i5"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_2im7n"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_j1jds"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_gkxou"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_juxeb"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_tk24r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -470,7 +470,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_tl8i5")
+button_group = SubResource("ButtonGroup_45seo")
 camera_id = "stage"
 initial_state = true
 
@@ -479,7 +479,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_2im7n")
+button_group = SubResource("ButtonGroup_irf2c")
 camera_id = "kitchen"
 initial_state = true
 
@@ -488,7 +488,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_j1jds")
+button_group = SubResource("ButtonGroup_gnluk")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -496,7 +496,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_gkxou")
+button_group = SubResource("ButtonGroup_gkt0b")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -504,7 +504,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_juxeb")
+button_group = SubResource("ButtonGroup_dubn4")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -512,7 +512,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_tk24r")
+button_group = SubResource("ButtonGroup_tl8i5")
 camera_id = "amostradinho_cove"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]

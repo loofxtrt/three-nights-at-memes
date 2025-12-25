@@ -12,14 +12,40 @@ var power: float = 100.0
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 
-var luva_pos = "stage"
-var virginia_pos = "stage"
-var bill_pos = "stage"
+#var luva_pos = "stage"
+#var virginia_pos = "stage"
+#var bill_pos = "stage"
 var amostradinho_stage: int = 2
+
+var luva_ai: int = 10
+var virginia_ai: int = 10
 
 var next_move: Timer
 
 signal animatronic_moved
+
+class Animatronic:
+	var nick: String
+	var ai: int
+	var pos: String
+	var moving_map: Dictionary
+	
+	func _init(_nick, _ai, _pos, _moving_map) -> void:
+		nick = _nick
+		ai = _ai
+		pos = _pos
+		moving_map = _moving_map
+
+var luva = Animatronic.new(
+	"luva",
+	10,
+	"stage",
+	{
+		"stage": ["hall_left", "kitchen"],
+		"kitchen": ["hall_left", "stage"],
+		"hall_left": ["stage", "office"]
+	}
+)
 
 func _ready() -> void:
 	# acionar o timer de movimentação dos animatronics pela primeira vez
@@ -67,56 +93,45 @@ func jumpscare():
 	audio_controller.jumpscare.play()
 
 func start_movement_timer():
-	#next_move.wait_time = randf_range(20, 45)
-	next_move.wait_time = randf_range(5, 10)
+	# o tempo entre cada tentativa de movimento dos animatronics
+	next_move.wait_time = randf_range(4, 6)
 	next_move.start()
 
-func move_animatronic(animatronic: String = ""):
+func move_animatronic():
 	start_movement_timer()
-	var possible_next = []
+	
+	var animatronic: Animatronic = [luva].pick_random()
+	var nick = animatronic.nick
+	var ai = animatronic.ai
+	var moving_map = animatronic.moving_map
+	var pos = animatronic.pos
 	var new_pos: String
 	
-	if animatronic == "":
-		animatronic = ["luva", "virginia"].pick_random()
-	if animatronic == "virginia":
+	# sorteia um número de x à y, se for maior que o número da ia
+	# ele NÃO vai se mover. se for menor que a ia, ele vai se mover
+	var movement_rng = randf_range(0, 20)
+	if movement_rng > ai:
+		print(nick + " tentou se mover mas não conseguiu")
 		return
 	
-	if animatronic == "luva":
-		var moving_map = {
-			"stage": ["hall_left", "kitchen"],
-			"kitchen": ["hall_left", "stage"],
-			"hall_left": ["stage", "office"]
-		}
-		var moves = moving_map.get(luva_pos)
+	# obter quais salas ele pode ir para, baseado na posição atual
+	# com base nisso, atualiza a posição ou dá o jumpscare
+	var moves = moving_map.get(pos)
 
-		if luva_pos != "office":
-			new_pos = moves.pick_random()
-			luva_pos = new_pos
-		else:
-			await get_tree().create_timer(4).timeout
-			
-			if !is_left_door_closed:
-				jumpscare()
-			else:
-				luva_pos = "stage"
-				print("luva foi embora")
-	elif animatronic == "virginia":
-		if virginia_pos == "stage":
-			possible_next = ["hall_right"]
-		elif virginia_pos == "hall_right":
-			possible_next = ["office"]
+	if pos != "office":
+		new_pos = moves.pick_random()
+		animatronic.pos = new_pos # a variável real da classe, não a cópia local
+	else:
+		await get_tree().create_timer(4).timeout
 		
-		new_pos = possible_next.pick_random()
-		virginia_pos = new_pos
+		if !is_left_door_closed:
+			jumpscare()
+		else:
+			pos = "stage"
+			print(nick + " foi embora")
 
 	animatronic_moved.emit() # útil pra atualizar as câmeras
-	print("posição de " + animatronic + " atualizada")
-	
-	#if new_pos == "office":
-	#	await get_tree().create_timer(4).timeout
-	#
-	#	jumpscare()
-	#	print(animatronic + " atacou, jumpscare")
+	print("posição de " + nick + " atualizada para " + animatronic.pos)
 
 func trigger_amostradinho():
 	# FIXME: warning toca duas vezes

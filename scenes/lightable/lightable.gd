@@ -65,12 +65,12 @@ func set_light(state: bool):
 		"left": {
 			"lit": OFFICE_LIGHT_LEFT,        # sprite da porta quando não tem nada
 			"animatronic": OFFICE_LUVA_LEFT, # sprite de quando tem o animatronic na portta
-			"pos": manager.luva_pos          # posição que deve ser levada em consideração pra mostrar o sprite
+			"pos": manager.luva.pos          # posição que deve ser levada em consideração pra mostrar o sprite
 		},
 		"right": {
 			"lit": OFFICE_LIGHT_RIGHT,
 			"animatronic": OFFICE_VIRGINIA_RIGHT,
-			"pos": manager.virginia_pos
+			#"pos": manager.virginia.pos
 		}
 	}
 	

@@ -22,11 +22,16 @@ func _ready() -> void:
 	# atualizar as câmeras quando um animatronic se mover
 	manager.animatronic_moved.connect(refresh_current_camera)
 
-func set_active_camera(camera_id: String):
-	play_blip_flash()
+func set_active_camera(camera_id: String, trigger_blip_flash: bool = true):
+	if trigger_blip_flash:
+		play_blip_flash()
 	
 	var animation_name: String
 	var frame_index: int = 0
+	
+	var luva_pos = manager.luva.pos
+	var virginia_pos = "stage"
+	#var virginia_pos = manager.virginia.pos
 	
 	if camera_id == "stage":
 		var sprite_map = [
@@ -50,23 +55,23 @@ func set_active_camera(camera_id: String):
 		animation_name = "stage"
 		camera_id = animation_name
 		
-		if manager.luva_pos == "stage" && manager.virginia_pos == "stage":
+		if luva_pos == "stage" && virginia_pos == "stage":
 			animation_name = "stage_luva_bill_virginia"
-		elif manager.luva_pos == "stage" && manager.virginia_pos != "stage":
+		elif luva_pos == "stage" && virginia_pos != "stage":
 			animation_name = "stage_luva_bill"
-		elif manager.luva_pos != "stage" && manager.virginia_pos == "stage":
+		elif luva_pos != "stage" && virginia_pos == "stage":
 			animation_name = "stage_bill_virginia"
 	elif camera_id == "hall_left":
 		animation_name = "hall_left"
 		camera_id = animation_name
 		
-		if manager.luva_pos == "hall_left":
+		if luva_pos == "hall_left":
 			animation_name = "hall_left_luva"
 	elif camera_id == "hall_right":
 		animation_name = "hall_right"
 		camera_id = animation_name
 		
-		if manager.virginia_pos == "hall_right":
+		if virginia_pos == "hall_right":
 			animation_name = "hall_right_virginia"
 	elif camera_id == "amostradinho_cove":
 		animation_name = "amostradinho_cove"
@@ -90,9 +95,11 @@ func set_active_camera(camera_id: String):
 	camera_sprite.animation = animation_name
 	camera_sprite.frame = frame_index
 
-func play_blip_flash(silent: bool = false):
-	if !silent:
-		camera_switch.play()
+func play_blip_flash():
+	if !manager.is_cameras_open:
+		return
+	
+	camera_switch.play() # áudio
 	
 	blip_flash.visible = true
 	blip_flash.play()
