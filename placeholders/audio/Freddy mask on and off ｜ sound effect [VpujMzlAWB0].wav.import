@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3ir42rw1gfkv"
+path="res://.godot/imported/Freddy mask on and off ｜ sound effect [VpujMzlAWB0].wav-199dff85d158b9223b008ea5b5829e1b.sample"
+
+[deps]
+
+source_file="res://placeholders/audio/Freddy mask on and off ｜ sound effect [VpujMzlAWB0].wav"
+dest_files=["res://.godot/imported/Freddy mask on and off ｜ sound effect [VpujMzlAWB0].wav-199dff85d158b9223b008ea5b5829e1b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

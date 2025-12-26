@@ -9,6 +9,9 @@ extends Node
 @onready var ambience: AudioStreamPlayer = $Ambience
 @onready var going_away: AudioStreamPlayer = $GoingAway
 @onready var animatronic_in_office: AudioStreamPlayer = $AnimatronicInOffice
+@onready var breathing: AudioStreamPlayer = $Breathing
+@onready var mask_on: AudioStreamPlayer = $MaskOn
+@onready var mask_off: AudioStreamPlayer = $MaskOff
 
 # esse em específico não funciona pelo audiocontroller por algum motivo
 #@onready var camera_switch: AudioStreamPlayer = $CameraSwitch

@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=99 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://baifcscwhhby" path="res://assets/sprites/desk/decoration.png" id="7_vnclx"]
 [ext_resource type="AudioStream" uid="uid://d4bp5djpju2ia" path="res://assets/audio/tung_tung_sahur.mp3" id="10_wtlpu"]
 [ext_resource type="Texture2D" uid="uid://dumck5loe1o8w" path="res://assets/sprites/cameras/amostradinho_cove_0.png" id="11_juxeb"]
+[ext_resource type="Texture2D" uid="uid://tuimlfvdha4h" path="res://assets/sprites/mask_vignette.png" id="11_xnr2b"]
 [ext_resource type="Texture2D" uid="uid://qbdwyvdkkgeb" path="res://assets/sprites/cameras/amostradinho_cove_1.png" id="12_tk24r"]
 [ext_resource type="Texture2D" uid="uid://cx8kwat3cw7ex" path="res://assets/sprites/cameras/hall_left.png" id="13_01qce"]
 [ext_resource type="Texture2D" uid="uid://mab7qbspjbsj" path="res://assets/sprites/cameras/amostradinho_cove_2.png" id="13_wtlpu"]
@@ -49,6 +50,9 @@
 [ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://placeholders/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
 [ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://placeholders/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
 [ext_resource type="AudioStream" uid="uid://v81v3bcy7icl" path="res://assets/audio/static.wav" id="48_vnclx"]
+[ext_resource type="AudioStream" uid="uid://mwq3qboso45i" path="res://assets/audio/breathing.wav" id="50_xnr2b"]
+[ext_resource type="AudioStream" uid="uid://dbsr5wohca6ov" path="res://assets/audio/mask_on.wav" id="51_qa8um"]
+[ext_resource type="AudioStream" uid="uid://dd5tc1lu18hhy" path="res://assets/audio/mask_off.wav" id="52_s0oiu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0sld"]
 radius = 12.0415945
@@ -451,6 +455,44 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="Animation" id="Animation_xnr2b"]
+resource_name = "mask_idling"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mask:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.04, 2.5, 3.8, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, -7), Vector2(0, 10), Vector2(-10, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qa8um"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mask:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0oiu"]
+_data = {
+&"RESET": SubResource("Animation_qa8um"),
+&"mask_idling": SubResource("Animation_xnr2b")
+}
+
 [node name="Office" type="Node2D" groups=["office"]]
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -530,6 +572,9 @@ stream = ExtResource("25_mdy2d")
 
 [node name="TungTungSFX" type="AudioStreamPlayer" parent="Decoration"]
 stream = ExtResource("10_wtlpu")
+
+[node name="Mask" type="Sprite2D" parent="."]
+texture = ExtResource("11_xnr2b")
 
 [node name="Cameras" type="Node2D" parent="." groups=["cameras_container"]]
 visible = false
@@ -656,6 +701,15 @@ stream = ExtResource("18_5sbiv")
 [node name="AnimatronicInOffice" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("48_vnclx")
 
+[node name="Breathing" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("50_xnr2b")
+
+[node name="MaskOn" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("51_qa8um")
+
+[node name="MaskOff" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("52_s0oiu")
+
 [node name="JumpscareSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_o4y4s")
@@ -689,6 +743,11 @@ text = "Lorem Ipsum"
 horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s0oiu")
+}
 
 [connection signal="input_event" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_input_event"]
 [connection signal="mouse_entered" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_entered"]

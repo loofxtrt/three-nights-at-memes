@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://clcadyan3wqv"
+path="res://.godot/imported/FNAF： Mask breathing (FNAF 2) - Gaming Sound Effect (HD) [MZkHRcgnux4].wav-c965f4869501380a778eeb22f49a9c6c.sample"
+
+[deps]
+
+source_file="res://placeholders/audio/FNAF： Mask breathing (FNAF 2) - Gaming Sound Effect (HD) [MZkHRcgnux4].wav"
+dest_files=["res://.godot/imported/FNAF： Mask breathing (FNAF 2) - Gaming Sound Effect (HD) [MZkHRcgnux4].wav-c965f4869501380a778eeb22f49a9c6c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

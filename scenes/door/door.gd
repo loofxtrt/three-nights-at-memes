@@ -38,6 +38,9 @@ func _process(delta: float) -> void:
 		toggle_door()
 
 func toggle_door():
+	if !manager.can_interact:
+		return
+	
 	# cooldown até poder fechar/abrir de novo
 	can_interact = false
 	cooldown.start()

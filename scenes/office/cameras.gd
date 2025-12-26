@@ -127,6 +127,9 @@ func camera_tips_visible(state):
 	manager.tip_visible(state)
 
 func toggle_cameras():
+	if !manager.can_interact:
+		return
+	
 	var state = !visible # oposto do estado anterior
 	
 	visible = state

@@ -6,11 +6,15 @@ extends Node
 @onready var power_left: Label = $"../HUD/TopVBox/PowerLeft"
 @onready var hotkey_tip: Label = $"../HUD/TopVBox/HotkeyTip"
 @onready var bill_standing_sprite: Sprite2D = $"../BillStanding"
+@onready var mask_sprite: Sprite2D = $"../Mask"
+@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 
 var is_cameras_open: bool = false
+var is_mask_on: bool = false
 var power: float = 100.0
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
+var can_interact: bool = true
 
 var amostradinho_stage: int = 0
 var amostradinho_is_running: bool = false
@@ -18,6 +22,8 @@ var bill_is_going_to_enter: bool = false
 var bill_is_in_the_office: bool = false
 
 signal animatronic_moved
+signal mask_off
+signal mask_on
 
 class Animatronic:
 	var nick: String
@@ -101,12 +107,17 @@ var animatronic_list = [bill, luva, virginia, amostradinho]
 func _ready() -> void:
 	tip_visible(false)
 	bill_standing_sprite.visible = false
+	mask_sprite.visible = false
+	can_interact = true
 	
 	# setar os timers de movimentação pela primeira vez
 	for a in animatronic_list:
 		a.start_movement_timer()
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("mask"):
+		toggle_mask()
+	
 	# atualizar os dados relacionados à energia
 	power_left.text = "billteria: " + str(round(power))
 	
@@ -128,12 +139,42 @@ func set_tip(tips: Array):
 	hotkey_tip.text = text
 
 func tip_visible(state: bool):
+	# sempre mostrar a tip da máscara quando outras não estiverem sendo exibidas
+	if state == false:
+		hotkey_tip.visible = true
+		set_tip([["space", "máscara"]])
+		return
+	
 	hotkey_tip.visible = state
 
+func toggle_mask():
+	mask_sprite.visible = !mask_sprite.visible
+	is_mask_on = mask_sprite.visible
+	
+	if is_mask_on:
+		mask_on.emit()
+		can_interact = false
+		
+		animation_player.play("mask_idling")
+		audio_controller.mask_on.play()
+		if !audio_controller.breathing.playing:
+			audio_controller.breathing.play()
+	else:
+		mask_off.emit()
+		can_interact = true
+		
+		audio_controller.mask_off.play()
+		animation_player.stop()
+		audio_controller.breathing.stop()
+
 func jumpscare():
-	# abaixar as câmeras antes de dar o jumpscare
+	can_interact = false
+	
+	# desligar os mecanismos antes de dar o jumpscare
 	if is_cameras_open:
 		cameras.toggle_cameras()
+	if is_mask_on:
+		toggle_mask()
 	
 	# parar possíveis áudios que estejam tocando
 	audio_controller.ambience.stop()
@@ -183,7 +224,7 @@ func move_animatronic(animatronic: Animatronic):
 			trigger_bill()
 			return
 		
-		# tempo até ele desistir ou entrar no escritório
+		# tempo até o animatronic desistir ou entrar no escritório
 		await get_tree().create_timer(4).timeout
 		
 		# a porta a ser fechada deve ser a de onde o animatronic vem
@@ -207,18 +248,17 @@ func trigger_bill():
 	print("bill vai entrar na sala quando levantar as câmeras")
 	bill_is_going_to_enter = true
 	
-	#if is_cameras_open:
-	cameras.cameras_off.connect(_on_cameras_off)
-	#else:
-	#	cameras.cameras_on.connect(trigger_bill)
+	if !cameras.cameras_off.is_connected(_on_cameras_off):
+		cameras.cameras_off.connect(_on_cameras_off)
+	if !mask_off.is_connected(_on_mask_off):
+		mask_off.connect(_on_mask_off)
 
-	## quando esse som acabar, é seguro abaixar as câmeras
-	#audio_controller.animatronic_in_office.play()
-	#await audio_controller.animatronic_in_office.finished
-	#
-	#bill_is_in_the_office = false
-	#bill_is_going_to_enter = false
-	#bill.pos = "stage"
+func _on_mask_off():
+	# se ele já estiver na sala e tirar a máscara antes dele ir embora, morre
+	if bill_is_in_the_office:
+		jumpscare()
+	
+	mask_off.disconnect(_on_mask_off)
 
 func _on_cameras_off():
 	if !bill_is_in_the_office:
@@ -227,20 +267,20 @@ func _on_cameras_off():
 		
 		audio_controller.animatronic_in_office.play()
 		
-		# tempo de tolerância pra levantar as câmeras de novo
+		# tempo de tolerância pra levantar colocar a máscara
 		await get_tree().create_timer(1.2).timeout
 	
-		if not is_cameras_open:
+		if not is_mask_on:
 			jumpscare()
 		
-		# quando esse som acabar, é seguro abaixar as câmeras
+		# quando esse som acabar, é seguro tirar a máscara
 		await audio_controller.animatronic_in_office.finished
+		bill_standing_sprite.visible = false
 		bill_is_in_the_office = false
 		bill_is_going_to_enter = false
 		bill.pos = "stage"
-	else:
-		# se abaixar as câmeras antes dele ir embora, também morre
-		jumpscare()
+		
+		cameras.cameras_off.disconnect(_on_cameras_off)
 
 func trigger_amostradinho():
 	# não toca os eventos se já foi indentificado que ele saiu da cove
