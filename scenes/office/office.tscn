@@ -1,11 +1,15 @@
-[gd_scene load_steps=89 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=92 format=3 uid="uid://diw1qplhntkkf"]
 
-[ext_resource type="Script" uid="uid://ettiwsdrkgf6" path="res://scenes/office/office.gd" id="1_ul364"]
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
+[ext_resource type="Texture2D" uid="uid://clyu3k62gqncb" path="res://assets/sprites/desk/shadows.png" id="5_tk24r"]
+[ext_resource type="Texture2D" uid="uid://odif6njhd4ep" path="res://assets/sprites/office_bill_crop.png" id="5_vnclx"]
 [ext_resource type="Script" uid="uid://dxajnyjvrcjjg" path="res://scenes/office/cameras.gd" id="5_yexkw"]
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="6_8d8gp"]
+[ext_resource type="Texture2D" uid="uid://btbr5s1vgs8yx" path="res://assets/sprites/desk/monitor_off.png" id="6_wtlpu"]
+[ext_resource type="Texture2D" uid="uid://baifcscwhhby" path="res://assets/sprites/desk/decoration.png" id="7_vnclx"]
+[ext_resource type="AudioStream" uid="uid://d4bp5djpju2ia" path="res://assets/audio/tung_tung_sahur.mp3" id="10_wtlpu"]
 [ext_resource type="Texture2D" uid="uid://dumck5loe1o8w" path="res://assets/sprites/cameras/amostradinho_cove_0.png" id="11_juxeb"]
 [ext_resource type="Texture2D" uid="uid://qbdwyvdkkgeb" path="res://assets/sprites/cameras/amostradinho_cove_1.png" id="12_tk24r"]
 [ext_resource type="Texture2D" uid="uid://cx8kwat3cw7ex" path="res://assets/sprites/cameras/hall_left.png" id="13_01qce"]
@@ -22,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://dpw2pgym5dpts" path="res://assets/sprites/cameras/backstage_virginia-luva.png" id="16_tk24r"]
 [ext_resource type="AudioStream" uid="uid://c47me4i48d873" path="res://assets/audio/amostradinho-warning-shorter.wav" id="17_5sbiv"]
 [ext_resource type="Texture2D" uid="uid://bkur32nhkarbt" path="res://assets/sprites/cameras/stage.png" id="17_in01k"]
-[ext_resource type="Texture2D" uid="uid://d25pm6tqx28e3" path="res://assets/sprites/monitor_off.png" id="17_mdy2d"]
 [ext_resource type="Texture2D" uid="uid://bfwwiavuvig4a" path="res://assets/sprites/cameras/backstage_virginia.png" id="17_wtlpu"]
 [ext_resource type="AudioStream" uid="uid://gb55kxkrkjmt" path="res://assets/audio/amostradinho-knocking.wav" id="18_4fjga"]
 [ext_resource type="AudioStream" uid="uid://dreq1878o8rd6" path="res://assets/audio/jumpscare.wav" id="18_5sbiv"]
@@ -37,7 +40,6 @@
 [ext_resource type="PackedScene" uid="uid://dboffipd38jsp" path="res://scenes/office/channel_button.tscn" id="21_o4y4s"]
 [ext_resource type="AudioStream" uid="uid://3k3vw4vfpxio" path="res://assets/audio/fluorescent-light.wav" id="22_35w6l"]
 [ext_resource type="Texture2D" uid="uid://dxnnka2cx3ejn" path="res://assets/sprites/cameras/kitchen.png" id="22_vnclx"]
-[ext_resource type="Texture2D" uid="uid://b6cp4v0twevq1" path="res://assets/sprites/labubu.png" id="23_mdy2d"]
 [ext_resource type="Texture2D" uid="uid://dfupo7ec6np13" path="res://assets/sprites/cameras/kitchen_luva.png" id="23_vh2bw"]
 [ext_resource type="Texture2D" uid="uid://dmcmbrfygeq6c" path="res://placeholders/blip_flash.png" id="24_30jyb"]
 [ext_resource type="Script" uid="uid://drit1526rwnuk" path="res://scenes/office/nose_honk.gd" id="24_g0sld"]
@@ -46,6 +48,7 @@
 [ext_resource type="Texture2D" uid="uid://cnnqgltwb6vpr" path="res://assets/sprites/cameras/kitchen_virginia.png" id="25_qa8um"]
 [ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://placeholders/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
 [ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://placeholders/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
+[ext_resource type="AudioStream" uid="uid://v81v3bcy7icl" path="res://assets/audio/static.wav" id="48_vnclx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0sld"]
 radius = 12.0415945
@@ -266,17 +269,17 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_45seo"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_vh2bw"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_irf2c"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_xnr2b"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_gnluk"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_qa8um"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_gkt0b"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_s0oiu"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_dubn4"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_m40x1"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_tl8i5"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_v2bev"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -449,19 +452,18 @@ animations = [{
 }]
 
 [node name="Office" type="Node2D" groups=["office"]]
-script = ExtResource("1_ul364")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_mdy2d")
 
 [node name="DoorR" parent="." node_paths=PackedStringArray("manager", "audio_controller") instance=ExtResource("4_nanex")]
-position = Vector2(490, 19)
+position = Vector2(490, 21)
 manager = NodePath("../Manager")
 audio_controller = NodePath("../AudioController")
 direction = "right"
 
 [node name="DoorL" parent="." node_paths=PackedStringArray("manager", "audio_controller") instance=ExtResource("4_nanex")]
-position = Vector2(-489, 19)
+position = Vector2(-491, 22)
 scale = Vector2(-1, 1)
 manager = NodePath("../Manager")
 audio_controller = NodePath("../AudioController")
@@ -479,34 +481,55 @@ manager = NodePath("../Manager")
 audio_controller = NodePath("../AudioController")
 direction = "left"
 
+[node name="BillStanding" type="Sprite2D" parent="."]
+position = Vector2(0, -103)
+texture = ExtResource("5_vnclx")
+
+[node name="Shadows" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.69411767)
+position = Vector2(0, 113)
+texture = ExtResource("5_tk24r")
+
 [node name="TabletTrigger" type="Area2D" parent="."]
 position = Vector2(129, -246)
 
 [node name="Sprite" type="Sprite2D" parent="TabletTrigger"]
 position = Vector2(0, 287)
-texture = ExtResource("17_mdy2d")
+texture = ExtResource("6_wtlpu")
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="TabletTrigger"]
 position = Vector2(-13, 0)
-polygon = PackedVector2Array(-73, 210, -75, 318, 40, 342, 42, 227)
+polygon = PackedVector2Array(-69, 204, -71, 326, 53, 361, 57, 226)
 
-[node name="Labubu" type="Node2D" parent="."]
+[node name="Decoration" type="Node2D" parent="."]
 position = Vector2(-164, 61)
 
-[node name="Sprite2D" type="Sprite2D" parent="Labubu"]
-position = Vector2(4.928331, -9.140333)
-scale = Vector2(0.36129856, 0.36129853)
-texture = ExtResource("23_mdy2d")
+[node name="Sprite2D" type="Sprite2D" parent="Decoration"]
+position = Vector2(52.999992, -20)
+scale = Vector2(0.69008315, 0.6900832)
+texture = ExtResource("7_vnclx")
 
-[node name="Area2D" type="Area2D" parent="Labubu"]
+[node name="Labubu" type="Area2D" parent="Decoration"]
+position = Vector2(12, 6)
 script = ExtResource("24_g0sld")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Labubu/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decoration/Labubu"]
 position = Vector2(5, -14)
 shape = SubResource("CircleShape2D_g0sld")
 
-[node name="HonkAudio" type="AudioStreamPlayer" parent="Labubu"]
+[node name="TungTung" type="Area2D" parent="Decoration"]
+position = Vector2(49, -43)
+script = ExtResource("24_g0sld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decoration/TungTung"]
+position = Vector2(5, -14)
+shape = SubResource("CircleShape2D_g0sld")
+
+[node name="NoseHonkSFX" type="AudioStreamPlayer" parent="Decoration"]
 stream = ExtResource("25_mdy2d")
+
+[node name="TungTungSFX" type="AudioStreamPlayer" parent="Decoration"]
+stream = ExtResource("10_wtlpu")
 
 [node name="Cameras" type="Node2D" parent="." groups=["cameras_container"]]
 visible = false
@@ -546,7 +569,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_45seo")
+button_group = SubResource("ButtonGroup_vh2bw")
 camera_id = "stage"
 initial_state = true
 
@@ -555,7 +578,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_irf2c")
+button_group = SubResource("ButtonGroup_xnr2b")
 camera_id = "kitchen"
 initial_state = true
 
@@ -564,7 +587,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_gnluk")
+button_group = SubResource("ButtonGroup_qa8um")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -572,7 +595,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_gkt0b")
+button_group = SubResource("ButtonGroup_s0oiu")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -580,7 +603,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_dubn4")
+button_group = SubResource("ButtonGroup_m40x1")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -588,7 +611,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_tl8i5")
+button_group = SubResource("ButtonGroup_v2bev")
 camera_id = "amostradinho_cove"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
@@ -627,6 +650,12 @@ stream = ExtResource("19_5sbiv")
 [node name="Jumpscare" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("18_5sbiv")
 
+[node name="GoingAway" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("18_5sbiv")
+
+[node name="AnimatronicInOffice" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("48_vnclx")
+
 [node name="JumpscareSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_o4y4s")
@@ -664,5 +693,6 @@ horizontal_alignment = 1
 [connection signal="input_event" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_input_event"]
 [connection signal="mouse_entered" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_entered"]
 [connection signal="mouse_exited" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_mouse_exited"]
-[connection signal="input_event" from="Labubu/Area2D" to="Labubu/Area2D" method="_on_input_event"]
+[connection signal="input_event" from="Decoration/Labubu" to="Decoration/Labubu" method="_on_labubu_input_event"]
+[connection signal="input_event" from="Decoration/TungTung" to="Decoration/TungTung" method="_on_tung_tung_input_event"]
 [connection signal="animation_finished" from="Cameras/BlipFlash" to="Cameras" method="_on_blip_flash_animation_finished"]

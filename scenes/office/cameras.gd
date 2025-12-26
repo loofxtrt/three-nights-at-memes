@@ -8,10 +8,13 @@ extends Node2D
 @onready var camera_switch: AudioStreamPlayer = $"../AudioController/CameraSwitch"
 
 const CHANNEL_BUTTON_THEME = preload("uid://3idyt7myk8tf")
-const MONITOR_OFF_SPRITE = preload("uid://d25pm6tqx28e3")
-const MONITOR_ON_SPRITE = preload("uid://dj2qmmn1x50lv")
+const MONITOR_OFF_SPRITE = preload("uid://btbr5s1vgs8yx")
+const MONITOR_ON_SPRITE = preload("uid://b45mlhu0dbrfl")
 
 var active_camera: String = "stage"
+
+signal cameras_on
+signal cameras_off
 
 func _ready() -> void:
 	# garantir que as câmeras/efeitos comecem desligados
@@ -124,13 +127,18 @@ func camera_tips_visible(state):
 	manager.tip_visible(state)
 
 func toggle_cameras():
-	visible = !visible
-	manager.is_cameras_open = visible
+	var state = !visible # oposto do estado anterior
 	
-	if visible:
+	visible = state
+	manager.is_cameras_open = state
+	
+	if state:
+		cameras_on.emit()
 		set_active_camera(active_camera) # pro sprite sempre começar atualizado
+	else:
+		cameras_off.emit()
 	
-	camera_tips_visible(visible)
+	camera_tips_visible(state)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cameras"):

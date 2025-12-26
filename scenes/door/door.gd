@@ -50,6 +50,11 @@ func toggle_door():
 		manager.is_right_door_closed = is_closed
 	elif direction == "left":
 		manager.is_left_door_closed = is_closed
+		
+		if manager.amostradinho_is_running && !is_closed:
+			# fazer o amostradinho dar o jumpscare se abrir a porta
+			# sem esperar ele ir embora antes if amostradinho_is_running && !is_left_door_closed: jumpscare()
+			manager.jumpscare()
 	
 	audio_controller.door_slam.play()
 

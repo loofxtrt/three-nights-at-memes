@@ -5,13 +5,17 @@ extends Node
 @onready var cameras: Node2D = $"../Cameras"
 @onready var power_left: Label = $"../HUD/TopVBox/PowerLeft"
 @onready var hotkey_tip: Label = $"../HUD/TopVBox/HotkeyTip"
+@onready var bill_standing_sprite: Sprite2D = $"../BillStanding"
 
 var is_cameras_open: bool = false
 var power: float = 100.0
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 
-var amostradinho_stage: int = 3
+var amostradinho_stage: int = 0
+var amostradinho_is_running: bool = false
+var bill_is_going_to_enter: bool = false
+var bill_is_in_the_office: bool = false
 
 signal animatronic_moved
 
@@ -45,9 +49,17 @@ class Animatronic:
 		
 		next_move.start()
 
+#var _bill_ai = 10
+#var _luva_ai = 10
+#var _virginia_ai = 10
+#var _amostradinho_ai = 6
+var _bill_ai = 20
+var _luva_ai = 0
+var _virginia_ai = 0
+var _amostradinho_ai = 0
 var luva = Animatronic.new(
 	"luva",
-	10,
+	_luva_ai,
 	"stage",
 	{
 		"stage": ["hall_left", "kitchen"],
@@ -58,7 +70,7 @@ var luva = Animatronic.new(
 )
 var virginia = Animatronic.new(
 	"virginia",
-	10,
+	_virginia_ai,
 	"stage",
 	{
 		"stage": ["hall_right", "kitchen"],
@@ -67,16 +79,35 @@ var virginia = Animatronic.new(
 	},
 	self
 )
-var animatronic_list = [luva, virginia]
+var bill = Animatronic.new(
+	"bill",
+	_bill_ai,
+	"stage",
+	{
+		"stage": ["hall_right"],
+		"hall_right": ["stage", "office"]
+	},
+	self
+)
+var amostradinho = Animatronic.new(
+	"amostradinho",
+	_amostradinho_ai,
+	"amostradinho_cove",
+	{},
+	self
+)
+var animatronic_list = [bill, luva, virginia, amostradinho]
 
 func _ready() -> void:
+	tip_visible(false)
+	bill_standing_sprite.visible = false
+	
 	# setar os timers de movimentação pela primeira vez
 	for a in animatronic_list:
 		a.start_movement_timer()
-	
-	tip_visible(false)
 
 func _process(delta: float) -> void:
+	# atualizar os dados relacionados à energia
 	power_left.text = "billteria: " + str(round(power))
 	
 	if is_right_door_closed or is_left_door_closed:
@@ -104,6 +135,10 @@ func jumpscare():
 	if is_cameras_open:
 		cameras.toggle_cameras()
 	
+	# parar possíveis áudios que estejam tocando
+	audio_controller.ambience.stop()
+	audio_controller.amostradinho_knocking.stop()
+	
 	# fazer a animação ser visível e tocar o som
 	jumpscare_sprite.visible = true
 	jumpscare_sprite.animation = "bill"
@@ -126,28 +161,92 @@ func move_animatronic(animatronic: Animatronic):
 		print(nick + " tentou se mover mas não conseguiu")
 		return
 	
+	# o amostradinho é um caso especial porque ele não se move,
+	# só avança o estado dele na amostradinho cove
+	if animatronic == amostradinho:
+		amostradinho_stage += 1
+		animatronic_moved.emit()
+		print("amostradinho avançõou mais um estágio")
+		return
+	
 	# obter quais salas ele pode ir para, baseado na posição atual
 	# com base nisso, atualiza a posição ou dá o jumpscare
 	var moves = moving_map.get(pos)
 
 	if pos != "office":
 		new_pos = moves.pick_random()
-		animatronic.pos = new_pos # a variável real da classe, não a cópia local
+		animatronic.pos = new_pos # tem que ser a variável real da classe, não a cópia local
 	else:
+		# se o animatronic for o bill, ele não entra automaticamente
+		# ele espera a próxima vez que as câmeras forem triggadas pra ele entrar
+		if animatronic == bill:
+			trigger_bill()
+			return
+		
+		# tempo até ele desistir ou entrar no escritório
 		await get_tree().create_timer(4).timeout
 		
-		if !is_left_door_closed:
+		# a porta a ser fechada deve ser a de onde o animatronic vem
+		var is_targeted_door_closed
+		if animatronic == luva:
+			is_targeted_door_closed = is_left_door_closed
+		elif animatronic == virginia || animatronic == bill:
+			is_targeted_door_closed = is_right_door_closed
+		
+		if !is_targeted_door_closed:
 			jumpscare()
 		else:
 			pos = "stage"
+			audio_controller.going_away.play() # indicador de que é seguro abrir a porta
 			print(nick + " foi embora")
 
 	animatronic_moved.emit() # útil pra atualizar as câmeras
 	print("posição de " + nick + " atualizada para " + animatronic.pos)
 
+func trigger_bill():
+	print("bill vai entrar na sala quando levantar as câmeras")
+	bill_is_going_to_enter = true
+	
+	#if is_cameras_open:
+	cameras.cameras_off.connect(_on_cameras_off)
+	#else:
+	#	cameras.cameras_on.connect(trigger_bill)
+
+	## quando esse som acabar, é seguro abaixar as câmeras
+	#audio_controller.animatronic_in_office.play()
+	#await audio_controller.animatronic_in_office.finished
+	#
+	#bill_is_in_the_office = false
+	#bill_is_going_to_enter = false
+	#bill.pos = "stage"
+
+func _on_cameras_off():
+	if !bill_is_in_the_office:
+		bill_standing_sprite.visible = true
+		bill_is_in_the_office = true
+		
+		audio_controller.animatronic_in_office.play()
+		
+		# tempo de tolerância pra levantar as câmeras de novo
+		await get_tree().create_timer(1.2).timeout
+	
+		if not is_cameras_open:
+			jumpscare()
+		
+		# quando esse som acabar, é seguro abaixar as câmeras
+		await audio_controller.animatronic_in_office.finished
+		bill_is_in_the_office = false
+		bill_is_going_to_enter = false
+		bill.pos = "stage"
+	else:
+		# se abaixar as câmeras antes dele ir embora, também morre
+		jumpscare()
+
 func trigger_amostradinho():
-	# FIXME: warning toca duas vezes
-	# FIXME: nada acontece se abrir a porta antes do audio de batidas terminar
+	# não toca os eventos se já foi indentificado que ele saiu da cove
+	# assim, os sfx não tocam duas vezes
+	if amostradinho_is_running:
+		return
 	
 	var sfx_warning = audio_controller.amostradinho_warning
 	var sfx_running = audio_controller.amostradinho_running
@@ -157,14 +256,28 @@ func trigger_amostradinho():
 	if !sfx_running.playing:
 		audio_controller.amostradinho_running.play()
 	
-	# depois que ele termina de correr (esse timer)
-	# porta aberta -> jumpscare
-	# porta fechada -> vai embora
-	await get_tree().create_timer(2).timeout
+	# registro de que não precisa mais tocar os sfx de novo
+	amostradinho_is_running = true
+	
+	# quanto tempo ele demora pra chegar na sala
+	var running_duration = 2
+	await get_tree().create_timer(running_duration).timeout
 	
 	if is_left_door_closed:
-		audio_controller.amostradinho_knocking.play()
+		# tocar o áudio de batidas. se a porta for aberta antes dele acabar
+		# o jumpscare acontece mesmo assim. isso tá embutido no código da porta
+		var knocking_sfx = audio_controller.amostradinho_knocking
+		
+		knocking_sfx.play()
+		await knocking_sfx.finished
+		
+		# quando o áudio acabar, significa que ele parou de bater na porta
+		# e voltou pra cove, então é seguro abrir a porta de novo
 		amostradinho_stage = 0
+		amostradinho_is_running = false
+		cameras.refresh_current_camera()
+		modify_power(-randf_range(2, 4)) # ele também drena energia extra quando vai embora
+		
 		print("amostradinho foi embora")
 	else:
 		jumpscare()
