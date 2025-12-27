@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://dah2e3e275agu"]
+
+[ext_resource type="Script" uid="uid://qy7fljai7nl1" path="res://scenes/completion_screen/completion_screen.gd" id="1_nofvy"]
+[ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="2_46f6g"]
+[ext_resource type="AudioStream" uid="uid://cmuko3fihmeoj" path="res://assets/audio/complete.wav" id="2_rb33u"]
+
+[sub_resource type="Animation" id="Animation_46f6g"]
+resource_name = "wiggle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hour:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.78, 1.63, 2.38, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.578, 6.545), Vector2(4.225, 1), Vector2(2.459, -5.935), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rb33u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hour:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6qmx"]
+_data = {
+&"RESET": SubResource("Animation_rb33u"),
+&"wiggle": SubResource("Animation_46f6g")
+}
+
+[node name="CompletionScreen" type="Node2D"]
+script = ExtResource("1_nofvy")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rb33u")
+volume_db = -15.758
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l6qmx")
+}
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -565.0
+offset_top = -371.0
+offset_right = 1780.0
+offset_bottom = 992.0
+color = Color(0, 0, 0, 1)
+
+[node name="Hour" type="Label" parent="."]
+offset_left = 556.0
+offset_top = 306.0
+offset_right = 596.0
+offset_bottom = 329.0
+theme = ExtResource("2_46f6g")
+text = "6 AM"
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

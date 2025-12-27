@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxfsyft1lufpf"
+path="res://.godot/imported/BEAT ZÉ DA MANGA 🥭 - Aaah zé da manga (FUNK REMIX) by Sr. Nescau [ba7--Hp7EQU].wav-a6babb693b335c8f699e92987d763286.sample"
+
+[deps]
+
+source_file="res://placeholders/audio/BEAT ZÉ DA MANGA 🥭 - Aaah zé da manga (FUNK REMIX) by Sr. Nescau [ba7--Hp7EQU].wav"
+dest_files=["res://.godot/imported/BEAT ZÉ DA MANGA 🥭 - Aaah zé da manga (FUNK REMIX) by Sr. Nescau [ba7--Hp7EQU].wav-a6babb693b335c8f699e92987d763286.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

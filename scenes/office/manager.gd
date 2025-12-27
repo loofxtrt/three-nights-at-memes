@@ -6,15 +6,20 @@ extends Node
 @onready var power_left: Label = $"../HUD/TopVBox/PowerLeft"
 @onready var hotkey_tip: Label = $"../HUD/TopVBox/HotkeyTip"
 @onready var bill_standing_sprite: Sprite2D = $"../BillStanding"
+@onready var breathing_animation: AnimationPlayer = $"../Mask/BreathingAnimation"
 @onready var mask_sprite: Sprite2D = $"../Mask"
-@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
+@onready var flickering_animation: AnimationPlayer = $"../LightFlick/FlickeringAnimation"
+@onready var light_flick_rect: ColorRect = $"../LightFlick"
+@onready var night_timer: Timer = $"../NightTimer"
+@onready var clock: Label = $"../HUD/Clock"
 
 var is_cameras_open: bool = false
 var is_mask_on: bool = false
-var power: float = 100.0
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 var can_interact: bool = true
+var power: float = 100.0
+var night_duration_minutes: int = 4
 
 var amostradinho_stage: int = 0
 var amostradinho_is_running: bool = false
@@ -108,21 +113,37 @@ func _ready() -> void:
 	tip_visible(false)
 	bill_standing_sprite.visible = false
 	mask_sprite.visible = false
+	light_flick_rect.visible = false
 	can_interact = true
 	
 	# setar os timers de movimentação pela primeira vez
 	for a in animatronic_list:
 		a.start_movement_timer()
+	
+	set_night_duration_minutes(night_duration_minutes)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("mask"):
 		toggle_mask()
 	
 	# atualizar os dados relacionados à energia
-	power_left.text = "billteria: " + str(round(power))
+	power_left.text = "billteria: " + str(roundi(power))
 	
 	if is_right_door_closed or is_left_door_closed:
 		modify_power(-0.2)
+	
+	# atualizar o relógio
+	clock.text = str(roundf(night_timer.time_left))
+
+func set_night_duration_minutes(minutes: int):
+	night_timer.one_shot = true
+	night_timer.autostart = true
+	
+	var total_seconds = minutes * 60
+	night_timer.wait_time = total_seconds
+	
+	# FIXME: talvez tenha que verificar se já não começou antes
+	night_timer.start()
 
 func set_tip(tips: Array):
 	# recebe um array de dicas. cada item é uma linha
@@ -148,6 +169,9 @@ func tip_visible(state: bool):
 	hotkey_tip.visible = state
 
 func toggle_mask():
+	if is_cameras_open:
+		return
+	
 	mask_sprite.visible = !mask_sprite.visible
 	is_mask_on = mask_sprite.visible
 	
@@ -155,7 +179,7 @@ func toggle_mask():
 		mask_on.emit()
 		can_interact = false
 		
-		animation_player.play("mask_idling")
+		breathing_animation.play("mask_idling")
 		audio_controller.mask_on.play()
 		if !audio_controller.breathing.playing:
 			audio_controller.breathing.play()
@@ -164,7 +188,7 @@ func toggle_mask():
 		can_interact = true
 		
 		audio_controller.mask_off.play()
-		animation_player.stop()
+		breathing_animation.stop()
 		audio_controller.breathing.stop()
 
 func jumpscare():
@@ -265,6 +289,8 @@ func _on_cameras_off():
 		bill_standing_sprite.visible = true
 		bill_is_in_the_office = true
 		
+		light_flick_rect.visible = true
+		flickering_animation.play("light_flick")
 		audio_controller.animatronic_in_office.play()
 		
 		# tempo de tolerância pra levantar colocar a máscara
@@ -275,10 +301,14 @@ func _on_cameras_off():
 		
 		# quando esse som acabar, é seguro tirar a máscara
 		await audio_controller.animatronic_in_office.finished
+		
 		bill_standing_sprite.visible = false
 		bill_is_in_the_office = false
 		bill_is_going_to_enter = false
 		bill.pos = "stage"
+		
+		flickering_animation.stop()
+		light_flick_rect.visible = false
 		
 		cameras.cameras_off.disconnect(_on_cameras_off)
 
