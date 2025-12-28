@@ -11,7 +11,10 @@ extends Node
 @onready var flickering_animation: AnimationPlayer = $"../LightFlick/FlickeringAnimation"
 @onready var light_flick_rect: ColorRect = $"../LightFlick"
 @onready var night_timer: Timer = $"../NightTimer"
-@onready var clock: Label = $"../HUD/Clock"
+@onready var clock_label: Label = $"../HUD/ClockVBox/ClockLabel"
+@onready var night_label: Label = $"../HUD/ClockVBox/NightLabel"
+
+const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
 
 var is_cameras_open: bool = false
 var is_mask_on: bool = false
@@ -19,7 +22,8 @@ var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 var can_interact: bool = true
 var power: float = 100.0
-var night_duration_minutes: int = 4
+var night: int = 1
+var night_duration_minutes: int = 3
 
 var amostradinho_stage: int = 0
 var amostradinho_is_running: bool = false
@@ -64,13 +68,13 @@ class Animatronic:
 #var _luva_ai = 10
 #var _virginia_ai = 10
 #var _amostradinho_ai = 6
-var _bill_ai = 20
-var _luva_ai = 0
-var _virginia_ai = 0
-var _amostradinho_ai = 0
+#var _bill_ai = 20
+#var _luva_ai = 0
+#var _virginia_ai = 0
+#var _amostradinho_ai = 0
 var luva = Animatronic.new(
 	"luva",
-	_luva_ai,
+	0,
 	"stage",
 	{
 		"stage": ["hall_left", "kitchen"],
@@ -81,7 +85,7 @@ var luva = Animatronic.new(
 )
 var virginia = Animatronic.new(
 	"virginia",
-	_virginia_ai,
+	0,
 	"stage",
 	{
 		"stage": ["hall_right", "kitchen"],
@@ -92,7 +96,7 @@ var virginia = Animatronic.new(
 )
 var bill = Animatronic.new(
 	"bill",
-	_bill_ai,
+	0,
 	"stage",
 	{
 		"stage": ["hall_right"],
@@ -102,7 +106,7 @@ var bill = Animatronic.new(
 )
 var amostradinho = Animatronic.new(
 	"amostradinho",
-	_amostradinho_ai,
+	0,
 	"amostradinho_cove",
 	{},
 	self
@@ -114,13 +118,21 @@ func _ready() -> void:
 	bill_standing_sprite.visible = false
 	mask_sprite.visible = false
 	light_flick_rect.visible = false
+	
 	can_interact = true
+	
+	night = Progress.load_progress()
+	night_label.text = "noite " + str(night)
+	set_night_duration_minutes(night_duration_minutes)
 	
 	# setar os timers de movimentação pela primeira vez
 	for a in animatronic_list:
 		a.start_movement_timer()
 	
-	set_night_duration_minutes(night_duration_minutes)
+	# ia dos animatronics
+	set_animatronics_ai()
+	for a in animatronic_list:
+		print(a.nick + ": " + str(a.ai))
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("mask"):
@@ -133,13 +145,45 @@ func _process(delta: float) -> void:
 		modify_power(-0.2)
 	
 	# atualizar o relógio
-	clock.text = str(roundf(night_timer.time_left))
+	clock_label.text = str(roundf(night_timer.time_left))
 
-func set_night_duration_minutes(minutes: int):
+func set_animatronics_ai():
+	# obtém qual ia cada animatronic deve ter em cada noite
+	# e setta a ia atual deles pra condizer com isso
+	var ai_night_map = {
+		1: {
+			"luva_ai": 4,
+			"bill_ai": 0,
+			"virginia_ai": 4,
+			"amostradinho_ai": 2
+		},
+		2: {
+			"luva_ai": 6,
+			"bill_ai": 3,
+			"virginia_ai": 5,
+			"amostradinho_ai": 5
+		},
+		3: {
+			"luva_ai": 9,
+			"bill_ai": 7,
+			"virginia_ai": 8,
+			"amostradinho_ai": 9
+		}
+	}
+	var values = ai_night_map.get(night) # pega o mapa da noite atual
+	
+	luva.ai = values.get("luva_ai")
+	bill.ai = values.get("bill_ai")
+	virginia.ai = values.get("virginia_ai")
+	amostradinho.ai = values.get("amostradinho_ai")
+
+func set_night_duration_minutes(minutes: int, seconds: int = 0):
 	night_timer.one_shot = true
 	night_timer.autostart = true
 	
+	# passar tudo pra segundos
 	var total_seconds = minutes * 60
+	total_seconds += seconds
 	night_timer.wait_time = total_seconds
 	
 	# FIXME: talvez tenha que verificar se já não começou antes
@@ -356,3 +400,8 @@ func modify_power(amount: float):
 	amount = amount / 50
 	power += amount
 	#print("energia atual: " + str(power))
+
+func _on_night_timer_timeout() -> void:
+	night += 1
+	Progress.save_progress(night)
+	get_tree().change_scene_to_packed(COMPLETION_SCREEN)

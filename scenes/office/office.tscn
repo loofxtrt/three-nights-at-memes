@@ -47,8 +47,8 @@
 [ext_resource type="Texture2D" uid="uid://bo7qjnudqx555" path="res://assets/sprites/cameras/kitchen_luva-virginia.png" id="24_xnr2b"]
 [ext_resource type="AudioStream" uid="uid://dym0idan4k3mq" path="res://assets/audio/honk.mp3" id="25_mdy2d"]
 [ext_resource type="Texture2D" uid="uid://cnnqgltwb6vpr" path="res://assets/sprites/cameras/kitchen_virginia.png" id="25_qa8um"]
-[ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://placeholders/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
-[ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://placeholders/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
+[ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://assets/audio/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
+[ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://assets/audio/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
 [ext_resource type="AudioStream" uid="uid://v81v3bcy7icl" path="res://assets/audio/static.wav" id="48_vnclx"]
 [ext_resource type="AudioStream" uid="uid://mwq3qboso45i" path="res://assets/audio/breathing.wav" id="50_xnr2b"]
 [ext_resource type="AudioStream" uid="uid://dbsr5wohca6ov" path="res://assets/audio/mask_on.wav" id="51_qa8um"]
@@ -333,17 +333,17 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_vh2bw"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_xnr2b"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_qa8um"]
-
 [sub_resource type="ButtonGroup" id="ButtonGroup_s0oiu"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_m40x1"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_v2bev"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_iv6vv"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_0bux0"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_m055d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -659,7 +659,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_vh2bw")
+button_group = SubResource("ButtonGroup_s0oiu")
 camera_id = "stage"
 initial_state = true
 
@@ -668,7 +668,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_xnr2b")
+button_group = SubResource("ButtonGroup_m40x1")
 camera_id = "kitchen"
 initial_state = true
 
@@ -677,7 +677,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_qa8um")
+button_group = SubResource("ButtonGroup_v2bev")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -685,7 +685,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_s0oiu")
+button_group = SubResource("ButtonGroup_iv6vv")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -693,7 +693,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_m40x1")
+button_group = SubResource("ButtonGroup_0bux0")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -701,7 +701,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_v2bev")
+button_group = SubResource("ButtonGroup_m055d")
 camera_id = "amostradinho_cove"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
@@ -787,16 +787,26 @@ theme_override_font_sizes/font_size = 18
 text = "Lorem Ipsum"
 horizontal_alignment = 1
 
-[node name="Clock" type="Label" parent="HUD"]
+[node name="ClockVBox" type="VBoxContainer" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -76.0
-offset_bottom = 23.0
+offset_left = -123.0
+offset_bottom = 64.0
 grow_horizontal = 0
+
+[node name="ClockLabel" type="Label" parent="HUD/ClockVBox"]
+layout_mode = 2
 theme = ExtResource("6_8d8gp")
 theme_override_font_sizes/font_size = 42
 text = "CLOCK"
+horizontal_alignment = 2
+
+[node name="NightLabel" type="Label" parent="HUD/ClockVBox"]
+layout_mode = 2
+theme = ExtResource("6_8d8gp")
+text = "NIGHT"
+horizontal_alignment = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -810,3 +820,4 @@ autostart = true
 [connection signal="input_event" from="Decoration/Labubu" to="Decoration/Labubu" method="_on_labubu_input_event"]
 [connection signal="input_event" from="Decoration/TungTung" to="Decoration/TungTung" method="_on_tung_tung_input_event"]
 [connection signal="animation_finished" from="Cameras/BlipFlash" to="Cameras" method="_on_blip_flash_animation_finished"]
+[connection signal="timeout" from="NightTimer" to="Manager" method="_on_night_timer_timeout"]

@@ -1,0 +1,236 @@
+[gd_scene load_steps=28 format=3 uid="uid://cd6bwdxwxudq1"]
+
+[ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="1_klgdb"]
+[ext_resource type="Script" uid="uid://bl06p7ucayfn3" path="res://scenes/menu/menu.gd" id="1_mcvr8"]
+[ext_resource type="Texture2D" uid="uid://caeb2ig8kdeuw" path="res://placeholders/static.png" id="2_037ec"]
+[ext_resource type="Texture2D" uid="uid://drbndu45pptym" path="res://assets/sprites/menu.png" id="2_y1o0p"]
+[ext_resource type="AudioStream" uid="uid://s4ud3i6w3llq" path="res://assets/audio/tada.wav" id="3_e0arn"]
+[ext_resource type="AudioStream" uid="uid://dft7tt01i6fwt" path="res://placeholders/audio/MONTAGEM AUDACIOSA - Eu gosto é assim, amostradinho - Que audácia (FUNK BRAZILIAN) by Sr. Nescau [gRf2KxvCBKM].wav" id="6_r8yej"]
+[ext_resource type="Texture2D" uid="uid://behb0opj0nj1v" path="res://assets/extras/2025-12-28_12-13.png" id="7_2j8sj"]
+[ext_resource type="Texture2D" uid="uid://olvv5b8geexp" path="res://assets/extras/2025-12-28_12-13_1.png" id="8_55a8x"]
+[ext_resource type="Texture2D" uid="uid://vjke2w0sfwl2" path="res://assets/extras/2025-12-28_12-14.png" id="9_rrod7"]
+[ext_resource type="Texture2D" uid="uid://muulbbkeql7t" path="res://assets/extras/2025-12-28_12-14_1.png" id="10_faisu"]
+[ext_resource type="Texture2D" uid="uid://bcc0pnv6gcp8k" path="res://assets/extras/2025-12-28_12-14_2.png" id="11_t2e6u"]
+[ext_resource type="Texture2D" uid="uid://gah1exk068t6" path="res://assets/extras/2025-12-28_12-14_3.png" id="12_fb4qf"]
+[ext_resource type="Texture2D" uid="uid://ctc27yu7qdy36" path="res://assets/extras/2025-12-28_12-15.png" id="13_riv3r"]
+[ext_resource type="Texture2D" uid="uid://81tqyjx0teuj" path="res://assets/extras/2025-12-28_12-15_1.png" id="14_ns7vx"]
+[ext_resource type="Texture2D" uid="uid://cfmhroe5ghowj" path="res://assets/extras/2025-12-28_12-15_2.png" id="15_a0fu0"]
+[ext_resource type="Texture2D" uid="uid://dfvd5an0c6364" path="res://assets/extras/2025-12-28_12-15_3.png" id="16_pafgo"]
+[ext_resource type="Texture2D" uid="uid://pttgnoo7omfr" path="res://assets/sprites/mask_desk.png" id="17_uryge"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30jyb"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 4, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvg5m"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 726, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akl8q"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 1448, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0vrj"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 2170, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45seo"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 2892, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irf2c"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 3614, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnluk"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 4336, 1280, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkt0b"]
+atlas = ExtResource("2_037ec")
+region = Rect2(0, 5058, 1280, 720)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y1o0p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30jyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvg5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akl8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0vrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45seo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irf2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnluk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkt0b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b18gb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_2j8sj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_55a8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rrod7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_faisu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_t2e6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fb4qf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_riv3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ns7vx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_a0fu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_pafgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_uryge")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mcvr8")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(574, 321)
+texture = ExtResource("2_y1o0p")
+
+[node name="Static" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.20784314)
+position = Vector2(568, 326)
+sprite_frames = SubResource("SpriteFrames_y1o0p")
+autoplay = "default"
+
+[node name="DeleteTip" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -267.5
+offset_top = -23.0
+offset_right = 267.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_klgdb")
+theme_override_font_sizes/font_size = 16
+text = "pressillne [DEL] por 2 segundos para apagar o progrillso "
+
+[node name="Success" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_e0arn")
+
+[node name="PlayVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -24.0
+offset_right = 93.0
+offset_bottom = 24.0
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="PlayVBox"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+text = "play"
+alignment = 0
+
+[node name="NightLabel" type="Label" parent="PlayVBox"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+theme_override_font_sizes/font_size = 16
+text = "NIGHT"
+
+[node name="Extras" type="Button" parent="PlayVBox"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+text = "extras"
+alignment = 0
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 166.0
+offset_bottom = 177.0
+theme = ExtResource("1_klgdb")
+theme_override_font_sizes/font_size = 42
+text = "three
+nights
+at
+memes"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_r8yej")
+volume_db = -14.707
+autoplay = true
+
+[node name="ExtrasContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 490.0
+offset_top = 52.0
+offset_right = -180.0
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExtraContent" type="AnimatedSprite2D" parent="ExtrasContainer"]
+position = Vector2(240, 286)
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("SpriteFrames_b18gb")
+
+[node name="NavigateTIp" type="Label" parent="ExtrasContainer"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+theme_override_font_sizes/font_size = 16
+text = "[<] para navillgar [>]"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="PlayVBox/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="PlayVBox/Extras" to="." method="_on_extras_pressed"]
