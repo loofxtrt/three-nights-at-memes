@@ -13,6 +13,9 @@ máscara descer pra bc - https://share.google/4OZf2lNOd1JBDZd6g
 tada - https://www.youtube.com/watch?v=BE553dM-YtI
 beat zé da manga - https://www.youtube.com/watch?v=ba7--Hp7EQU
 beat amostradinho - https://www.youtube.com/watch?v=gRf2KxvCBKM
+pickup - https://freesound.org/people/Pavee2/sounds/586163/
+8bit horror - https://freesound.org/people/jhyland/sounds/539667/
+zamn - https://freesound.org/people/Beetlemuse/sounds/703317/
 
 blip flash - fnaf
 static - fnaf
@@ -22,3 +25,9 @@ honk - https://www.myinstants.com/en/instant/freddys-honk-nose/
 sight - https://www.youtube.com/watch?v=6mfncmVnhDI
 breathing - https://www.youtube.com/watch?v=MZkHRcgnux4
 mask on, mask off - https://www.youtube.com/watch?v=VpujMzlAWB0
+
+pra fazer o overlay dos minigames
+blinds, gimp:
+	displacement 60
+	segments 90
+depois duplica a layer e coloca por cima da outra

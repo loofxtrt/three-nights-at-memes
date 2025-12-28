@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://d2o3uuoqupeml"]
+
+[ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="1_f0ahj"]
+[ext_resource type="Script" uid="uid://f7jyp82khjbf" path="res://scenes/minigame_01/player.gd" id="1_f7pc0"]
+[ext_resource type="Texture2D" uid="uid://c67fgo0qm4y5j" path="res://assets/sprites/minigames/puppet.png" id="2_2v3a8"]
+[ext_resource type="AudioStream" uid="uid://cpqfke7114fi3" path="res://assets/audio/pickup.wav" id="2_25oiy"]
+[ext_resource type="Script" uid="uid://dv10t3xmbm8a0" path="res://scenes/minigame_01/manager.gd" id="3_3ugtl"]
+[ext_resource type="AudioStream" uid="uid://o3xjjuoct58e" path="res://assets/audio/8bit-horror.wav" id="3_jynol"]
+[ext_resource type="AudioStream" uid="uid://b62j61m2uhx85" path="res://assets/audio/zamn.wav" id="4_p5a4m"]
+[ext_resource type="Texture2D" uid="uid://ridqxneqrte2" path="res://assets/sprites/minigames/overlay.png" id="4_pw1h3"]
+[ext_resource type="PackedScene" uid="uid://b627ab6874g6g" path="res://scenes/minigame_01/gift.tscn" id="6_ob7yh"]
+[ext_resource type="Texture2D" uid="uid://dppdpg72e4dqq" path="res://assets/sprites/transitions/hqdefault-893664753.jpg" id="9_5coug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pat7"]
+size = Vector2(130, 264)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5a4m"]
+size = Vector2(45, 1206)
+
+[node name="Minigame01" type="Node2D"]
+
+[node name="Manager" type="Node" parent="."]
+script = ExtResource("3_3ugtl")
+
+[node name="Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_25oiy")
+
+[node name="8BitHorror" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jynol")
+
+[node name="Zamn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_p5a4m")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -322.0
+offset_top = -227.0
+offset_right = 1613.0
+offset_bottom = 889.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(133, 337)
+motion_mode = 1
+script = ExtResource("1_f7pc0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_0pat7")
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture_filter = 1
+scale = Vector2(0.63541657, 0.6354166)
+texture = ExtResource("2_2v3a8")
+
+[node name="Gift" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("6_ob7yh")]
+position = Vector2(1037, 547)
+manager = NodePath("../Manager")
+
+[node name="Gift2" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("6_ob7yh")]
+position = Vector2(79, 573)
+manager = NodePath("../Manager")
+
+[node name="Gift3" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("6_ob7yh")]
+position = Vector2(177, 93)
+manager = NodePath("../Manager")
+
+[node name="Gift4" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("6_ob7yh")]
+position = Vector2(988, 98)
+manager = NodePath("../Manager")
+
+[node name="Gift5" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("6_ob7yh")]
+position = Vector2(579, 341)
+manager = NodePath("../Manager")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 706.0
+offset_bottom = 177.0
+theme = ExtResource("1_f0ahj")
+theme_override_font_sizes/font_size = 42
+text = "give gifts. carry the flame."
+
+[node name="Final" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(588, 322.00003)
+scale = Vector2(2.49, 2.49)
+texture = ExtResource("9_5coug")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PointsLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1029.0
+offset_right = 1152.0
+offset_bottom = 37.0
+grow_horizontal = 0
+theme = ExtResource("1_f0ahj")
+theme_override_font_sizes/font_size = 42
+text = "00000"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-1, 228)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-20.5, 0)
+shape = SubResource("RectangleShape2D_p5a4m")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1193, 188)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-20.5, 0)
+shape = SubResource("RectangleShape2D_p5a4m")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(571, -1)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-20.5, 0)
+shape = SubResource("RectangleShape2D_p5a4m")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(576, 692)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-20.5, 0)
+shape = SubResource("RectangleShape2D_p5a4m")
+
+[node name="Overlay" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(586, 338)
+texture = ExtResource("4_pw1h3")

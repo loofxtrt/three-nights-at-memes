@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b627ab6874g6g"]
+
+[ext_resource type="Texture2D" uid="uid://dxkjrhfllcuqr" path="res://assets/sprites/minigames/gift.png" id="1_j8n3l"]
+[ext_resource type="Script" uid="uid://dfe3ujr0edes5" path="res://scenes/minigame_01/gift.gd" id="1_nimvq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8n3l"]
+size = Vector2(56, 62)
+
+[node name="Gift" type="Area2D"]
+script = ExtResource("1_nimvq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_j8n3l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j8n3l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
