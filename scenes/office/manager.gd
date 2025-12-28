@@ -64,22 +64,15 @@ class Animatronic:
 		
 		next_move.start()
 
-#var _bill_ai = 10
-#var _luva_ai = 10
-#var _virginia_ai = 10
-#var _amostradinho_ai = 6
-#var _bill_ai = 20
-#var _luva_ai = 0
-#var _virginia_ai = 0
-#var _amostradinho_ai = 0
 var luva = Animatronic.new(
 	"luva",
 	0,
 	"stage",
 	{
 		"stage": ["hall_left", "kitchen"],
-		"kitchen": ["hall_left", "stage"],
-		"hall_left": ["stage", "office"]
+		"kitchen": ["hall_left", "stage", "backstage"],
+		"backstage": ["hall_left"],
+		"hall_left": ["backstage", "office"]
 	},
 	self
 )
@@ -90,7 +83,8 @@ var virginia = Animatronic.new(
 	{
 		"stage": ["hall_right", "kitchen"],
 		"kitchen": ["hall_right", "stage"],
-		"hall_right": ["stage", "office"]
+		"backstage": ["hall_right"],
+		"hall_right": ["backstage", "office"]
 	},
 	self
 )
@@ -99,7 +93,9 @@ var bill = Animatronic.new(
 	0,
 	"stage",
 	{
-		"stage": ["hall_right"],
+		# não faz diferença nas câmeras, só faz ele atrasar igual os outros
+		"stage": ["hall_right", "kitchen"],
+		"kitchen": ["hall_right"],
 		"hall_right": ["stage", "office"]
 	},
 	self
@@ -153,21 +149,21 @@ func set_animatronics_ai():
 	var ai_night_map = {
 		1: {
 			"luva_ai": 4,
-			"bill_ai": 0,
+			"bill_ai": 2,
 			"virginia_ai": 4,
-			"amostradinho_ai": 2
+			"amostradinho_ai": 3
 		},
 		2: {
 			"luva_ai": 6,
-			"bill_ai": 3,
+			"bill_ai": 6,
 			"virginia_ai": 5,
 			"amostradinho_ai": 5
 		},
 		3: {
-			"luva_ai": 9,
-			"bill_ai": 7,
-			"virginia_ai": 8,
-			"amostradinho_ai": 9
+			"luva_ai": 7,
+			"bill_ai": 9,
+			"virginia_ai": 7,
+			"amostradinho_ai": 6
 		}
 	}
 	var values = ai_night_map.get(night) # pega o mapa da noite atual

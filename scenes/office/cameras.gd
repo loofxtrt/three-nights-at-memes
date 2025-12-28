@@ -34,62 +34,43 @@ func set_active_camera(camera_id: String, trigger_blip_flash: bool = true):
 	
 	var luva_pos = manager.luva.pos
 	var virginia_pos = manager.virginia.pos
+	var bill_pos = manager.bill.pos
+	
+	var sprite_map = [
+		{
+			"animatronics": ["luva", "bill", "virginia"],
+			"sprite": "stage_luva_bill_virginia"
+		},
+		{
+			"animatronics": ["luva", "bill"],
+			"sprite": "stage_luva_bill"
+		},
+		{
+			"animatronics": ["bill", "virginia"],
+			"sprite": "stage_bill_virginia"
+		},
+		{
+			"animatronics": [],
+			"sprite": "stage"
+		}
+	]
 	
 	if camera_id == "stage":
-		var sprite_map = [
-			{
-				"animatronics": ["luva", "bill", "virginia"],
-				"sprite": "stage_luva_bill_virginia"
-			},
-			{
-				"animatronics": ["luva", "bill"],
-				"sprite": "stage_luva_bill"
-			},
-			{
-				"animatronics": ["bill", "virginia"],
-				"sprite": "stage_bill_virginia"
-			},
-			{
-				"animatronics": [],
-				"sprite": "stage"
-			}
-		]
+		var b = bill_pos == "stage"
+		var l = luva_pos == "stage"
+		var v = virginia_pos == "stage"
 		animation_name = "stage"
 		
-		if luva_pos == "stage" && virginia_pos == "stage":
+		if l && v && b:
 			animation_name = "stage_luva_bill_virginia"
-		elif luva_pos == "stage" && virginia_pos != "stage":
+		elif l && b && !v:
 			animation_name = "stage_luva_bill"
-		elif luva_pos != "stage" && virginia_pos == "stage":
+		elif b && v && !l:
 			animation_name = "stage_bill_virginia"
-	elif camera_id == "hall_left":
-		animation_name = "hall_left"
-		
-		if luva_pos == "hall_left":
-			animation_name = "hall_left_luva"
-	elif camera_id == "hall_right":
-		animation_name = "hall_right"
-		
-		if virginia_pos == "hall_right":
-			animation_name = "hall_right_virginia"
-	elif camera_id == "backstage":
-		animation_name = "backstage"
-		
-		if virginia_pos == "backstage":
-			animation_name = "backstage_virginia"
-		elif luva_pos == "backstage":
-			animation_name = "backstage_luva"
-		elif virginia_pos && luva_pos == "backstage":
-			animation_name = "backstage_luva_virginia"
-	elif camera_id == "kitchen":
-		animation_name = "kitchen"
-		
-		if virginia_pos == "kitchen":
-			animation_name = "kitchen_virginia"
-		elif luva_pos == "kitchen":
-			animation_name = "kitchen_luva"
-		elif luva_pos && virginia_pos == "kitchen":
-			animation_name = "kitchen_luva_virginia"
+		elif b && !v && !l:
+			animation_name = "stage_bill"
+		else:
+			animation_name = "no_signal"
 	elif camera_id == "amostradinho_cove":
 		animation_name = "amostradinho_cove"
 		frame_index = manager.amostradinho_stage
@@ -98,7 +79,19 @@ func set_active_camera(camera_id: String, trigger_blip_flash: bool = true):
 		# ele começa a correr quando a câmera muda pra amostradinho cove
 		if manager.amostradinho_stage == 3:
 			manager.trigger_amostradinho()
+	else:
+		# casos de câmeras normais, que só luva e virginia aparecem
+		# isso assume que a ordem de nomeação vai ser sempre _luva_virginia
+		animation_name = camera_id
+		var present = []
+		if luva_pos == camera_id:
+			present.append("luva")
+		if virginia_pos == camera_id:
+			present.append("virginia")
 	
+		if present.size() > 0:
+			animation_name = animation_name + "_" + "_".join(present)
+
 	# define as variáveis e atualiza o sprite
 	# o frame index serve principalmente pra mostrar o estágio do amostradinho
 	active_camera = camera_id

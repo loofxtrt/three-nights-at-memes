@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=103 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
@@ -49,6 +49,8 @@
 [ext_resource type="Texture2D" uid="uid://cnnqgltwb6vpr" path="res://assets/sprites/cameras/kitchen_virginia.png" id="25_qa8um"]
 [ext_resource type="AudioStream" uid="uid://bwqdg1crxffev" path="res://assets/audio/Cold Presence ｜ Space Hulk Ambient Music [EIhzdUbiot4].wav" id="29_d0vrj"]
 [ext_resource type="AudioStream" uid="uid://d03o1vwx1q12q" path="res://assets/audio/Changing Camera Sound from Fnaf [pKTWFAtCoqY].wav" id="30_45seo"]
+[ext_resource type="Texture2D" uid="uid://bv4yyrp5mmcqo" path="res://assets/sprites/cameras/no_signal.png" id="30_m40x1"]
+[ext_resource type="Texture2D" uid="uid://bpqemnufprv47" path="res://assets/sprites/cameras/stage_bill.png" id="32_v2bev"]
 [ext_resource type="AudioStream" uid="uid://v81v3bcy7icl" path="res://assets/audio/static.wav" id="48_vnclx"]
 [ext_resource type="AudioStream" uid="uid://mwq3qboso45i" path="res://assets/audio/breathing.wav" id="50_xnr2b"]
 [ext_resource type="AudioStream" uid="uid://dbsr5wohca6ov" path="res://assets/audio/mask_on.wav" id="51_qa8um"]
@@ -238,10 +240,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("30_m40x1")
+}],
+"loop": true,
+"name": &"no_signal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("17_in01k")
 }],
 "loop": false,
 "name": &"stage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_v2bev")
+}],
+"loop": true,
+"name": &"stage_bill",
 "speed": 5.0
 }, {
 "frames": [{
@@ -629,7 +647,7 @@ script = ExtResource("5_yexkw")
 material = SubResource("ShaderMaterial_pgmud")
 scale = Vector2(0.61111104, 0.6111111)
 sprite_frames = SubResource("SpriteFrames_8d8gp")
-animation = &"amostradinho_cove"
+animation = &"backstage"
 
 [node name="Static" type="AnimatedSprite2D" parent="Cameras"]
 modulate = Color(1, 1, 1, 0.09019608)
@@ -703,6 +721,14 @@ offset_right = 387.3846
 offset_bottom = 115.0
 button_group = SubResource("ButtonGroup_m055d")
 camera_id = "amostradinho_cove"
+
+[node name="ChannelButton7" parent="Cameras" instance=ExtResource("21_o4y4s")]
+offset_left = 242.0
+offset_top = 125.0
+offset_right = 277.3846
+offset_bottom = 148.0
+button_group = SubResource("ButtonGroup_m055d")
+camera_id = "backstage"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
 visible = false
