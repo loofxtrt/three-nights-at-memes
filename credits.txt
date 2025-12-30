@@ -16,6 +16,7 @@ beat amostradinho - https://www.youtube.com/watch?v=gRf2KxvCBKM
 pickup - https://freesound.org/people/Pavee2/sounds/586163/
 8bit horror - https://freesound.org/people/jhyland/sounds/539667/
 zamn - https://freesound.org/people/Beetlemuse/sounds/703317/
+power outage - framzit
 
 blip flash - fnaf
 static - fnaf

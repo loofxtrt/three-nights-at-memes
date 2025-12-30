@@ -23,7 +23,11 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	can_interact = false
-	set_light(false) # deve apagar a luz sempre que o mouse sair, não só quando soltar o botão
+ 	
+	# deve apagar a luz sempre que o mouse sair, não só quando soltar o botão
+	# tem que checar pelo is_lit pq se não isso afeta o usage, diminuindo ele mesmo quando não precisa
+	if is_lit:
+		set_light(false)
 
 func _input(event: InputEvent) -> void:
 	# só poder interagir quando estiver com as câmeras abaixadas
@@ -32,13 +36,8 @@ func _input(event: InputEvent) -> void:
 	
 	if can_interact && event.is_action_pressed("light"):
 		set_light(true)
-	elif event.is_action_released("light"):
+	elif is_lit && event.is_action_released("light"): # verificação pelo is_lit pelo mesmo motivo anterior
 		set_light(false)
-
-func _process(delta: float) -> void:
-	# subtrair energia enquanto uma das luzes estiver ligada
-	if is_lit:
-		manager.modify_power(-0.1)
 
 func reset_office_lights(office_sprite: Sprite2D):
 	office_sprite.texture = OFFICE
@@ -53,8 +52,10 @@ func set_light(state: bool):
 	
 	if is_lit:
 		audio_controller.light_flicker.play()
+		manager.increase_usage(true) # subtrair energia enquanto uma das luzes estiver ligada
 	else:
 		audio_controller.light_flicker.stop()
+		manager.increase_usage(false)
 	
 	var office_sprite = office.get_node("Sprite")
 	if !office_sprite:

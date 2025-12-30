@@ -1,8 +1,9 @@
-[gd_scene load_steps=103 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=105 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
 [ext_resource type="PackedScene" uid="uid://bu1ymi7f087r" path="res://scenes/door/door.tscn" id="4_nanex"]
+[ext_resource type="Texture2D" uid="uid://b267avjbu0qdm" path="res://assets/sprites/office_bill_power_out_crop.png" id="5_iv6vv"]
 [ext_resource type="Texture2D" uid="uid://clyu3k62gqncb" path="res://assets/sprites/desk/shadows.png" id="5_tk24r"]
 [ext_resource type="Texture2D" uid="uid://odif6njhd4ep" path="res://assets/sprites/office_bill_crop.png" id="5_vnclx"]
 [ext_resource type="Script" uid="uid://dxajnyjvrcjjg" path="res://scenes/office/cameras.gd" id="5_yexkw"]
@@ -351,10 +352,6 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_s0oiu"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_m40x1"]
-
 [sub_resource type="ButtonGroup" id="ButtonGroup_v2bev"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_iv6vv"]
@@ -362,6 +359,12 @@ animations = [{
 [sub_resource type="ButtonGroup" id="ButtonGroup_0bux0"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_m055d"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_82ft2"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3vol3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_8mggk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -567,6 +570,11 @@ direction = "left"
 position = Vector2(0, -103)
 texture = ExtResource("5_vnclx")
 
+[node name="BillPowerOutage" type="Sprite2D" parent="."]
+position = Vector2(-507.25, -133.4647)
+scale = Vector2(1.1588235, 1.1588236)
+texture = ExtResource("5_iv6vv")
+
 [node name="Shadows" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.69411767)
 position = Vector2(0, 113)
@@ -677,7 +685,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_s0oiu")
+button_group = SubResource("ButtonGroup_v2bev")
 camera_id = "stage"
 initial_state = true
 
@@ -686,7 +694,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_m40x1")
+button_group = SubResource("ButtonGroup_iv6vv")
 camera_id = "kitchen"
 initial_state = true
 
@@ -695,7 +703,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_v2bev")
+button_group = SubResource("ButtonGroup_0bux0")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -703,7 +711,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_iv6vv")
+button_group = SubResource("ButtonGroup_m055d")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -711,7 +719,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_0bux0")
+button_group = SubResource("ButtonGroup_82ft2")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -719,7 +727,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_m055d")
+button_group = SubResource("ButtonGroup_3vol3")
 camera_id = "amostradinho_cove"
 
 [node name="ChannelButton7" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -727,7 +735,7 @@ offset_left = 242.0
 offset_top = 125.0
 offset_right = 277.3846
 offset_bottom = 148.0
-button_group = SubResource("ButtonGroup_m055d")
+button_group = SubResource("ButtonGroup_8mggk")
 camera_id = "backstage"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
@@ -788,30 +796,40 @@ animation = &"bill"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="TopVBox" type="VBoxContainer" parent="HUD"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -58.5
-offset_right = 58.5
-offset_bottom = 43.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="PowerLeft" type="Label" parent="HUD/TopVBox"]
-layout_mode = 2
-theme = ExtResource("6_8d8gp")
-text = "POWER LEFT"
-horizontal_alignment = 1
-
-[node name="HotkeyTip" type="Label" parent="HUD/TopVBox"]
-visible = false
-layout_mode = 2
+[node name="HotkeyTip" type="Label" parent="HUD"]
+offset_left = 500.0
+offset_right = 617.0
+offset_bottom = 16.0
 theme = ExtResource("6_8d8gp")
 theme_override_font_sizes/font_size = 18
 text = "Lorem Ipsum"
 horizontal_alignment = 1
+
+[node name="PowerVBox" type="VBoxContainer" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 152.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="PowerLeft" type="Label" parent="HUD/PowerVBox"]
+layout_mode = 2
+theme = ExtResource("6_8d8gp")
+text = "POWER LEFT"
+
+[node name="UsageHBox" type="HBoxContainer" parent="HUD/PowerVBox"]
+layout_mode = 2
+
+[node name="CurrentUsage" type="Label" parent="HUD/PowerVBox/UsageHBox"]
+layout_mode = 2
+theme = ExtResource("6_8d8gp")
+text = "usage: "
+
+[node name="UsageBars" type="HBoxContainer" parent="HUD/PowerVBox/UsageHBox"]
+layout_mode = 2
 
 [node name="ClockVBox" type="VBoxContainer" parent="HUD"]
 anchors_preset = 1

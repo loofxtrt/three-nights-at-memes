@@ -131,8 +131,10 @@ func toggle_cameras():
 	if state:
 		cameras_on.emit()
 		set_active_camera(active_camera) # pro sprite sempre começar atualizado
+		manager.increase_usage(true)
 	else:
 		cameras_off.emit()
+		manager.increase_usage(false)
 	
 	camera_tips_visible(state)
 

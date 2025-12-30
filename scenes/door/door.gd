@@ -29,13 +29,14 @@ func _on_mouse_exited() -> void:
 	if !manager.is_cameras_open:
 		manager.tip_visible(false)
 
-func _process(delta: float) -> void:
+func _input(event: InputEvent) -> void:
 	# só poder interagir quando estiver com as câmeras abaixadas
 	if manager.is_cameras_open || !can_interact:
 		return
 	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		toggle_door()
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			toggle_door()
 
 func toggle_door():
 	if !manager.can_interact:
@@ -58,6 +59,11 @@ func toggle_door():
 			# fazer o amostradinho dar o jumpscare se abrir a porta
 			# sem esperar ele ir embora antes if amostradinho_is_running && !is_left_door_closed: jumpscare()
 			manager.jumpscare()
+	
+	if is_closed:
+		manager.increase_usage(true)
+	else:
+		manager.increase_usage(false)
 	
 	audio_controller.door_slam.play()
 

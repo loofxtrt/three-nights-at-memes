@@ -13,12 +13,22 @@ func _ready() -> void:
 
 func _on_music_finished() -> void:
 	var night = Progress.load_progress()
-	if night < 3:
-		# redirecionar de volta pro escritório quando a tela de 6 am acaba
-		var office = load("uid://diw1qplhntkkf") # funciona com load
-		get_tree().change_scene_to_packed(office)
-	else:
+
+	if night > 3:
 		print("fim")
+		return
+
+	# redirecionar de volta pro escritório ou pra um minigame quando a tela de 6 am acaba
+	match night:
+		3:
+			SceneManager.to_minigame_02()
+		2:
+			SceneManager.to_minigame_01()
+		1:
+			SceneManager.to_office()
+		_:
+			# valor default
+			SceneManager.to_office()
 
 func set_hour_text(text: String):
 	hour.text = text

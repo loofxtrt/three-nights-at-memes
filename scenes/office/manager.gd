@@ -3,8 +3,10 @@ extends Node
 @onready var audio_controller: Node = $"../AudioController"
 @onready var jumpscare_sprite: AnimatedSprite2D = $"../JumpscareSprite"
 @onready var cameras: Node2D = $"../Cameras"
-@onready var power_left: Label = $"../HUD/TopVBox/PowerLeft"
-@onready var hotkey_tip: Label = $"../HUD/TopVBox/HotkeyTip"
+@onready var hotkey_tip: Label = $"../HUD/HotkeyTip"
+@onready var power_left: Label = $"../HUD/PowerVBox/PowerLeft"
+@onready var current_usage: Label = $"../HUD/PowerVBox/UsageHBox/CurrentUsage"
+@onready var usage_bars: HBoxContainer = $"../HUD/PowerVBox/UsageHBox/UsageBars"
 @onready var bill_standing_sprite: Sprite2D = $"../BillStanding"
 @onready var breathing_animation: AnimationPlayer = $"../Mask/BreathingAnimation"
 @onready var mask_sprite: Sprite2D = $"../Mask"
@@ -13,8 +15,10 @@ extends Node
 @onready var night_timer: Timer = $"../NightTimer"
 @onready var clock_label: Label = $"../HUD/ClockVBox/ClockLabel"
 @onready var night_label: Label = $"../HUD/ClockVBox/NightLabel"
+@onready var bill_power_outage: Sprite2D = $"../BillPowerOutage"
 
 const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
+const USAGE_WHITE = preload("uid://c188asmil3hig")
 
 var is_cameras_open: bool = false
 var is_mask_on: bool = false
@@ -22,6 +26,7 @@ var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 var can_interact: bool = true
 var power: float = 100.0
+var usage: int = 1
 var night: int = 1
 var night_duration_minutes: int = 3
 
@@ -112,6 +117,7 @@ var animatronic_list = [bill, luva, virginia, amostradinho]
 func _ready() -> void:
 	tip_visible(false)
 	bill_standing_sprite.visible = false
+	bill_power_outage.visible = false
 	mask_sprite.visible = false
 	light_flick_rect.visible = false
 	
@@ -136,9 +142,10 @@ func _process(delta: float) -> void:
 	
 	# atualizar os dados relacionados à energia
 	power_left.text = "billteria: " + str(roundi(power))
+	current_usage.text = "usage: " + str(usage)
 	
-	if is_right_door_closed or is_left_door_closed:
-		modify_power(-0.2)
+	#if is_right_door_closed or is_left_door_closed:
+	#	modify_power(-0.2)
 	
 	# atualizar o relógio
 	clock_label.text = str(roundf(night_timer.time_left))
@@ -178,6 +185,8 @@ func set_night_duration_minutes(minutes: int, seconds: int = 0):
 	night_timer.autostart = true
 	
 	# passar tudo pra segundos
+	minutes = 0
+	seconds = 5
 	var total_seconds = minutes * 60
 	total_seconds += seconds
 	night_timer.wait_time = total_seconds
@@ -397,7 +406,27 @@ func modify_power(amount: float):
 	power += amount
 	#print("energia atual: " + str(power))
 
+func increase_usage(state: bool):
+	if state:
+		usage += 1
+		
+		#var segment = TextureRect.new()
+		#segment.texture = USAGE_WHITE
+		#segment.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		#segment.expand_mode = TextureRect.EXPAND_KEEP_SIZE
+		#segment.stretch_mode = TextureRect.STRETCH_SCALE
+		#usage_bars.add_child(segment)
+	elif !state && usage != 1:
+		usage -= 1
+		
+		#var segment = usage_bars.get_child(-1)
+		#usage_bars.remove_child(segment)
+	
+	print("usage: " + str(usage))
+	#current_usage.text = "usage: " + str(usage)
+
 func _on_night_timer_timeout() -> void:
 	night += 1
 	Progress.save_progress(night)
-	get_tree().change_scene_to_packed(COMPLETION_SCREEN)
+	SceneManager.to_completion_screen()
+	#get_tree().change_scene_to_packed(COMPLETION_SCREEN)

@@ -40,5 +40,5 @@ func increase_points():
 		await get_tree().create_timer(2).timeout
 		
 		
-		var office = load("uid://diw1qplhntkkf")
-		get_tree().change_scene_to_packed(office)
+		#var office = load("uid://diw1qplhntkkf")
+		SceneManager.to_office()
