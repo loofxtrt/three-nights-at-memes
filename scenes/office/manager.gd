@@ -1,5 +1,6 @@
 extends Node
 
+@onready var office_sprite: Sprite2D = $"../Sprite"
 @onready var audio_controller: Node = $"../AudioController"
 @onready var jumpscare_sprite: AnimatedSprite2D = $"../JumpscareSprite"
 @onready var cameras: Node2D = $"../Cameras"
@@ -13,22 +14,29 @@ extends Node
 @onready var flickering_animation: AnimationPlayer = $"../LightFlick/FlickeringAnimation"
 @onready var light_flick_rect: ColorRect = $"../LightFlick"
 @onready var night_timer: Timer = $"../NightTimer"
+@onready var power_tick: Timer = $"../PowerTick"
 @onready var clock_label: Label = $"../HUD/ClockVBox/ClockLabel"
 @onready var night_label: Label = $"../HUD/ClockVBox/NightLabel"
 @onready var bill_power_outage: Sprite2D = $"../BillPowerOutage"
+@onready var tablet_trigger: Area2D = $"../TabletTrigger"
+@onready var decoration: Node2D = $"../Decoration"
+@onready var shadows: Sprite2D = $"../Shadows"
+@onready var blackout: ColorRect = $"../Blackout"
 
 const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
 const USAGE_WHITE = preload("uid://c188asmil3hig")
+const OFFICE_POWER_OUT = preload("uid://dormbbba2hwdr")
 
 var is_cameras_open: bool = false
 var is_mask_on: bool = false
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 var can_interact: bool = true
-var power: float = 100.0
+var power: float = 10.0
 var usage: int = 1
 var night: int = 1
 var night_duration_minutes: int = 3
+var lock_tips: bool = false
 
 var amostradinho_stage: int = 0
 var amostradinho_is_running: bool = false
@@ -38,6 +46,7 @@ var bill_is_in_the_office: bool = false
 signal animatronic_moved
 signal mask_off
 signal mask_on
+signal power_modified
 
 class Animatronic:
 	var nick: String
@@ -122,10 +131,14 @@ func _ready() -> void:
 	light_flick_rect.visible = false
 	
 	can_interact = true
+	lock_tips = false
 	
 	night = Progress.load_progress()
 	night_label.text = "noite " + str(night)
 	set_night_duration_minutes(night_duration_minutes)
+	
+	power_tick.start() # timer de quanto em quanto tempo a energia é drenada
+	power_tick.one_shot = true # pra ele não recomeçar quando já tá sem energia
 	
 	# setar os timers de movimentação pela primeira vez
 	for a in animatronic_list:
@@ -135,6 +148,8 @@ func _ready() -> void:
 	set_animatronics_ai()
 	for a in animatronic_list:
 		print(a.nick + ": " + str(a.ai))
+	
+	power_modified.connect(_on_power_modified)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("mask"):
@@ -175,6 +190,10 @@ func set_animatronics_ai():
 	}
 	var values = ai_night_map.get(night) # pega o mapa da noite atual
 	
+	# não tem mais noites que isso, mas dá pra continuar jogando
+	if !values:
+		ai_night_map.get(3)
+	
 	luva.ai = values.get("luva_ai")
 	bill.ai = values.get("bill_ai")
 	virginia.ai = values.get("virginia_ai")
@@ -183,10 +202,11 @@ func set_animatronics_ai():
 func set_night_duration_minutes(minutes: int, seconds: int = 0):
 	night_timer.one_shot = true
 	night_timer.autostart = true
+
+	#minutes = 0
+	#seconds = 5
 	
 	# passar tudo pra segundos
-	minutes = 0
-	seconds = 5
 	var total_seconds = minutes * 60
 	total_seconds += seconds
 	night_timer.wait_time = total_seconds
@@ -195,6 +215,9 @@ func set_night_duration_minutes(minutes: int, seconds: int = 0):
 	night_timer.start()
 
 func set_tip(tips: Array):
+	if lock_tips:
+		return
+	
 	# recebe um array de dicas. cada item é uma linha
 	# ex: [["e", "interagir"]]
 	var text = ""
@@ -209,6 +232,11 @@ func set_tip(tips: Array):
 	hotkey_tip.text = text
 
 func tip_visible(state: bool):
+	# se o lock tips estiver ativo, não mostra independente da circunstância
+	if lock_tips:
+		hotkey_tip.visible = false
+		return
+	
 	# sempre mostrar a tip da máscara quando outras não estiverem sendo exibidas
 	if state == false:
 		hotkey_tip.visible = true
@@ -218,7 +246,7 @@ func tip_visible(state: bool):
 	hotkey_tip.visible = state
 
 func toggle_mask():
-	if is_cameras_open:
+	if is_cameras_open || power <= 0:
 		return
 	
 	mask_sprite.visible = !mask_sprite.visible
@@ -228,6 +256,7 @@ func toggle_mask():
 		mask_on.emit()
 		can_interact = false
 		
+		# tocar o áudio
 		breathing_animation.play("mask_idling")
 		audio_controller.mask_on.play()
 		if !audio_controller.breathing.playing:
@@ -236,6 +265,7 @@ func toggle_mask():
 		mask_off.emit()
 		can_interact = true
 		
+		# parar o áudio
 		audio_controller.mask_off.play()
 		breathing_animation.stop()
 		audio_controller.breathing.stop()
@@ -430,3 +460,54 @@ func _on_night_timer_timeout() -> void:
 	Progress.save_progress(night)
 	SceneManager.to_completion_screen()
 	#get_tree().change_scene_to_packed(COMPLETION_SCREEN)
+
+func _on_power_modified():
+	# essa função só serve pra cortar a luz, então não precisa fazer nada
+	# se ainda tiver energia disponível
+	if !power <= 0:
+		return
+	
+	# desligar todos os sistemas e travar as interações
+	if is_cameras_open:
+		cameras.toggle_cameras()
+	
+	for l in get_tree().get_nodes_in_group("lightables"):
+		l.set_light(false)
+	
+	for d in get_tree().get_nodes_in_group("doors"):
+		if d.is_closed:
+			d.toggle_door()
+	
+	can_interact = false
+	lock_tips = true
+	
+	# parar a ambiência e trocar os sprites
+	audio_controller.ambience.stop()
+	
+	office_sprite.texture = OFFICE_POWER_OUT
+	decoration.visible = false
+	tablet_trigger.visible = false
+	shadows.visible = false
+	
+	# tocar as duas fases do outage, a primeira com o áudio das luzes apagando
+	# e a segunda com o bill na porta esquerda
+	audio_controller.power_outage.play()
+	await audio_controller.power_outage.finished
+	
+	bill_power_outage.visible = true
+	
+	audio_controller.bills_lullaby.play()
+	await audio_controller.bills_lullaby.finished
+	
+	jumpscare()
+
+func _on_power_tick_timeout() -> void:
+	# toda vez que o tick acaba, a energia é atualizada
+	# e depois o ciclo recomeça (se ainda tiver energia)
+	power -= float(usage) / 5
+	power = max(0.0, power) # pra nunca ficar a baixo de 0
+	power_modified.emit()
+	
+	if power > 0:
+		power_tick.start()
+	#print(str(power))

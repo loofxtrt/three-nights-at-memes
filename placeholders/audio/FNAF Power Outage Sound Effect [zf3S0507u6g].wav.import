@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://eaej142ipfw3"
+path="res://.godot/imported/FNAF Power Outage Sound Effect [zf3S0507u6g].wav-0cd8c169aaf6a98e5210a929a805c0b4.sample"
+
+[deps]
+
+source_file="res://placeholders/audio/FNAF Power Outage Sound Effect [zf3S0507u6g].wav"
+dest_files=["res://.godot/imported/FNAF Power Outage Sound Effect [zf3S0507u6g].wav-0cd8c169aaf6a98e5210a929a805c0b4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

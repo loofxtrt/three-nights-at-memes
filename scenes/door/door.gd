@@ -59,7 +59,6 @@ func toggle_door():
 			# fazer o amostradinho dar o jumpscare se abrir a porta
 			# sem esperar ele ir embora antes if amostradinho_is_running && !is_left_door_closed: jumpscare()
 			manager.jumpscare()
-	
 	if is_closed:
 		manager.increase_usage(true)
 	else:

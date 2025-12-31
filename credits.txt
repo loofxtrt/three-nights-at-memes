@@ -16,7 +16,9 @@ beat amostradinho - https://www.youtube.com/watch?v=gRf2KxvCBKM
 pickup - https://freesound.org/people/Pavee2/sounds/586163/
 8bit horror - https://freesound.org/people/jhyland/sounds/539667/
 zamn - https://freesound.org/people/Beetlemuse/sounds/703317/
-power outage - framzit
+bill's lullaby - framzit
+heartbeat - https://www.youtube.com/watch?v=zId0k-kkWW4
+fire - https://freesound.org/people/newlocknew/sounds/645070/
 
 blip flash - fnaf
 static - fnaf
@@ -26,6 +28,7 @@ honk - https://www.myinstants.com/en/instant/freddys-honk-nose/
 sight - https://www.youtube.com/watch?v=6mfncmVnhDI
 breathing - https://www.youtube.com/watch?v=MZkHRcgnux4
 mask on, mask off - https://www.youtube.com/watch?v=VpujMzlAWB0
+power outage - https://www.youtube.com/watch?v=zf3S0507u6g
 
 pra fazer o overlay dos minigames
 blinds, gimp:
