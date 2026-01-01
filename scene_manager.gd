@@ -6,6 +6,7 @@ const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
 const MINIGAME_01 = preload("uid://d2o3uuoqupeml")
 const MINIGAME_02 = preload("uid://cvm7gcgjd82oa")
 const FINAL_CUTSCENE = preload("uid://deqkf4m3ih7ug")
+const NEWSPAPER = preload("uid://c2epydx7g7c35")
 
 func _change_scene(constant: PackedScene):
 	get_tree().change_scene_to_packed(constant)
@@ -27,3 +28,6 @@ func to_minigame_02():
 
 func to_final_cutscene():
 	_change_scene(FINAL_CUTSCENE)
+
+func to_newspaper():
+	_change_scene(NEWSPAPER)

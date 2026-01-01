@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://3idyt7myk8tf"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://3idyt7myk8tf"]
 
 [ext_resource type="FontFile" uid="uid://30xbyeih5u37" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_vvkov"]
 
@@ -11,6 +11,10 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_so7ry"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryq2r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wwnl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yquhc"]
 
 [resource]
 default_font = ExtResource("1_vvkov")
@@ -27,3 +31,5 @@ Button/styles/focus = SubResource("StyleBoxEmpty_vvkov")
 Button/styles/hover = SubResource("StyleBoxEmpty_0gocb")
 Button/styles/normal = SubResource("StyleBoxEmpty_so7ry")
 Button/styles/pressed = SubResource("StyleBoxEmpty_ryq2r")
+SpinBox/styles/down_background_hovered = SubResource("StyleBoxEmpty_0wwnl")
+SpinBox/styles/down_background_pressed = SubResource("StyleBoxEmpty_yquhc")

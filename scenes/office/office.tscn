@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=147 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://k62uvyw5ks7d" path="res://assets/sprites/cameras/hall_right.png" id="15_trify"]
 [ext_resource type="Script" uid="uid://b6akukxqqanvq" path="res://scenes/office/audio_controller.gd" id="16_h6w4s"]
 [ext_resource type="Texture2D" uid="uid://c2kck82ljtk2g" path="res://assets/sprites/cameras/hall_right_virginia.png" id="16_o4y4s"]
-[ext_resource type="Texture2D" uid="uid://ucpfbej5usud" path="res://placeholders/PC _ Computer - Five Nights at Freddy's 2 - Animatronics - Withered Freddy.png" id="16_qei30"]
 [ext_resource type="Texture2D" uid="uid://dpw2pgym5dpts" path="res://assets/sprites/cameras/backstage_virginia-luva.png" id="16_tk24r"]
 [ext_resource type="AudioStream" uid="uid://c47me4i48d873" path="res://assets/audio/amostradinho-warning-shorter.wav" id="17_5sbiv"]
 [ext_resource type="Texture2D" uid="uid://bkur32nhkarbt" path="res://assets/sprites/cameras/stage.png" id="17_in01k"]
@@ -58,6 +57,60 @@
 [ext_resource type="AudioStream" uid="uid://mwq3qboso45i" path="res://assets/audio/breathing.wav" id="50_xnr2b"]
 [ext_resource type="AudioStream" uid="uid://dbsr5wohca6ov" path="res://assets/audio/mask_on.wav" id="51_qa8um"]
 [ext_resource type="AudioStream" uid="uid://dd5tc1lu18hhy" path="res://assets/audio/mask_off.wav" id="52_s0oiu"]
+[ext_resource type="AudioStream" uid="uid://c0pr7rghp7137" path="res://assets/audio/going-away.wav" id="54_5s7xq"]
+[ext_resource type="Texture2D" uid="uid://diso3qe2okfxu" path="res://assets/sprites/jumpscares/amostradinho/0001.png" id="58_g52jb"]
+[ext_resource type="Texture2D" uid="uid://cn4ejqrekk64q" path="res://assets/sprites/jumpscares/amostradinho/0002.png" id="59_5s7xq"]
+[ext_resource type="Texture2D" uid="uid://rjcimsh88ggb" path="res://assets/sprites/jumpscares/amostradinho/0003.png" id="60_57tdf"]
+[ext_resource type="Texture2D" uid="uid://bmq5i5cb65nqq" path="res://assets/sprites/jumpscares/amostradinho/0004.png" id="61_k7xxg"]
+[ext_resource type="Texture2D" uid="uid://dhcsfko6ye8t" path="res://assets/sprites/jumpscares/amostradinho/0005.png" id="62_2llav"]
+[ext_resource type="Texture2D" uid="uid://do5n357w5rfjv" path="res://assets/sprites/jumpscares/amostradinho/0006.png" id="63_jx3vh"]
+[ext_resource type="Texture2D" uid="uid://2m4jcjl8umtf" path="res://assets/sprites/jumpscares/amostradinho/0007.png" id="64_71l7w"]
+[ext_resource type="Texture2D" uid="uid://x16asg1n6aa6" path="res://assets/sprites/jumpscares/amostradinho/0008.png" id="65_l20cn"]
+[ext_resource type="Texture2D" uid="uid://ce4s5kth4bleo" path="res://assets/sprites/jumpscares/amostradinho/0009.png" id="66_fc2h1"]
+[ext_resource type="Texture2D" uid="uid://bgk56ya25jvb4" path="res://assets/sprites/jumpscares/amostradinho/0010.png" id="67_j4llo"]
+[ext_resource type="Texture2D" uid="uid://vti31ms6yew3" path="res://assets/sprites/jumpscares/amostradinho/0011.png" id="68_68ga8"]
+[ext_resource type="Texture2D" uid="uid://byv25vp4tns5h" path="res://assets/sprites/jumpscares/amostradinho/0012.png" id="69_y022n"]
+[ext_resource type="Texture2D" uid="uid://bsxwn4km06kc" path="res://assets/sprites/jumpscares/amostradinho/0013.png" id="70_d2miu"]
+[ext_resource type="Texture2D" uid="uid://dllsv2kyu2py5" path="res://assets/sprites/jumpscares/bill/0001.png" id="71_pbrw6"]
+[ext_resource type="Texture2D" uid="uid://djxwba5ddgj86" path="res://assets/sprites/jumpscares/bill/0002.png" id="72_fd5y7"]
+[ext_resource type="Texture2D" uid="uid://huixnl61cerq" path="res://assets/sprites/jumpscares/bill/0003.png" id="73_2ithw"]
+[ext_resource type="Texture2D" uid="uid://hq6o0alp875x" path="res://assets/sprites/jumpscares/bill/0004.png" id="74_gmvx7"]
+[ext_resource type="Texture2D" uid="uid://v4w4fe7qw2pr" path="res://assets/sprites/jumpscares/bill/0005.png" id="75_dyxct"]
+[ext_resource type="Texture2D" uid="uid://bmqaudvrqnfuh" path="res://assets/sprites/jumpscares/bill/0006.png" id="76_0iiny"]
+[ext_resource type="Texture2D" uid="uid://bqwyaidb25fku" path="res://assets/sprites/jumpscares/bill/0007.png" id="77_lyp87"]
+[ext_resource type="Texture2D" uid="uid://byf7efgy1golp" path="res://assets/sprites/jumpscares/bill/0008.png" id="78_i7vdn"]
+[ext_resource type="Texture2D" uid="uid://bn2eruxyv321d" path="res://assets/sprites/jumpscares/bill/0009.png" id="79_y3tih"]
+[ext_resource type="Texture2D" uid="uid://c0vxevgxb8naf" path="res://assets/sprites/jumpscares/bill/0010.png" id="80_j1j83"]
+[ext_resource type="Texture2D" uid="uid://cs3w0ipcbai0t" path="res://assets/sprites/jumpscares/bill/0011.png" id="81_gmqpd"]
+[ext_resource type="Texture2D" uid="uid://dhmbrxh7hn3uy" path="res://assets/sprites/jumpscares/bill/0012.png" id="82_j16pk"]
+[ext_resource type="Texture2D" uid="uid://da11dahypdiq7" path="res://assets/sprites/jumpscares/bill/0013.png" id="83_d8prb"]
+[ext_resource type="Texture2D" uid="uid://b3xnc8dgvg5u4" path="res://assets/sprites/jumpscares/bill/0014.png" id="84_i3x15"]
+[ext_resource type="Texture2D" uid="uid://clgj7irdprbl2" path="res://assets/sprites/jumpscares/luva/0001.png" id="85_0cypb"]
+[ext_resource type="Texture2D" uid="uid://bcdmu5f0ffttf" path="res://assets/sprites/jumpscares/luva/0002.png" id="86_0j42d"]
+[ext_resource type="Texture2D" uid="uid://c6fo6jv81ripq" path="res://assets/sprites/jumpscares/luva/0003.png" id="87_fh3bi"]
+[ext_resource type="Texture2D" uid="uid://tvax6agbjakm" path="res://assets/sprites/jumpscares/luva/0004.png" id="88_07sj5"]
+[ext_resource type="Texture2D" uid="uid://ddkj7vpy7jcmb" path="res://assets/sprites/jumpscares/luva/0005.png" id="89_jwsjc"]
+[ext_resource type="Texture2D" uid="uid://d4c4e2vbv32l8" path="res://assets/sprites/jumpscares/luva/0006.png" id="90_422ru"]
+[ext_resource type="Texture2D" uid="uid://b4sq256iw802m" path="res://assets/sprites/jumpscares/luva/0007.png" id="91_o4xky"]
+[ext_resource type="Texture2D" uid="uid://cgj852v42s6yf" path="res://assets/sprites/jumpscares/luva/0008.png" id="92_54job"]
+[ext_resource type="Texture2D" uid="uid://bnneepahblkpi" path="res://assets/sprites/jumpscares/luva/0009.png" id="93_5igdn"]
+[ext_resource type="Texture2D" uid="uid://dn5ixjpwiph8" path="res://assets/sprites/jumpscares/luva/0010.png" id="94_x68ye"]
+[ext_resource type="Texture2D" uid="uid://dato30a544wjr" path="res://assets/sprites/jumpscares/luva/0011.png" id="95_mnqhx"]
+[ext_resource type="Texture2D" uid="uid://b76grp83o242x" path="res://assets/sprites/jumpscares/luva/0012.png" id="96_xck4l"]
+[ext_resource type="Texture2D" uid="uid://pkmmhopkq7kw" path="res://assets/sprites/jumpscares/virginia/0001.png" id="97_x7d8i"]
+[ext_resource type="Texture2D" uid="uid://dhs31t3p6eyln" path="res://assets/sprites/jumpscares/virginia/0002.png" id="98_sr2ku"]
+[ext_resource type="Texture2D" uid="uid://gxu3p74h7p46" path="res://assets/sprites/jumpscares/virginia/0003.png" id="99_u66t2"]
+[ext_resource type="Texture2D" uid="uid://brabvso01c4i3" path="res://assets/sprites/jumpscares/virginia/0004.png" id="100_ytef3"]
+[ext_resource type="Texture2D" uid="uid://cbkfapqmi8533" path="res://assets/sprites/jumpscares/virginia/0005.png" id="101_l531o"]
+[ext_resource type="Texture2D" uid="uid://bx5njttqygf" path="res://assets/sprites/jumpscares/virginia/0006.png" id="102_r7o87"]
+[ext_resource type="Texture2D" uid="uid://dlw87ch7qrd2g" path="res://assets/sprites/jumpscares/virginia/0007.png" id="103_bbirx"]
+[ext_resource type="Texture2D" uid="uid://isawger8vqxc" path="res://assets/sprites/jumpscares/virginia/0008.png" id="104_3sss2"]
+[ext_resource type="Texture2D" uid="uid://blmx6yqh745vq" path="res://assets/sprites/jumpscares/virginia/0009.png" id="105_yvos7"]
+[ext_resource type="Texture2D" uid="uid://dmyrdptraojix" path="res://assets/sprites/jumpscares/virginia/0010.png" id="106_d2v02"]
+[ext_resource type="Texture2D" uid="uid://bu2yckgitc1bi" path="res://assets/sprites/jumpscares/virginia/0011.png" id="107_hvirp"]
+[ext_resource type="Texture2D" uid="uid://tnfc0jalaudj" path="res://assets/sprites/jumpscares/virginia/0012.png" id="108_06min"]
+[ext_resource type="Texture2D" uid="uid://baxe32s0qocae" path="res://assets/sprites/jumpscares/virginia/0013.png" id="109_ndb65"]
+[ext_resource type="Texture2D" uid="uid://bg52wes22to5p" path="res://assets/sprites/jumpscares/virginia/0014.png" id="110_cfusc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0sld"]
 radius = 12.0415945
@@ -354,19 +407,19 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_v2bev"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_nut6s"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_iv6vv"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_iskxv"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_0bux0"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_gopy5"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_m055d"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_dn5j8"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_82ft2"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_67lyu"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_3vol3"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_gofmg"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_8mggk"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_rheku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -439,102 +492,185 @@ animations = [{
 "speed": 60.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r0vp7"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 1, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6w4s"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 770, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5sbiv"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 1539, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4fjga"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 2308, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g0sld"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 3077, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mdy2d"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 3846, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lgefm"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1, 4615, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_01qce"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1026, 1, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_35w6l"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1026, 770, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trify"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1026, 1539, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o4y4s"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1026, 2308, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_in01k"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1026, 3077, 1024, 768)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pgmud"]
-atlas = ExtResource("16_qei30")
-region = Rect2(1026, 3846, 1024, 768)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_o4y4s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r0vp7")
+"texture": ExtResource("58_g52jb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h6w4s")
+"texture": ExtResource("59_5s7xq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5sbiv")
+"texture": ExtResource("60_57tdf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4fjga")
+"texture": ExtResource("61_k7xxg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g0sld")
+"texture": ExtResource("62_2llav")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mdy2d")
+"texture": ExtResource("63_jx3vh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lgefm")
+"texture": ExtResource("64_71l7w")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_01qce")
+"texture": ExtResource("65_l20cn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_35w6l")
+"texture": ExtResource("66_fc2h1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_trify")
+"texture": ExtResource("67_j4llo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o4y4s")
+"texture": ExtResource("68_68ga8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_in01k")
+"texture": ExtResource("69_y022n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pgmud")
+"texture": ExtResource("70_d2miu")
+}],
+"loop": false,
+"name": &"amostradinho",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("71_pbrw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_fd5y7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_2ithw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_gmvx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_dyxct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_0iiny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_lyp87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_i7vdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_y3tih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_j1j83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_gmqpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_j16pk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_d8prb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_i3x15")
 }],
 "loop": false,
 "name": &"bill",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("85_0cypb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_0j42d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_fh3bi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_07sj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_jwsjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_422ru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_o4xky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_54job")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_5igdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_x68ye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_mnqhx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_xck4l")
+}],
+"loop": false,
+"name": &"luva",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("97_x7d8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_sr2ku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_u66t2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_ytef3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_l531o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_r7o87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_bbirx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_3sss2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_yvos7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_d2v02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_hvirp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_06min")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_ndb65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_cfusc")
+}],
+"loop": false,
+"name": &"virginia",
 "speed": 30.0
 }]
 
@@ -687,7 +823,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_v2bev")
+button_group = SubResource("ButtonGroup_nut6s")
 camera_id = "stage"
 initial_state = true
 
@@ -696,7 +832,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_iv6vv")
+button_group = SubResource("ButtonGroup_iskxv")
 camera_id = "kitchen"
 initial_state = true
 
@@ -705,7 +841,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_0bux0")
+button_group = SubResource("ButtonGroup_gopy5")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -713,7 +849,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_m055d")
+button_group = SubResource("ButtonGroup_dn5j8")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -721,7 +857,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_82ft2")
+button_group = SubResource("ButtonGroup_67lyu")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -729,7 +865,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_3vol3")
+button_group = SubResource("ButtonGroup_gofmg")
 camera_id = "amostradinho_cove"
 
 [node name="ChannelButton7" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -737,7 +873,7 @@ offset_left = 242.0
 offset_top = 125.0
 offset_right = 277.3846
 offset_bottom = 148.0
-button_group = SubResource("ButtonGroup_8mggk")
+button_group = SubResource("ButtonGroup_rheku")
 camera_id = "backstage"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
@@ -783,7 +919,7 @@ stream = ExtResource("19_5sbiv")
 stream = ExtResource("18_5sbiv")
 
 [node name="GoingAway" type="AudioStreamPlayer" parent="AudioController"]
-stream = ExtResource("18_5sbiv")
+stream = ExtResource("54_5s7xq")
 
 [node name="AnimatronicInOffice" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("48_vnclx")
@@ -800,7 +936,9 @@ stream = ExtResource("52_s0oiu")
 [node name="JumpscareSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_o4y4s")
-animation = &"bill"
+animation = &"virginia"
+frame = 13
+frame_progress = 1.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

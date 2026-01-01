@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2epydx7g7c35"]
+
+[ext_resource type="Texture2D" uid="uid://d0erd53nkrlq8" path="res://assets/sprites/transitions/newspaper.png" id="1_0x16h"]
+[ext_resource type="Script" uid="uid://b301wt2wmtew" path="res://scenes/newspaper/newspaper.gd" id="1_opi7l"]
+[ext_resource type="AudioStream" uid="uid://4f8y0xbit6ns" path="res://assets/audio/heartbeat.wav" id="3_ysmvm"]
+[ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="4_5d7k1"]
+
+[node name="Newspaper" type="Node2D"]
+script = ExtResource("1_opi7l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0x16h")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Heartbeat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ysmvm")
+
+[node name="DialogTip" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -267.5
+offset_top = 270.0
+offset_right = 267.5
+offset_bottom = 293.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_5d7k1")
+theme_override_font_sizes/font_size = 16
+text = "[ENTER]"
+horizontal_alignment = 1

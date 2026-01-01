@@ -21,7 +21,6 @@ extends Node
 @onready var tablet_trigger: Area2D = $"../TabletTrigger"
 @onready var decoration: Node2D = $"../Decoration"
 @onready var shadows: Sprite2D = $"../Shadows"
-@onready var blackout: ColorRect = $"../Blackout"
 
 const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
 const USAGE_WHITE = preload("uid://c188asmil3hig")
@@ -32,7 +31,7 @@ var is_mask_on: bool = false
 var is_left_door_closed: bool = false
 var is_right_door_closed: bool = false
 var can_interact: bool = true
-var power: float = 10.0
+var power: float = 100.0
 var usage: int = 1
 var night: int = 1
 var night_duration_minutes: int = 3
@@ -77,6 +76,11 @@ class Animatronic:
 		)
 		
 		next_move.start()
+	
+	func jumpscare():
+		# isso assume que as animações de jumpscare têm
+		# os mesmos nomes respectivos pra cada animatronic
+		manager.jumpscare(nick)
 
 var luva = Animatronic.new(
 	"luva",
@@ -166,33 +170,53 @@ func _process(delta: float) -> void:
 	clock_label.text = str(roundf(night_timer.time_left))
 
 func set_animatronics_ai():
-	# obtém qual ia cada animatronic deve ter em cada noite
-	# e setta a ia atual deles pra condizer com isso
-	var ai_night_map = {
-		1: {
-			"luva_ai": 4,
-			"bill_ai": 2,
-			"virginia_ai": 4,
-			"amostradinho_ai": 3
-		},
-		2: {
-			"luva_ai": 6,
-			"bill_ai": 6,
-			"virginia_ai": 5,
-			"amostradinho_ai": 5
-		},
-		3: {
-			"luva_ai": 7,
-			"bill_ai": 9,
-			"virginia_ai": 7,
-			"amostradinho_ai": 6
-		}
-	}
-	var values = ai_night_map.get(night) # pega o mapa da noite atual
+	var values: Dictionary
 	
-	# não tem mais noites que isso, mas dá pra continuar jogando
-	if !values:
-		ai_night_map.get(3)
+	# por padrão, seleciona uma ia fixa pra cada noite
+	# mas se tiver definido um custom map de ia mudando a variável
+	# do singleton da custom night, então usa ele no lugar
+	if CustomNight.ai_map == {}:
+		# obtém qual ia cada animatronic deve ter em cada noite
+		# e setta a ia atual deles pra condizer com isso
+		var ai_night_map = {
+			1: {
+				"luva_ai": 4,
+				"bill_ai": 2,
+				"virginia_ai": 4,
+				"amostradinho_ai": 3
+			},
+			2: {
+				"luva_ai": 6,
+				"bill_ai": 6,
+				"virginia_ai": 5,
+				"amostradinho_ai": 5
+			},
+			3: {
+				"luva_ai": 7,
+				"bill_ai": 9,
+				"virginia_ai": 7,
+				"amostradinho_ai": 6
+			}
+		}
+		values = ai_night_map.get(night) # pega o mapa da noite atual
+		
+		# não tem mais noites que isso, mas dá pra continuar jogando
+		if !values:
+			ai_night_map.get(3)
+	else:
+		# os custom maps tem que ser tipo os padrões, mas sem as noites, tipo:
+		# {
+			 #"luva_ai": 7,
+			 #"bill_ai": 9,
+			 #"virginia_ai": 7,
+			 #"amostradinho_ai": 6
+		# }
+		values = CustomNight.ai_map
+		
+	#luva.ai = 0
+	#bill.ai = 20
+	#virginia.ai = 0
+	#amostradinho.ai = 0
 	
 	luva.ai = values.get("luva_ai")
 	bill.ai = values.get("bill_ai")
@@ -204,7 +228,7 @@ func set_night_duration_minutes(minutes: int, seconds: int = 0):
 	night_timer.autostart = true
 
 	#minutes = 0
-	#seconds = 5
+	#seconds = 3
 	
 	# passar tudo pra segundos
 	var total_seconds = minutes * 60
@@ -270,7 +294,9 @@ func toggle_mask():
 		breathing_animation.stop()
 		audio_controller.breathing.stop()
 
-func jumpscare():
+func jumpscare(animation_name: String):
+	# essa função NÃO deve ser chamada sozinha
+	# ela deve estar dentro de um wrapper da classe Animatronic
 	can_interact = false
 	
 	# desligar os mecanismos antes de dar o jumpscare
@@ -283,11 +309,22 @@ func jumpscare():
 	audio_controller.ambience.stop()
 	audio_controller.amostradinho_knocking.stop()
 	
-	# fazer a animação ser visível e tocar o som
+	# parar os eventos que o bill trigga quando entra no escritório
+	flickering_animation.stop()
+	audio_controller.light_flicker.stop()
+	bill_standing_sprite.visible = false
+	light_flick_rect.visible = false
+	cameras.cameras_off.disconnect(_on_cameras_off)
+	
+	# fazer a animação ser visível, tocar o som e voltar pro menu
 	jumpscare_sprite.visible = true
-	jumpscare_sprite.animation = "bill"
+	jumpscare_sprite.animation = animation_name
 	jumpscare_sprite.play()
+	
 	audio_controller.jumpscare.play()
+	await audio_controller.jumpscare.finished
+	
+	SceneManager.to_menu()
 
 func move_animatronic(animatronic: Animatronic):
 	animatronic.start_movement_timer()
@@ -338,9 +375,9 @@ func move_animatronic(animatronic: Animatronic):
 			is_targeted_door_closed = is_right_door_closed
 		
 		if !is_targeted_door_closed:
-			jumpscare()
+			animatronic.jumpscare()
 		else:
-			pos = "stage"
+			animatronic.pos = "stage"
 			audio_controller.going_away.play() # indicador de que é seguro abrir a porta
 			print(nick + " foi embora")
 
@@ -359,7 +396,7 @@ func trigger_bill():
 func _on_mask_off():
 	# se ele já estiver na sala e tirar a máscara antes dele ir embora, morre
 	if bill_is_in_the_office:
-		jumpscare()
+		bill.jumpscare()
 	
 	mask_off.disconnect(_on_mask_off)
 
@@ -376,7 +413,7 @@ func _on_cameras_off():
 		await get_tree().create_timer(1.2).timeout
 	
 		if not is_mask_on:
-			jumpscare()
+			bill.jumpscare()
 		
 		# quando esse som acabar, é seguro tirar a máscara
 		await audio_controller.animatronic_in_office.finished
@@ -429,7 +466,7 @@ func trigger_amostradinho():
 		
 		print("amostradinho foi embora")
 	else:
-		jumpscare()
+		amostradinho.jumpscare()
 
 func modify_power(amount: float):
 	amount = amount / 50
@@ -499,7 +536,7 @@ func _on_power_modified():
 	audio_controller.bills_lullaby.play()
 	await audio_controller.bills_lullaby.finished
 	
-	jumpscare()
+	bill.jumpscare()
 
 func _on_power_tick_timeout() -> void:
 	# toda vez que o tick acaba, a energia é atualizada

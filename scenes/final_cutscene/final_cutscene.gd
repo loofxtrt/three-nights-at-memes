@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var bill_sprite: Sprite2D = $BillSprite
 @onready var _67_sprite: Sprite2D = $"67Sprite"
-@onready var dialog_text: Label = $CanvasLayer/DialogText
+@onready var dialog_text: Label = $CanvasLayer/VBoxContainer/DialogText
 @onready var fire: AudioStreamPlayer = $Fire
 @onready var success: AudioStreamPlayer = $Success
 @onready var heartbeat: AudioStreamPlayer = $Heartbeat

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cd6bwdxwxudq1"]
+[gd_scene load_steps=35 format=3 uid="uid://cd6bwdxwxudq1"]
 
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="1_klgdb"]
 [ext_resource type="Script" uid="uid://bl06p7ucayfn3" path="res://scenes/menu/menu.gd" id="1_mcvr8"]
@@ -17,6 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://cfmhroe5ghowj" path="res://assets/extras/2025-12-28_12-15_2.png" id="15_a0fu0"]
 [ext_resource type="Texture2D" uid="uid://dfvd5an0c6364" path="res://assets/extras/2025-12-28_12-15_3.png" id="16_pafgo"]
 [ext_resource type="Texture2D" uid="uid://pttgnoo7omfr" path="res://assets/sprites/mask_desk.png" id="17_uryge"]
+[ext_resource type="Texture2D" uid="uid://bmnmduw8rs5x0" path="res://assets/extras/2025-12-28_17-32.png" id="18_t2e6u"]
+[ext_resource type="Texture2D" uid="uid://d3hg5aiy3h05r" path="res://assets/extras/2025-12-28_17-32_1.png" id="19_fb4qf"]
+[ext_resource type="Texture2D" uid="uid://c6fcnxosci4qt" path="res://assets/extras/2025-12-30_21-13.png" id="20_riv3r"]
+[ext_resource type="Texture2D" uid="uid://dg3nr2l7tgrcb" path="res://assets/extras/2025-12-30_21-13_1.png" id="21_ns7vx"]
+[ext_resource type="Texture2D" uid="uid://gxlckfpjleqg" path="res://assets/extras/2025-12-31_21-29.png" id="22_ns7vx"]
+[ext_resource type="Texture2D" uid="uid://54t51row31y" path="res://assets/extras/2025-12-31_21-30.png" id="23_a0fu0"]
+[ext_resource type="Texture2D" uid="uid://qr4cbo3ljvr4" path="res://assets/extras/2025-12-31_21-30_1.png" id="24_pafgo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30jyb"]
 atlas = ExtResource("2_037ec")
@@ -117,6 +124,27 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_uryge")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_t2e6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_fb4qf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_riv3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ns7vx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ns7vx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_a0fu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_pafgo")
 }],
 "loop": false,
 "name": &"default",
@@ -190,6 +218,12 @@ theme = ExtResource("1_klgdb")
 text = "extras"
 alignment = 0
 
+[node name="CustomNillth" type="Button" parent="PlayVBox"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+text = "custom nillht"
+alignment = 0
+
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_left = 18.0
@@ -232,5 +266,20 @@ theme_override_font_sizes/font_size = 16
 text = "[<] para navillgar [>]"
 horizontal_alignment = 1
 
+[node name="CustomNightContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = 388.0
+offset_right = 360.0
+offset_bottom = 524.0
+
+[node name="Apply" type="Button" parent="CustomNightContainer"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+text = "aplillcar"
+
 [connection signal="pressed" from="PlayVBox/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="PlayVBox/Extras" to="." method="_on_extras_pressed"]
+[connection signal="pressed" from="PlayVBox/CustomNillth" to="." method="_on_custom_nillth_pressed"]
+[connection signal="pressed" from="CustomNightContainer/Apply" to="." method="_on_apply_pressed"]
