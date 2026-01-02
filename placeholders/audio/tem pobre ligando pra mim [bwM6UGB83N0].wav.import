@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://qgh342gforx0"
+path="res://.godot/imported/tem pobre ligando pra mim [bwM6UGB83N0].wav-18d34a93284b985bb459c5c4fcabfe81.sample"
+
+[deps]
+
+source_file="res://placeholders/audio/tem pobre ligando pra mim [bwM6UGB83N0].wav"
+dest_files=["res://.godot/imported/tem pobre ligando pra mim [bwM6UGB83N0].wav-18d34a93284b985bb459c5c4fcabfe81.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

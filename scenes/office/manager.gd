@@ -21,6 +21,11 @@ extends Node
 @onready var tablet_trigger: Area2D = $"../TabletTrigger"
 @onready var decoration: Node2D = $"../Decoration"
 @onready var shadows: Sprite2D = $"../Shadows"
+@onready var mute_container: Control = $"../MuteContainer"
+@onready var ringtone: AudioStreamPlayer = $"../AudioController/Ringtone" # não funciona pelo audio controller (???)
+@onready var beep: AudioStreamPlayer = $"../AudioController/Beep"
+@onready var call_1: AudioStreamPlayer = $"../AudioController/Call1"
+@onready var call_2: AudioStreamPlayer = $"../AudioController/Call2"
 
 const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
 const USAGE_WHITE = preload("uid://c188asmil3hig")
@@ -36,6 +41,11 @@ var usage: int = 1
 var night: int = 1
 var night_duration_minutes: int = 3
 var lock_tips: bool = false
+var difficulty: String = "normal"
+var difficulty_operator = 0
+
+var phone_call_ongoing: bool = false
+var current_phone_audio: AudioStreamPlayer
 
 var amostradinho_stage: int = 0
 var amostradinho_is_running: bool = false
@@ -133,13 +143,31 @@ func _ready() -> void:
 	bill_power_outage.visible = false
 	mask_sprite.visible = false
 	light_flick_rect.visible = false
+	mute_container.visible = false
 	
 	can_interact = true
 	lock_tips = false
 	
+	# calcular a dificuldade a mais ou a menos dependendo da escolha
+	difficulty = Progress.load_difficulty()
+	match difficulty:
+		"skill issue":
+			difficulty_operator = -1
+		"ajuda o maluco tá doente":
+			difficulty_operator = 2
+		"cê é o bixão memo hein doido":
+			difficulty_operator = 3
+		"normal":
+			difficulty_operator = 0
+		_:
+			difficulty_operator = 0
+	
 	night = Progress.load_progress()
 	night_label.text = "noite " + str(night)
+	
+	night_duration_minutes += difficulty_operator
 	set_night_duration_minutes(night_duration_minutes)
+	print("duração da noite: " + str(night_duration_minutes) + " minutos")
 	
 	power_tick.start() # timer de quanto em quanto tempo a energia é drenada
 	power_tick.one_shot = true # pra ele não recomeçar quando já tá sem energia
@@ -154,10 +182,38 @@ func _ready() -> void:
 		print(a.nick + ": " + str(a.ai))
 	
 	power_modified.connect(_on_power_modified)
+	
+	# ligação do phone guy
+	await get_tree().create_timer(2).timeout
+	phone_call_ongoing = true
+	
+	match night:
+		1: current_phone_audio = call_1
+		2: current_phone_audio = call_2
+	
+	if !current_phone_audio:
+		return
+	
+	mute_container.visible = true
+	
+	if phone_call_ongoing: # pode ter mutado antes de chegar aqui
+		current_phone_audio.play()
+		
+		await get_tree().create_timer(15).timeout
+		mute_container.visible = false
+		
+		await current_phone_audio.finished
+		beep.play()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("mask"):
 		toggle_mask()
+	
+	if Input.is_action_just_pressed("mute"):
+		phone_call_ongoing = false
+		mute_container.visible = false
+		if current_phone_audio:
+			current_phone_audio.stop()
 	
 	# atualizar os dados relacionados à energia
 	power_left.text = "billteria: " + str(roundi(power))
@@ -180,29 +236,42 @@ func set_animatronics_ai():
 		# e setta a ia atual deles pra condizer com isso
 		var ai_night_map = {
 			1: {
+				"luva_ai": 2,
+				"bill_ai": 0,
+				"virginia_ai": 2,
+				"amostradinho_ai": 0
+			},
+			2: {
+				"luva_ai": 3,
+				"bill_ai": 3,
+				"virginia_ai": 3,
+				"amostradinho_ai": 4
+			},
+			3: {
 				"luva_ai": 4,
-				"bill_ai": 2,
+				"bill_ai": 6,
 				"virginia_ai": 4,
 				"amostradinho_ai": 3
 			},
-			2: {
-				"luva_ai": 6,
-				"bill_ai": 6,
-				"virginia_ai": 5,
-				"amostradinho_ai": 5
-			},
-			3: {
-				"luva_ai": 7,
+			4: {
+				"luva_ai": 5,
 				"bill_ai": 9,
-				"virginia_ai": 7,
-				"amostradinho_ai": 6
+				"virginia_ai": 5,
+				"amostradinho_ai": 4
 			}
 		}
-		values = ai_night_map.get(night) # pega o mapa da noite atual
+		var total_nights = ai_night_map.keys().size()
+		if night < total_nights:
+			# pega o mapa da noite atual
+			values = ai_night_map.get(night)
+		else:
+			# não tem mais noites que isso, mas dá pra continuar jogando
+			values = ai_night_map.get(total_nights)
 		
-		# não tem mais noites que isso, mas dá pra continuar jogando
-		if !values:
-			ai_night_map.get(3)
+		# alterar a ia com base na dificuldade
+		for key in values.keys():
+			values[key] += difficulty_operator
+			values[key] = clamp(values[key], 0, 20) # mínimo e máximo da ia
 	else:
 		# os custom maps tem que ser tipo os padrões, mas sem as noites, tipo:
 		# {
@@ -462,14 +531,13 @@ func trigger_amostradinho():
 		amostradinho_stage = 0
 		amostradinho_is_running = false
 		cameras.refresh_current_camera()
-		modify_power(-randf_range(2, 4)) # ele também drena energia extra quando vai embora
+		modify_power(-randf_range(1, 2)) # ele também drena energia extra quando vai embora
 		
 		print("amostradinho foi embora")
 	else:
 		amostradinho.jumpscare()
 
 func modify_power(amount: float):
-	amount = amount / 50
 	power += amount
 	#print("energia atual: " + str(power))
 
@@ -539,9 +607,12 @@ func _on_power_modified():
 	bill.jumpscare()
 
 func _on_power_tick_timeout() -> void:
+	var divider = 6
+	divider -= difficulty_operator
+	
 	# toda vez que o tick acaba, a energia é atualizada
 	# e depois o ciclo recomeça (se ainda tiver energia)
-	power -= float(usage) / 5
+	power -= float(usage) / divider
 	power = max(0.0, power) # pra nunca ficar a baixo de 0
 	power_modified.emit()
 	

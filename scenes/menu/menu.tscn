@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cd6bwdxwxudq1"]
+[gd_scene load_steps=36 format=3 uid="uid://cd6bwdxwxudq1"]
 
 [ext_resource type="Theme" uid="uid://3idyt7myk8tf" path="res://themes/channel_button.tres" id="1_klgdb"]
 [ext_resource type="Script" uid="uid://bl06p7ucayfn3" path="res://scenes/menu/menu.gd" id="1_mcvr8"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://d3hg5aiy3h05r" path="res://assets/extras/2025-12-28_17-32_1.png" id="19_fb4qf"]
 [ext_resource type="Texture2D" uid="uid://c6fcnxosci4qt" path="res://assets/extras/2025-12-30_21-13.png" id="20_riv3r"]
 [ext_resource type="Texture2D" uid="uid://dg3nr2l7tgrcb" path="res://assets/extras/2025-12-30_21-13_1.png" id="21_ns7vx"]
+[ext_resource type="Texture2D" uid="uid://clbf58lftp8tk" path="res://assets/extras/2026-01-01_12-38.png" id="22_a0fu0"]
 [ext_resource type="Texture2D" uid="uid://gxlckfpjleqg" path="res://assets/extras/2025-12-31_21-29.png" id="22_ns7vx"]
 [ext_resource type="Texture2D" uid="uid://54t51row31y" path="res://assets/extras/2025-12-31_21-30.png" id="23_a0fu0"]
 [ext_resource type="Texture2D" uid="uid://qr4cbo3ljvr4" path="res://assets/extras/2025-12-31_21-30_1.png" id="24_pafgo"]
@@ -138,6 +139,9 @@ animations = [{
 "texture": ExtResource("21_ns7vx")
 }, {
 "duration": 1.0,
+"texture": ExtResource("22_a0fu0")
+}, {
+"duration": 1.0,
 "texture": ExtResource("22_ns7vx")
 }, {
 "duration": 1.0,
@@ -189,6 +193,27 @@ text = "pressillne [DEL] por 2 segundos para apagar o progrillso "
 [node name="Success" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_e0arn")
 
+[node name="DifficultyOptions" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_right = 220.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("1_klgdb")
+selected = 1
+item_count = 4
+popup/item_0/text = "skill issue"
+popup/item_0/id = 0
+popup/item_1/text = "normal"
+popup/item_1/id = 1
+popup/item_2/text = "ajuda o maluco tá doente"
+popup/item_2/id = 2
+popup/item_3/text = "cê é o bixão memo hein doido"
+popup/item_3/id = 3
+
 [node name="PlayVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
@@ -224,12 +249,15 @@ theme = ExtResource("1_klgdb")
 text = "custom nillht"
 alignment = 0
 
-[node name="Title" type="Label" parent="."]
+[node name="TitleVBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 20.0
-offset_right = 166.0
-offset_bottom = 177.0
+offset_right = 262.0
+offset_bottom = 218.0
+
+[node name="Title" type="Label" parent="TitleVBox"]
+layout_mode = 2
 theme = ExtResource("1_klgdb")
 theme_override_font_sizes/font_size = 42
 text = "three
@@ -237,12 +265,19 @@ nights
 at
 memes"
 
+[node name="StarsRow" type="Label" parent="TitleVBox"]
+layout_mode = 2
+theme = ExtResource("1_klgdb")
+theme_override_font_sizes/font_size = 42
+text = "★★"
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_r8yej")
 volume_db = -14.707
 autoplay = true
 
 [node name="ExtrasContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,6 +314,7 @@ layout_mode = 2
 theme = ExtResource("1_klgdb")
 text = "aplillcar"
 
+[connection signal="item_selected" from="DifficultyOptions" to="." method="_on_difficulty_options_item_selected"]
 [connection signal="pressed" from="PlayVBox/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="PlayVBox/Extras" to="." method="_on_extras_pressed"]
 [connection signal="pressed" from="PlayVBox/CustomNillth" to="." method="_on_custom_nillth_pressed"]

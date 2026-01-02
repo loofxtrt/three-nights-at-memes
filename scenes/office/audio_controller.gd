@@ -14,6 +14,10 @@ extends Node
 @onready var mask_off: AudioStreamPlayer = $MaskOff
 @onready var power_outage: AudioStreamPlayer = $PowerOutage
 @onready var bills_lullaby: AudioStreamPlayer = $BillsLullaby
+@onready var ringtone: AudioStreamPlayer = $Ringtone
+@onready var call_1: AudioStreamPlayer = $Call1
+@onready var call_2: AudioStreamPlayer = $Call2
+@onready var beep: AudioStreamPlayer = $Beep
 
 # esse em específico não funciona pelo audiocontroller por algum motivo
 #@onready var camera_switch: AudioStreamPlayer = $CameraSwitch

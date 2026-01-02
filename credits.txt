@@ -19,6 +19,8 @@ zamn - https://freesound.org/people/Beetlemuse/sounds/703317/
 bill's lullaby - framzit
 heartbeat - https://www.youtube.com/watch?v=zId0k-kkWW4
 fire - https://freesound.org/people/newlocknew/sounds/645070/
+ringtone - https://www.youtube.com/watch?v=bwM6UGB83N0
+beep - https://www.youtube.com/watch?v=7KWLT56PEWg
 
 blip flash - fnaf
 static - fnaf
@@ -29,6 +31,7 @@ sight - https://www.youtube.com/watch?v=6mfncmVnhDI
 breathing - https://www.youtube.com/watch?v=MZkHRcgnux4
 mask on, mask off - https://www.youtube.com/watch?v=VpujMzlAWB0
 power outage - https://www.youtube.com/watch?v=zf3S0507u6g
+golden freddy - https://www.myinstants.com/en/instant/golden-freddy-jumpscare-30848/
 
 pra fazer o overlay dos minigames
 blinds, gimp:

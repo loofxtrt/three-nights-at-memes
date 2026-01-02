@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=152 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
@@ -53,8 +53,12 @@
 [ext_resource type="Texture2D" uid="uid://bpqemnufprv47" path="res://assets/sprites/cameras/stage_bill.png" id="32_v2bev"]
 [ext_resource type="AudioStream" uid="uid://d057ow0p26wc7" path="res://assets/audio/power-outage.wav" id="45_0bux0"]
 [ext_resource type="AudioStream" uid="uid://ch5j0l22dw6su" path="res://assets/audio/bills_lullaby.wav" id="46_m055d"]
+[ext_resource type="AudioStream" uid="uid://dyogwf2nw0epr" path="res://assets/audio/ringtone.wav" id="48_k7xxg"]
 [ext_resource type="AudioStream" uid="uid://v81v3bcy7icl" path="res://assets/audio/static.wav" id="48_vnclx"]
+[ext_resource type="AudioStream" uid="uid://ciyqr4d3pmwdi" path="res://assets/audio/beep.wav" id="49_71l7w"]
+[ext_resource type="AudioStream" uid="uid://cw3jvkokik7ck" path="res://assets/audio/call_1.mp3" id="50_l20cn"]
 [ext_resource type="AudioStream" uid="uid://mwq3qboso45i" path="res://assets/audio/breathing.wav" id="50_xnr2b"]
+[ext_resource type="AudioStream" uid="uid://toxhsr6yvaji" path="res://assets/audio/call_2.mp3" id="51_fc2h1"]
 [ext_resource type="AudioStream" uid="uid://dbsr5wohca6ov" path="res://assets/audio/mask_on.wav" id="51_qa8um"]
 [ext_resource type="AudioStream" uid="uid://dd5tc1lu18hhy" path="res://assets/audio/mask_off.wav" id="52_s0oiu"]
 [ext_resource type="AudioStream" uid="uid://c0pr7rghp7137" path="res://assets/audio/going-away.wav" id="54_5s7xq"]
@@ -111,6 +115,7 @@
 [ext_resource type="Texture2D" uid="uid://tnfc0jalaudj" path="res://assets/sprites/jumpscares/virginia/0012.png" id="108_06min"]
 [ext_resource type="Texture2D" uid="uid://baxe32s0qocae" path="res://assets/sprites/jumpscares/virginia/0013.png" id="109_ndb65"]
 [ext_resource type="Texture2D" uid="uid://bg52wes22to5p" path="res://assets/sprites/jumpscares/virginia/0014.png" id="110_cfusc"]
+[ext_resource type="Texture2D" uid="uid://8a6tmqve8kmo" path="res://assets/sprites/mute_button.png" id="112_57tdf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0sld"]
 radius = 12.0415945
@@ -407,19 +412,19 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_nut6s"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_5s7xq"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_iskxv"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_57tdf"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_gopy5"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_k7xxg"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_dn5j8"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_2llav"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_67lyu"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_jx3vh"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_gofmg"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_71l7w"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rheku"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_l20cn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -823,7 +828,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_nut6s")
+button_group = SubResource("ButtonGroup_5s7xq")
 camera_id = "stage"
 initial_state = true
 
@@ -832,7 +837,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_iskxv")
+button_group = SubResource("ButtonGroup_57tdf")
 camera_id = "kitchen"
 initial_state = true
 
@@ -841,7 +846,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_gopy5")
+button_group = SubResource("ButtonGroup_k7xxg")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -849,7 +854,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_dn5j8")
+button_group = SubResource("ButtonGroup_2llav")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -857,7 +862,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_67lyu")
+button_group = SubResource("ButtonGroup_jx3vh")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -865,7 +870,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_gofmg")
+button_group = SubResource("ButtonGroup_71l7w")
 camera_id = "amostradinho_cove"
 
 [node name="ChannelButton7" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -873,7 +878,7 @@ offset_left = 242.0
 offset_top = 125.0
 offset_right = 277.3846
 offset_bottom = 148.0
-button_group = SubResource("ButtonGroup_rheku")
+button_group = SubResource("ButtonGroup_l20cn")
 camera_id = "backstage"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
@@ -899,6 +904,18 @@ stream = ExtResource("46_m055d")
 
 [node name="CameraSwitch" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("30_45seo")
+
+[node name="Ringtone" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("48_k7xxg")
+
+[node name="Beep" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("49_71l7w")
+
+[node name="Call1" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("50_l20cn")
+
+[node name="Call2" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("51_fc2h1")
 
 [node name="DoorSlam" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("21_01qce")
@@ -998,6 +1015,34 @@ theme = ExtResource("6_8d8gp")
 text = "NIGHT"
 horizontal_alignment = 2
 
+[node name="MuteContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -507.0
+offset_top = -257.0
+offset_right = -507.0
+offset_bottom = -257.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MuteTip" type="Label" parent="MuteContainer"]
+layout_mode = 0
+offset_left = -147.0
+offset_top = 64.0
+offset_right = 143.0
+offset_bottom = 80.0
+theme = ExtResource("6_8d8gp")
+theme_override_font_sizes/font_size = 18
+text = "[M] mutar"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="MuteContainer"]
+modulate = Color(1, 1, 1, 0.36862746)
+scale = Vector2(0.40972227, 0.4097222)
+texture = ExtResource("112_57tdf")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="NightTimer" type="Timer" parent="."]
@@ -1005,6 +1050,7 @@ one_shot = true
 autostart = true
 
 [node name="PowerTick" type="Timer" parent="."]
+wait_time = 1.5
 one_shot = true
 
 [connection signal="input_event" from="TabletTrigger" to="Cameras" method="_on_tablet_trigger_input_event"]

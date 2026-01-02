@@ -6,6 +6,8 @@ extends Control
 @onready var extras_container: Control = $ExtrasContainer
 @onready var extra_content_sprite: AnimatedSprite2D = $ExtrasContainer/ExtraContent
 @onready var custom_night_container: VBoxContainer = $CustomNightContainer
+@onready var difficulty_options: OptionButton = $DifficultyOptions
+@onready var stars_row: Label = $TitleVBox/StarsRow
 
 const CHANNEL_BUTTON = preload("uid://3idyt7myk8tf")
 
@@ -16,15 +18,28 @@ var already_triggered: bool = false
 var current_extras_frame = 0
 var custom_night_inputs = []
 
-func update_play():
+func update_play() -> int:
 	var night = Progress.load_progress()
 	night_label.text = "noite " + str(night)
+	
+	return night
 
 func _ready() -> void:
-	update_play()
+	var night = update_play()
 	extras_container.visible = false
 	custom_night_container.visible = false
 	make_custom_night_inputs()
+	
+	stars_row.text = ""
+	match night -1: # -1 pra saber a noite atual, não a próxima
+		3: stars_row.text = "★"
+		4: stars_row.text = "★★"
+	
+	# mostrar a dificuldade atualmente selecionada
+	var difficulty = Progress.load_difficulty()
+	for i in range(difficulty_options.item_count):
+		if difficulty_options.get_item_text(i) == difficulty:
+			difficulty_options.select(i)
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("delete_progress"):
@@ -129,7 +144,25 @@ func _on_apply_pressed() -> void:
 			
 		if !ai_map.has(label_text):
 			continue
-		ai_map[label_text] = spin_box_value
+		ai_map[label_text] = int(spin_box_value) # spin box sempre é float por padrão
 	
 	CustomNight.ai_map = ai_map
-	SceneManager.to_office()
+	
+	if ai_map == {
+		"luva_ai": 1,
+		"bill_ai": 9,
+		"virginia_ai": 6,
+		"amostradinho_ai": 7
+	} || ai_map == {
+		"luva_ai": 2,
+		"bill_ai": 0,
+		"virginia_ai": 2,
+		"amostradinho_ai": 5
+	}:
+		SceneManager.to_golden_67()
+	else:
+		SceneManager.to_office()
+
+func _on_difficulty_options_item_selected(index: int) -> void:
+	var difficulty = difficulty_options.get_item_text(index)
+	Progress.save_difficulty(difficulty)
