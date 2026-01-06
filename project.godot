@@ -21,6 +21,10 @@ Progress="*res://progress.gd"
 SceneManager="*res://scene_manager.gd"
 CustomNight="*res://custom_night.gd"
 
+[display]
+
+window/size/resizable=false
+
 [global_group]
 
 office=""

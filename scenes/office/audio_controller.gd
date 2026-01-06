@@ -17,6 +17,7 @@ extends Node
 @onready var ringtone: AudioStreamPlayer = $Ringtone
 @onready var call_1: AudioStreamPlayer = $Call1
 @onready var call_2: AudioStreamPlayer = $Call2
+@onready var call_3: AudioStreamPlayer = $Call3
 @onready var beep: AudioStreamPlayer = $Beep
 
 # esse em específico não funciona pelo audiocontroller por algum motivo

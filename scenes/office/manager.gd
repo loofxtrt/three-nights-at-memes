@@ -26,6 +26,7 @@ extends Node
 @onready var beep: AudioStreamPlayer = $"../AudioController/Beep"
 @onready var call_1: AudioStreamPlayer = $"../AudioController/Call1"
 @onready var call_2: AudioStreamPlayer = $"../AudioController/Call2"
+@onready var call_3: AudioStreamPlayer = $"../AudioController/Call3"
 
 const COMPLETION_SCREEN = preload("uid://dah2e3e275agu")
 const USAGE_WHITE = preload("uid://c188asmil3hig")
@@ -190,6 +191,7 @@ func _ready() -> void:
 	match night:
 		1: current_phone_audio = call_1
 		2: current_phone_audio = call_2
+		3: current_phone_audio = call_3
 	
 	if !current_phone_audio:
 		return
@@ -607,7 +609,7 @@ func _on_power_modified():
 	bill.jumpscare()
 
 func _on_power_tick_timeout() -> void:
-	var divider = 6
+	var divider = 5
 	divider -= difficulty_operator
 	
 	# toda vez que o tick acaba, a energia é atualizada

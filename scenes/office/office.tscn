@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://diw1qplhntkkf"]
+[gd_scene load_steps=153 format=3 uid="uid://diw1qplhntkkf"]
 
 [ext_resource type="Texture2D" uid="uid://dejvws08oqqy0" path="res://assets/sprites/office.png" id="2_mdy2d"]
 [ext_resource type="PackedScene" uid="uid://bwl2mlr8acbnr" path="res://scenes/lightable/lightable.tscn" id="4_66du1"]
@@ -60,6 +60,7 @@
 [ext_resource type="AudioStream" uid="uid://mwq3qboso45i" path="res://assets/audio/breathing.wav" id="50_xnr2b"]
 [ext_resource type="AudioStream" uid="uid://toxhsr6yvaji" path="res://assets/audio/call_2.mp3" id="51_fc2h1"]
 [ext_resource type="AudioStream" uid="uid://dbsr5wohca6ov" path="res://assets/audio/mask_on.wav" id="51_qa8um"]
+[ext_resource type="AudioStream" uid="uid://dsn4c05vp132s" path="res://assets/audio/call_3.mp3" id="52_l20cn"]
 [ext_resource type="AudioStream" uid="uid://dd5tc1lu18hhy" path="res://assets/audio/mask_off.wav" id="52_s0oiu"]
 [ext_resource type="AudioStream" uid="uid://c0pr7rghp7137" path="res://assets/audio/going-away.wav" id="54_5s7xq"]
 [ext_resource type="Texture2D" uid="uid://diso3qe2okfxu" path="res://assets/sprites/jumpscares/amostradinho/0001.png" id="58_g52jb"]
@@ -412,19 +413,19 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_5s7xq"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_fc2h1"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_57tdf"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_j4llo"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_k7xxg"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_68ga8"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_2llav"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_y022n"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_jx3vh"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_d2miu"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_71l7w"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_pbrw6"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_l20cn"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_fd5y7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dubn4"]
 atlas = ExtResource("24_30jyb")
@@ -828,7 +829,7 @@ offset_left = 426.0
 offset_top = 33.0
 offset_right = 461.3846
 offset_bottom = 56.0
-button_group = SubResource("ButtonGroup_5s7xq")
+button_group = SubResource("ButtonGroup_fc2h1")
 camera_id = "stage"
 initial_state = true
 
@@ -837,7 +838,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_57tdf")
+button_group = SubResource("ButtonGroup_j4llo")
 camera_id = "kitchen"
 initial_state = true
 
@@ -846,7 +847,7 @@ offset_left = 524.0
 offset_top = 155.0
 offset_right = 559.38464
 offset_bottom = 178.0
-button_group = SubResource("ButtonGroup_k7xxg")
+button_group = SubResource("ButtonGroup_68ga8")
 camera_id = "kitchen"
 
 [node name="ChannelButton5" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -854,7 +855,7 @@ offset_left = 470.0
 offset_top = 208.0
 offset_right = 505.38464
 offset_bottom = 231.0
-button_group = SubResource("ButtonGroup_2llav")
+button_group = SubResource("ButtonGroup_y022n")
 camera_id = "hall_right"
 
 [node name="ChannelButton6" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -862,7 +863,7 @@ offset_left = 293.0
 offset_top = 186.0
 offset_right = 328.38464
 offset_bottom = 209.0
-button_group = SubResource("ButtonGroup_jx3vh")
+button_group = SubResource("ButtonGroup_d2miu")
 camera_id = "hall_left"
 
 [node name="ChannelButton2" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -870,7 +871,7 @@ offset_left = 352.0
 offset_top = 92.0
 offset_right = 387.3846
 offset_bottom = 115.0
-button_group = SubResource("ButtonGroup_71l7w")
+button_group = SubResource("ButtonGroup_pbrw6")
 camera_id = "amostradinho_cove"
 
 [node name="ChannelButton7" parent="Cameras" instance=ExtResource("21_o4y4s")]
@@ -878,7 +879,7 @@ offset_left = 242.0
 offset_top = 125.0
 offset_right = 277.3846
 offset_bottom = 148.0
-button_group = SubResource("ButtonGroup_l20cn")
+button_group = SubResource("ButtonGroup_fd5y7")
 camera_id = "backstage"
 
 [node name="BlipFlash" type="AnimatedSprite2D" parent="Cameras"]
@@ -916,6 +917,9 @@ stream = ExtResource("50_l20cn")
 
 [node name="Call2" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("51_fc2h1")
+
+[node name="Call3" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("52_l20cn")
 
 [node name="DoorSlam" type="AudioStreamPlayer" parent="AudioController"]
 stream = ExtResource("21_01qce")
